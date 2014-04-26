@@ -1,0 +1,11 @@
+
+    <div class="container">
+      <hr>
+
+      <footer>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

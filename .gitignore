@@ -1,0 +1,7 @@
+*~
+www/include/config.php
+.vagrant
+tests/coverage.state
+coverage/
+.travis.yml
+*~

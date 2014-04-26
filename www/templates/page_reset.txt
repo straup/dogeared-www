@@ -1,0 +1,49 @@
+{assign var="page_title" value="Reset your password"}
+{include file="inc_head.txt"}
+
+<div class="col-md-8 col-md-offset-2 blah-blah-blah">
+
+{* very bad errors *}
+
+{if $error_nouser}
+<p class="alert alert-danger">NO USER.</p>
+{elseif $error_update_failed}
+<p class="alert alert-danger">UPDATE FAILED.</p>
+{else}
+
+{* user errors *}
+
+{if $error|@count}
+<p class="error">
+{if $error_missing_password}
+MISSING.
+{elseif $error_password_mismatch}
+MISMATCH.
+{else}
+INVISIBLE ERROR CAT HISSES AT YOU!
+</p>
+{/if}
+{/if}
+
+<form action="{$cfg.abs_root_url}reset/{$reset_code|escape}" method="post" accept-encoding="UTF-8">
+      <input type="hidden" name="done" value="1" />
+
+              <div class="form-group">
+      	        <label for="new_password1">Your new password</label>
+	            <input type="password" name="new_password1" size="40" value="" class="form-control" />
+    	   </div>
+
+           <div class="form-group">
+   	     <label for="new_password2">Your new password (again)</label>
+   	         <input type="password" name="new_password2" size="40" value="" class="form-control" />
+	</div>
+
+											<div class="form-group text-center">
+											     <button type="submit" class="btn btn-primary">Reset your password</button>
+											     	     </div>
+</form>
+{/if}
+
+</div>
+
+{include file="inc_foot.txt"}

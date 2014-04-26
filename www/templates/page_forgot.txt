@@ -1,0 +1,25 @@
+{assign var="page_title" value="Forgot your password?" nav_tab='signin'}
+{include file="inc_head.txt"}
+
+<div class="container">
+	{if $error_nouser}	<p class="alert alert-error">We can't find an account registered with that address.</p>{/if}
+	{if $error_deleted}	<p class="alert alert-error">Your account has been deleted.</p>{/if}
+	{if $error_notsent}	<p class="alert alert-error">Something went wrong :(</p>{/if}
+
+
+	<form action="{$cfg.abs_root_url}forgot/" method="post" accept-encoding="UTF-8" class="form-horizontal">
+		<input type="hidden" name="remind" value="1" />
+
+		<fieldset>
+	        <div class="form-group">
+	        	<label for="email">Email</label>
+        		<input type="email" name="email" size="40" value="" class="form-control" />
+		</div>
+
+	        <div class="form-group">
+	        	<button type="submit" class="btn btn-primary">Send password reminder</button>
+		</div>
+	</form>
+</div>
+
+{include file="inc_foot.txt"}
