@@ -71,7 +71,7 @@ RewriteRule ^about/?$			about.php 		[L,QSA]
 RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
 
-# Test pages
+# Reading lists and documents
 
-RewriteRule ^paging/?$			paging.php		[L]
-RewriteRule ^paging/page(\d+)/?$	paging.php?page=$1	[L,QSA]
+RewriteRule ^readinglist(/page([0-9]+))?/?$		user_readinglist.php?page=$2		[L,QSA]
+RewriteRule ^readinglist/([0-9]+)/?$			user_document.php?document_id=$1	[L,QSA]

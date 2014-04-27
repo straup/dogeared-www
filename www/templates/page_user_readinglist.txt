@@ -1,0 +1,16 @@
+{include file="inc_head.txt"}
+
+<div class="container">
+
+{foreach from=$list item="row"}
+<div class="row">
+<h3><a href="{$cfg.abs_root_url}readinglist/{$row.document_id|escape}/">{$row.document.title|escape}</a> <small>{$row.created|@date_format|@escape}</small></h3>
+<p class="lead">{$row.document.excerpt|escape}</p>
+<p>{$row.document.url|@escape}</p>
+</div>
+
+{/foreach}
+
+</div>
+
+{include file="inc_foot.txt"}

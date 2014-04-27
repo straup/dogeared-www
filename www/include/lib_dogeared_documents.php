@@ -74,4 +74,29 @@
 
 	########################################################################
 
+	function dogeared_documents_generate_excerpt(&$paras, $count_words=100){
+
+		$excerpt = array();
+
+		foreach ($paras as $p){
+
+			foreach (explode(" ", $p) as $word){
+				$excerpt[] = $word;
+
+				if (count($excerpt) == $count_words){
+					break;
+				}
+			}
+
+			if (count($excerpt) == $count_words){
+				break;
+			}
+		}
+
+		$excerpt = implode(" ", $excerpt);
+		return $excerpt;
+	}
+
+	########################################################################
+
 	# the end

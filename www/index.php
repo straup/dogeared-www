@@ -16,7 +16,6 @@
 
 	# sudo put me in an API methods or something
 
-	/*
 
 	if ($url = post_str("url")){
 
@@ -25,18 +24,26 @@
 		if (! $document){
 
 			$service = (preg_match("/\.pdf$/", $url)) ? "tika" : "boilerpipe";
-			$rsp = dogeared_extruder($url, $service);
 
 			$service_map = dogeared_extruder_services_map('string keys');
 			$service_id = $service_map[ $service ];
 
-			$blocks = $rsp['data']['document']['blocks'];
-			$blocks = json_encode($blocks);
+			$rsp = dogeared_extruder($url, $service);
+
+			$doc = $rsp['data']['document'];
+			$title = $doc['title'];
+
+			$blocks = $doc['blocks'];
+			$body = json_encode($blocks);
+
+			$excerpt = dogeared_documents_generate_excerpt($blocks);
 
 			$document = array(
 				'url' => $url,
 				'service_id' => $service_id,
-				'document' => $blocks,
+				'title' => $title,
+				'body' => $body,
+				'excerpt' => $excerpt,
 			);
 
 			$rsp = dogeared_documents_add_document($document);
@@ -49,7 +56,6 @@
 		dumper($rsp);
 	}
 
-	*/
 
 	$GLOBALS['smarty']->display('page_index.txt');
 	exit();

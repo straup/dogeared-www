@@ -1,0 +1,21 @@
+{include file="inc_head.txt"}
+
+<div class="container">
+
+<div class="row">
+<h3>{$doc.title|@escape}</h3>
+
+<p>{$doc.url|escape}</p>
+</div>
+
+<div class="row">
+
+{foreach from=$doc.body item="para"}
+<p>{$para|escape}</p>
+{/foreach}
+
+</div>
+
+</div>
+
+{include file="inc_foot.txt"}
