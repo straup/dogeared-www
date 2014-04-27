@@ -16,6 +16,8 @@
 	$GLOBALS['cfg']['display_message'] = 0;
 	$GLOBALS['cfg']['display_message_text'] = '';
 
+	$GLOBALS['cfg']['dogeared_extruder_endpoint'] = 'http://localhost:8080/';
+
 	#
 	# Things you'll certainly need to tweak
 	#

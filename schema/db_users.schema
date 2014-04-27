@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS `ReadingLists`;
+
+CREATE TABLE `ReadingLists` (
+  `user_id` INT(11) UNSIGNED NOT NULL,
+  `document_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created` INT(11) UNSIGNED NOT NULL,
+  `lastmodified` INT(11) UNSIGNED NOT NULL,
+  PRIMARY KEY (`document_id`, `user_id`),
+  KEY `by_user` (`user_id`, `created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

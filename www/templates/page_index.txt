@@ -1,4 +1,19 @@
-{include file='inc_head.txt' nav_tab='home'}
+{include file='inc_head.txt'}
 
+<div class="container">
+<div class="row">
+
+<form class="form" role="form" method="POST">
+
+      <div class="form-group">
+      <label for="url">URL</label>
+	<input type="text" name="url" class="form-control" />
+	</div>
+
+	<button class="btn btn-primary">Fetch</button>
+</form>
+
+</div>
+</div>
 
 {include file='inc_foot.txt'}

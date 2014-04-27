@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS `Documents`;
+
+CREATE TABLE `Documents` (
+  `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(255) NOT NULL,
+  `hash` CHAR(32) NOT NULL,
+  `service_id` TINYINT(3) UNSIGNED NOT NULL,
+  `document` TEXT NOT NULL,
+  `created` INT(11) UNSIGNED NOT NULL,
+  `lastmodified` INT(11) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `by_hash` (`hash`),
+  KEY `by_created` (`created`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

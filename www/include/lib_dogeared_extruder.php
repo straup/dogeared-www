@@ -2,6 +2,23 @@
 
 	########################################################################
 
+	function dogeared_extruder_services_map($string_keys=0){
+
+		$map = array(
+			0 => 'boilerpipe',
+			1 => 'java-readability',
+			2 => 'tika',
+		);
+
+		if ($string_keys){
+			$map = array_flip($map);
+		}
+
+		return $map;
+	}
+
+	########################################################################
+
 	function dogeared_extruder($url, $service){
 
 		$service = urlencode($service);
