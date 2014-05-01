@@ -9,7 +9,7 @@
 			"documented" => 1,
 			"enabled" => 1,
 			"library" => "api_dogeared_readinglists",
-			"requires_perms" = 1,
+			"requires_perms" => 1,
 		),
 
 
