@@ -17,6 +17,7 @@
 	# sudo put me in an API methods or something
 
 
+	if (0){
 	if ($url = post_str("url")){
 
 		$document = dogeared_documents_get_by_url($url);
@@ -55,7 +56,7 @@
 		$rsp = dogeared_readinglists_add_document($user, $document);
 		dumper($rsp);
 	}
-
+	}
 
 	$GLOBALS['smarty']->display('page_index.txt');
 	exit();

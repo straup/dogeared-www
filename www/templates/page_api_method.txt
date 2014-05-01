@@ -1,0 +1,10 @@
+{capture assign="page_title}{$method} | API methods | API{/capture}
+{include file="inc_head.txt"}
+
+{include file="inc_api_header.txt" title=$method}
+
+{include file="inc_api_notice.txt"}
+
+{include file="inc_api_method.txt details=$details}
+
+{include file="inc_foot.txt"}
