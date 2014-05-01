@@ -47,9 +47,6 @@ function dogeared_api_call(method, args, on_success, on_error){
 		}
         };
 
-    console.log(endpoint);
-    console.log(args);
-
         $.ajax({
                 'url': endpoint,
                 'type': 'POST',

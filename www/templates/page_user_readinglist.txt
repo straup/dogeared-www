@@ -14,14 +14,45 @@
 
 $(document).ready(function(){
 
-	var method = 'dogeared.readinglists.getDocuments';
-	var args = {};
+	var get_text = function(doc){
 
-	var onsuccess = function(rsp){
-		console.log(rsp);
+		var id = doc['document_id'];
+
+		if (id=='0'){
+			return false;
+		}
+
+		var method = 'dogeared.documents.getInfo';
+		var args = { 'document_id': id };
+
+		var onsuccess = function(rsp){
+			console.log(rsp);
+		};
+
+		dogeared_api_call(method, args, onsuccess);
 	};
 
-	dogeared_api_call(method, args, onsuccess);
+	var get_docs = function(docs){
+
+		for (i in docs){
+
+			get_text(docs[i]);
+		}
+	};
+
+	var get_list = function(){
+		var method = 'dogeared.readinglists.getDocuments';
+		var args = {};
+
+		var onsuccess = function(rsp){
+			console.log(rsp);
+			get_docs(rsp['documents']['document'])
+		};
+
+		dogeared_api_call(method, args, onsuccess);
+	}
+
+	get_list();
 });
 
 {/literal}
