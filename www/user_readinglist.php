@@ -2,9 +2,6 @@
 
 	include("include/init.php");
 
-	loadlib("dogeared_documents");
-	loadlib("dogeared_readinglists");
-
 	login_ensure_loggedin();
 
 	$viewer = $GLOBALS['cfg']['user'];
