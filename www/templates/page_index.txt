@@ -1,6 +1,5 @@
 {include file='inc_head.txt'}
 
-<div class="container">
 <div class="row">
 
 <form class="form" role="form" method="POST">
@@ -13,7 +12,6 @@
 	<button class="btn btn-primary">Fetch</button>
 </form>
 
-</div>
 </div>
 
 {include file='inc_foot.txt'}
