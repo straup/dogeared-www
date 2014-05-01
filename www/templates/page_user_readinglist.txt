@@ -21,7 +21,6 @@ $(document).ready(function(){
 		console.log(rsp);
 	};
 
-
 	dogeared_api_call(method, args, onsuccess);
 });
 

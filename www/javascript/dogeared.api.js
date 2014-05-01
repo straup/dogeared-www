@@ -1,5 +1,5 @@
 function dogeared_api_call(method, args, on_success, on_error){
-    
+
 	var endpoint = dogeared_api_endpoint();
 
 	args['method'] = method;
@@ -46,6 +46,9 @@ function dogeared_api_call(method, args, on_success, on_error){
 			on_error(rsp);
 		}
         };
+
+    console.log(endpoint);
+    console.log(args);
 
         $.ajax({
                 'url': endpoint,
