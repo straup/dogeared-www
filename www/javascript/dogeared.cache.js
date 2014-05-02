@@ -21,7 +21,7 @@ function dogeared_cache_store_document(doc){
     }
     
     if (set_cache){
-	console.log("set " + key);
+	//  console.log("set " + key);
 	store.set(key, doc);
     }
 

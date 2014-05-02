@@ -5,13 +5,17 @@
 <form class="form" role="form" method="POST" id="fetch">
 
       <div class="form-group">
-      <label for="url">URL</label>
+      <label for="url">Dogear this URL</label>
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
 
 	<button class="btn btn-primary">Fetch</button>
 </form>
 
+</div>
+
+<div class="row">
+<p class="pull-right"><a href="{$cfg.abs_root_url}readinglist/">Jump to your readinglist</a></p>
 </div>
 
 <script type="text/javascript">
@@ -25,7 +29,8 @@ $(document).ready(function(){
 		url = url.val();
 
 		var onsuccess = function(rsp){
-			console.log(rsp);
+			var document = rsp['document'];
+			dogeared_cache_store_document(document);
 		};
 
 		var method = "dogeared.readinglists.addDocument";

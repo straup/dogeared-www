@@ -15,6 +15,10 @@
 
 			$rsp = dogeared_extruder($url, $service);
 
+			if (! $rsp['ok']){
+				return $rsp;
+			}
+
 			$doc = $rsp['data']['document'];
 			$title = $doc['title'];
 
@@ -32,6 +36,11 @@
 			);
 
 			$rsp = dogeared_documents_add_document($document);
+
+			if (! $rsp['ok']){
+				return $rsp;
+			}
+
 			$document = $rsp['document'];
 		}
 

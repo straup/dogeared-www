@@ -3,7 +3,7 @@
 <div class="container">
 
 <div class="row">
-<h3>{$doc.title|@escape}</h3>
+<h3>{if $doc.title}{$doc.title|@escape}{else}{$doc.url|escape}{/if}</h3>
 
 <p>{$doc.url|escape}</p>
 </div>
