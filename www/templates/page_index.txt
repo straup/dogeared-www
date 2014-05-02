@@ -2,16 +2,44 @@
 
 <div class="row">
 
-<form class="form" role="form" method="POST">
+<form class="form" role="form" method="POST" id="fetch">
 
       <div class="form-group">
       <label for="url">URL</label>
-	<input type="text" name="url" class="form-control" />
+	<input type="text" name="url" id="url" class="form-control" />
 	</div>
 
 	<button class="btn btn-primary">Fetch</button>
 </form>
 
 </div>
+
+<script type="text/javascript">
+{literal}
+
+$(document).ready(function(){
+
+	$("#fetch").submit(function(){
+
+		var url = $("#url");
+		url = url.val();
+
+		var onsuccess = function(rsp){
+			console.log(rsp);
+		};
+
+		var method = "dogeared.readinglists.addDocument";
+		var args = { 'url': url };
+
+		// console.log(args);
+		// return false;
+
+		dogeared_api_call(method, args, onsuccess);
+		return false;
+	});
+});
+
+{/literal}
+</script>
 
 {include file='inc_foot.txt'}

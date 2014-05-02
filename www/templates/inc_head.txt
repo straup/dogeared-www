@@ -17,6 +17,7 @@
 
     <script src="{$cfg.abs_root_url}javascript/dogeared.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

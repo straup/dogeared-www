@@ -2,6 +2,45 @@
 
 	########################################################################
 
+	function dogeared_readinglists_add_url(&$url, $url){
+
+		$document = dogeared_documents_get_by_url($url);
+
+		if (! $document){
+
+			$service = (preg_match("/\.pdf$/", $url)) ? "tika" : "boilerpipe";
+
+			$service_map = dogeared_extruder_services_map('string keys');
+			$service_id = $service_map[ $service ];
+
+			$rsp = dogeared_extruder($url, $service);
+
+			$doc = $rsp['data']['document'];
+			$title = $doc['title'];
+
+			$blocks = $doc['blocks'];
+			$body = json_encode($blocks);
+
+			$excerpt = dogeared_documents_generate_excerpt($blocks);
+
+			$document = array(
+				'url' => $url,
+				'service_id' => $service_id,
+				'title' => $title,
+				'body' => $body,
+				'excerpt' => $excerpt,
+			);
+
+			$rsp = dogeared_documents_add_document($document);
+			$document = $rsp['document'];
+		}
+
+		$rsp = dogeared_readinglists_add_document($user, $document);
+		return $rsp;
+	}
+
+	########################################################################
+
 	function dogeared_readinglists_add_document(&$user, &$document){
 
 		$cluster_id = $user['cluster_id'];

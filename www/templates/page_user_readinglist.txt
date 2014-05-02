@@ -14,30 +14,6 @@
 
 $(document).ready(function(){
 
-	var store_document = function(doc){
-
-		if (! store.enabled){
-			console.log("localstorage is not enabled");
-			return false;
-		}
-
-		var lastmod = doc['lastmodified'];
-		var id = doc['id'];
-			
-		var key = "dogeared_" + id;
-		console.log("key is " + key);
-
-		if (cache = store.get(key)){
-			console.log("has " + key);
-			console.log(cache);
-		}
-
-		else {
-			console.log("set " + key);
-			store.set(key, doc);
-		}
-	};
-
 	var get_text = function(doc){
 
 		var id = doc['document_id'];
@@ -50,7 +26,7 @@ $(document).ready(function(){
 		var args = { 'document_id': id };
 
 		var onsuccess = function(rsp){
-			store_document(rsp['document']);
+			dogeared_cache_store_document(rsp['document']);
 		};
 
 		dogeared_api_call(method, args, onsuccess);
