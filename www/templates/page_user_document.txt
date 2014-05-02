@@ -1,3 +1,4 @@
+{capture assign="page_title"}{if $doc.title}{$doc.title}{else}{$doc.url}{/if}{/capture}
 {include file="inc_head.txt"}
 
 <div class="container">
@@ -17,5 +18,16 @@
 </div>
 
 </div>
+
+<script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
+<script type="text/javascript">
+{literal}
+
+$(document).ready(function(){
+	dogeared_document_init();
+});
+
+{/literal}
+</script>
 
 {include file="inc_foot.txt"}
