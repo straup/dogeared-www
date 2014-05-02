@@ -60,7 +60,12 @@ function urls_normalize($url){
 	if(isset($url['path']))
 	{
 		// Case normalization
-		$url['path'] = preg_replace('/(%([0-9abcdef][0-9abcdef]))/ex', "'%'.strtoupper('\\2')", $url['path']);
+		//$url['path'] = preg_replace('/(%([0-9abcdef][0-9abcdef]))/ex', "'%'.strtoupper('\\2')", $url['path']);
+
+		$url['path'] = preg_replace_callback('/(%([0-9abcdef][0-9abcdef]))/x', function($m){
+			return '%' . strtoupper($m[2]);
+		}, $url['path']);
+
 		//Strip duplicate slashes
 		while(preg_match("/\/\//", $url['path']))
 			$url['path'] = preg_replace("/\/\//", "/", $url['path']);

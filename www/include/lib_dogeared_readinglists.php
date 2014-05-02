@@ -2,7 +2,7 @@
 
 	########################################################################
 
-	function dogeared_readinglists_add_url(&$url, $url){
+	function dogeared_readinglists_add_url(&$user, $url){
 
 		$document = dogeared_documents_get_by_url($url);
 
