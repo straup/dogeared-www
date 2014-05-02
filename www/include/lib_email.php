@@ -1,8 +1,8 @@
-<?php
-
+<?
+	
 	#########################################################################################
 
-	function email_send($args){
+	function email_send_figurethis_out($args){
 
 		$headers = array();
 
@@ -67,14 +67,28 @@
 		$message = email_format_body($message);
 		$subject = email_quoted_printable($subject);
 
-
 		#
-		# send via local MTA
+		# send via local MTA / or SendGrid if enabled
 		#
 
-		unset($headers['To']);
+		if (features_is_enabled("email_sendgrid")){
+			loadlib("sendgrid");
 
-		mail($args['to_email'], $subject, $message, email_format_headers($headers), $GLOBALS['cfg']['auto_email_args']);
+			$more = array(
+				'from_name' => $from_name,
+			);
+
+			$rsp = sendgrid_email_send($args['to_email'], $from_email, $subject, $message, $more);
+
+		} else {
+			
+			unset($headers['To']);
+
+			$ok = mail($args['to_email'], $subject, $message, email_format_headers($headers), $GLOBALS['cfg']['auto_email_args']);
+			$rsp = array('ok' => $ok);
+		}
+
+		return $rsp;
 	}
 
 	#########################################################################################
@@ -120,3 +134,4 @@
 
 	#########################################################################################
 
+	# the end
