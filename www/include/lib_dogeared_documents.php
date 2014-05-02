@@ -56,7 +56,6 @@
 		);
 
 		$rsp = db_insert_dupe('Documents', $insert, $dupe);
-		dumper($rsp);
 		
 		if ($rsp['ok']){
 			$document['id'] = $rsp['insert_id'];
