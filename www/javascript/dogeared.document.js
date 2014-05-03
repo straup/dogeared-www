@@ -3,26 +3,25 @@
 function dogeared_document_init(){
 
     $(document).mouseup(dogeared_document_onselected);
+    // $(document).touchend(dogeared_document_onselected);
+
 }
 
 function dogeared_document_onselected(e){
 
-    var s = dogeared_document_selected();
+    var target = e.target;
 
-    if (! s){
+    if (target.nodeName == 'BUTTON'){
+	dogeared_document_highlight();
 	return;
     }
 
-    // console.log(s);
-};
-
-function dogeared_document_selected(){
-
-    $(".highlight").remove();
 
     // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
-    sel = window.getSelection();
+    $(".highlight").remove();
+
+    var sel = window.getSelection();
     
     if (sel.toString() == ""){
 	return;
@@ -33,7 +32,7 @@ function dogeared_document_selected(){
     range.collapse(false);
 
     var el = document.createElement("div");
-    el.innerHTML = "<span class=\"highlight\"> <button class=\"btn btn-sm\">Highlight</button> </span>";
+    el.innerHTML = "<span class=\"highlight\"> <button id=\"highlight\" class=\"btn btn-sm\">Highlight</button> </span>";
 
     var frag = document.createDocumentFragment(), node, lastNode;
 
@@ -49,4 +48,28 @@ function dogeared_document_selected(){
         sel.addRange(expandedSelRange);
     }
 
+}
+
+function dogeared_document_highlight(){
+
+    var doc = $("#document");
+    var id = doc.attr("data-document-id");
+
+    var s = window.getSelection();
+    var t = s.toString();
+
+    var method = 'dogeared.highlights.addHighlight';
+
+    var args = {
+	'document_id': id,
+	'text': t
+    };
+
+    var on_success = function(rsp){
+	console.log(rsp);
+    };
+
+    console.log(args);
+
+    dogeared_api_call(method, args, on_success);
 }
