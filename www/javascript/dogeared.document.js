@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/window.getSelection
 
-var wtf = "";
+var current_selection = "";
 
 function dogeared_document_init(){
 
@@ -9,10 +9,12 @@ function dogeared_document_init(){
     // This does not work well at all yet (20140503/straup)
     // http://stackoverflow.com/questions/8991511/how-to-bind-a-handler-to-a-selection-change-on-window
 
-    $(document).bind('selectionchange', dogeared_document_onselected);
+    // $(document).bind('selectionchange', dogeared_document_onselected);
 }
 
 function dogeared_document_onselected(e){
+
+    // selection change is triggered on desktop safari because...
 
     // console.log(e.type);
     var target = e.target;
