@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS `Highlights`;
+
+CREATE TABLE `Highlights` (
+  `id` BIGINT(20) UNSIGNED NOT NULL,       
+  `user_id` INT(11) UNSIGNED NOT NULL,
+  `document_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created` INT(11) UNSIGNED NOT NULL,
+  `lastmodified` INT(11) UNSIGNED NOT NULL,
+  `highlight` TEXT NOT NULL,
+  `hash` CHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `by_user` (`user_id`, `created`),
+  KEY `by_user_doc` (`user_id`, `document_id`, `created`)  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

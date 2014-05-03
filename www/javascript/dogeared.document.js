@@ -7,8 +7,6 @@ function dogeared_document_init(){
 
 function dogeared_document_onselected(e){
 
-    console.log(e);
-
     var s = dogeared_document_selected();
 
     if (! s){
@@ -20,19 +18,22 @@ function dogeared_document_onselected(e){
 
 function dogeared_document_selected(){
 
+    $(".highlight").remove();
+
     // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
     sel = window.getSelection();
+    
+    if (sel.toString() == ""){
+	return;
+    }
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
     range.collapse(false);
 
-    // Range.createContextualFragment() would be useful here but is
-    // non-standard and not supported in all browsers (IE9, for one)
-
     var el = document.createElement("div");
-    el.innerHTML = " POO ";
+    el.innerHTML = "<span class=\"highlight\"> <button class=\"btn btn-sm\">Highlight</button> </span>";
 
     var frag = document.createDocumentFragment(), node, lastNode;
 
@@ -41,8 +42,6 @@ function dogeared_document_selected(){
     }
     
     range.insertNode(frag);
-
-    // Preserve the selection
 
     if (lastNode){
         expandedSelRange.setEndAfter(lastNode.previousSibling);
