@@ -54,6 +54,27 @@
 
 	########################################################################
 
+	function dogeared_highlights_get_by_id(&$user, $id){
+
+		$cluster_id = $user['cluster_id'];
+
+		$enc_id = AddSlashes($id);
+		$enc_user = AddSlashes($user['id']);
+
+		$sql = "SELECT * FROM Highlights WHERE id='{$enc_id}'";
+
+		$rsp = db_fetch_users($cluster_id, $sql);
+		$row = db_single($rsp);
+
+		if (($row) && ($row['user_id'] != $user['id'])){
+			$row = null;
+		}
+
+		return $row;
+	}
+
+	########################################################################
+
 	function dogeared_highlights_hash_text($text){
 		return md5($text);
 	}
