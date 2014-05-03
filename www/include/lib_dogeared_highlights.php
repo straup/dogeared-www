@@ -40,8 +40,32 @@
 
 	########################################################################
 
+	function dogeared_highlights_get_for_user(&$user, $more=array()){
+
+		$cluster_id = $user['cluster_id'];
+
+		$enc_user = AddSlashes($user['id']);
+
+		$sql = "SELECT * FROM Highlights WHERE user_id='{$enc_user}' ORDER BY created DESC";
+		$rsp = db_fetch_users($cluster_id, $sql, $more);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function dogeared_highlights_hash_text($text){
 		return md5($text);
+	}
+
+	########################################################################
+
+	function dogeared_highlights_inflate_highlight(&$highlight){
+
+		$document = dogeared_documents_get_by_id($highlight['document_id']);
+		$highlight['document'] = $document;
+
+		# pass-by-ref
 	}
 
 	########################################################################

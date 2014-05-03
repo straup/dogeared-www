@@ -3,7 +3,7 @@
 function dogeared_document_init(){
 
     $(document).mouseup(dogeared_document_onselected);
-    // $(document).touchend(dogeared_document_onselected);
+    $(document).touchend(dogeared_document_onselected);
 
 }
 
@@ -16,16 +16,15 @@ function dogeared_document_onselected(e){
 	return;
     }
 
-
-    // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
-
-    $(".highlight").remove();
-
     var sel = window.getSelection();
     
     if (sel.toString() == ""){
 	return;
     }
+
+    // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
+
+    $(".highlight").remove();
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
@@ -65,11 +64,11 @@ function dogeared_document_highlight(){
 	'text': t
     };
 
+    // TO DO: something...
+
     var on_success = function(rsp){
 	console.log(rsp);
     };
-
-    console.log(args);
 
     dogeared_api_call(method, args, on_success);
 }

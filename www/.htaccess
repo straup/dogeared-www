@@ -136,3 +136,6 @@ RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
 RewriteRule ^readinglist(/page([0-9]+))?/?$		user_readinglist.php?page=$2		[L,QSA]
 RewriteRule ^readinglist/([0-9]+)/?$			user_document.php?document_id=$1	[L,QSA]
+
+RewriteRule ^highlights(/page([0-9]+))?/?$		user_highlights.php		[L,QSA]
+

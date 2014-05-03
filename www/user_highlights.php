@@ -12,10 +12,11 @@
 		$more['page'] = $page;
 	}
 
-	$rsp = dogeared_highlights_for_user($owner, $more);
+	$rsp = dogeared_highlights_get_for_user($owner, $more);
 	$highlights = array();
 
 	foreach ($rsp['rows'] as $row){
+		dogeared_highlights_inflate_highlight($row);
 		$highlights[] = $row;
 	}
 
