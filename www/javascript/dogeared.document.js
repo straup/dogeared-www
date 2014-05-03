@@ -1,30 +1,46 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/window.getSelection
 
+var wtf = "";
+
 function dogeared_document_init(){
 
-    $(document).mouseup(dogeared_document_onselected);
-    $(document).touchend(dogeared_document_onselected);
+    $(document).bind('mouseup', dogeared_document_onselected);
 
+    // This does not work well at all yet (20140503/straup)
+    // http://stackoverflow.com/questions/8991511/how-to-bind-a-handler-to-a-selection-change-on-window
+
+    $(document).bind('selectionchange', dogeared_document_onselected);
 }
 
 function dogeared_document_onselected(e){
 
+    console.log(e.type);
     var target = e.target;
 
     if (target.nodeName == 'BUTTON'){
-	dogeared_document_highlight();
+	dogeared_document_add_highlight();
 	return;
     }
-
-    var sel = window.getSelection();
-    
-    if (sel.toString() == ""){
-	return;
-    }
-
-    // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
     $(".highlight").remove();
+
+    var sel = window.getSelection();
+    var txt = sel.toString();
+
+    if (txt == ""){
+	return;
+    }
+
+    if (txt == wtf){
+	return;
+    }
+
+    wtf = txt;
+
+    console.log('draw button');
+    $(".highlight").remove();
+
+    // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
@@ -41,15 +57,18 @@ function dogeared_document_onselected(e){
     
     range.insertNode(frag);
 
+    // this causes the highlight button to be hidden in iOS...
+
     if (lastNode){
         expandedSelRange.setEndAfter(lastNode.previousSibling);
         sel.removeAllRanges();
         sel.addRange(expandedSelRange);
     }
 
+
 }
 
-function dogeared_document_highlight(){
+function dogeared_document_add_highlight(){
 
     var doc = $("#document");
     var id = doc.attr("data-document-id");
@@ -57,12 +76,16 @@ function dogeared_document_highlight(){
     var s = window.getSelection();
     var t = s.toString();
 
+    // This requires grabbing 'wtf' in ios
+
     var method = 'dogeared.highlights.addHighlight';
 
     var args = {
 	'document_id': id,
 	'text': t
     };
+
+    console.log(args);
 
     // TO DO: something...
 
