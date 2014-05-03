@@ -14,7 +14,7 @@ function dogeared_document_init(){
 
 function dogeared_document_onselected(e){
 
-    console.log(e.type);
+    // console.log(e.type);
     var target = e.target;
 
     if (target.nodeName == 'BUTTON'){
@@ -31,14 +31,11 @@ function dogeared_document_onselected(e){
 	return;
     }
 
-    if (txt == wtf){
+    if (txt == current_selection){
 	return;
     }
 
-    wtf = txt;
-
-    console.log('draw button');
-    $(".highlight").remove();
+    current_selection = txt;
 
     // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
@@ -76,7 +73,7 @@ function dogeared_document_add_highlight(){
     var s = window.getSelection();
     var t = s.toString();
 
-    // This requires grabbing 'wtf' in ios
+    // This requires grabbing 'current_selection' in ios
 
     var method = 'dogeared.highlights.addHighlight';
 
