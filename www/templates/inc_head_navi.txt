@@ -1,9 +1,9 @@
 <nav class="navbar" role="navigation" id="header">
-
+     <div class="container-fluid">
 	  <div class="navbar-header">
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-head-collapse">
 	            <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
+		    <span class="icon-bar">...</span>
       		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 	      </button>
@@ -13,7 +13,7 @@
     	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
 	      {/if}
           </div>
-	
+
         {if !$cfg.site_disabled}
 	<div class="collapse navbar-collapse navbar-head-collapse">
 
@@ -21,10 +21,11 @@
 
 		<li class="dropdown">
 
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button"><span id="network-status">...</span></a>
+		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">...</a>
 
 		{if $cfg.user}
 		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
+		<li><a href="#"><span id="network-status">...</span></a></li>
 		<li><a href="{$cfg.abs_root_url}documents/">Your reading list</a></li>
 		<li><a href="{$cfg.abs_root_url}highlights/">Your highlights</a></li>
 		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">Your account</a></li>
@@ -46,4 +47,5 @@
 	</div>
       {/if}
 
+</div>
 </nav>
