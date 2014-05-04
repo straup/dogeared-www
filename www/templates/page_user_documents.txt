@@ -26,13 +26,13 @@ $(document).ready(function(){
 		var args = { 'document_id': id };
 
 		var onsuccess = function(rsp){
-			dogeared_cache_store_document(rsp['document']);
+			dogeared_cache_documents_store(rsp['document']);
 		};
 
 		dogeared_api_call(method, args, onsuccess);
 	};
 
-	var get_docs = function(docs){
+	var store_docs = function(docs){
 
 		for (i in docs){
 			get_text(docs[i]);
@@ -40,11 +40,14 @@ $(document).ready(function(){
 	};
 
 	var get_list = function(){
+
 		var method = 'dogeared.readinglists.getDocuments';
 		var args = {};
 
 		var onsuccess = function(rsp){
-			get_docs(rsp['documents']['document'])
+
+			// dogeared_cache_readinglists_store(rsp['documents']);
+			store_docs(rsp['documents']['document'])
 		};
 
 		dogeared_api_call(method, args, onsuccess);

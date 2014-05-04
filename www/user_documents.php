@@ -1,7 +1,6 @@
 <?php
 
 	include("include/init.php");
-
 	login_ensure_loggedin();
 
 	$viewer = $GLOBALS['cfg']['user'];
@@ -25,6 +24,6 @@
 	$GLOBALS['smarty']->assign_by_ref("list", $list);
 	$GLOBALS['smarty']->assign_by_ref("pagination", $rsp['pagination']);
 
-	$GLOBALS['smarty']->display("page_user_readinglist.txt");
+	$GLOBALS['smarty']->display("page_user_documents.txt");
 	exit();
 ?>

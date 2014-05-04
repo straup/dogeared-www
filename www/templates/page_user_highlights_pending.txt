@@ -1,3 +1,4 @@
+{capture assign="page_title"}pending | highlights{/capture}
 {include file="inc_head.txt"}
 
 <ul class="list" id="pending">
@@ -8,6 +9,31 @@
 
 $(document).ready(function(){
 
+	var highlights = dogeared_cache_highlights();
+
+	if (highlights.length == 0){
+		return;	   
+	}
+
+	var pending = $("#pending");
+
+	for (var i in highlights){
+
+		var item = '<li>';
+		item += highlights[i]['text'];
+		item += ' &#8212; <a href="">document</a>';
+		item += ' <button class="btn btn-sm btn-save-highlight"';
+		item += ' id="document-' + highlights[i]['document_id'] + '"';
+		item += '>Save</button>';
+		item += '</li>';
+
+		pending.append(item);		
+	}
+
+	$(".btn-save-highlight").click(function(){
+		var el = $(this);
+		console.log(el);
+	});
 
 });
 

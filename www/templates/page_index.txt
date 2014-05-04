@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-<p class="pull-right"><a href="{$cfg.abs_root_url}readinglist/">Jump to your readinglist</a></p>
+<p class="pull-right"><a href="{$cfg.abs_root_url}documents/">Jump to your readinglist</a></p>
 </div>
 
 <script type="text/javascript">
@@ -30,7 +30,7 @@ $(document).ready(function(){
 
 		var onsuccess = function(rsp){
 			var document = rsp['document'];
-			dogeared_cache_store_document(document);
+			dogeared_cache_documents_store(document);
 		};
 
 		var method = "dogeared.readinglists.addDocument";

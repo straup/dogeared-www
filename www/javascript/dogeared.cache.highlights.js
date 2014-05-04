@@ -4,6 +4,11 @@ function dogeared_cache_highlights_init(){
 
 function dogeared_cache_highlights_store(hl){
 
+    if (! store.enabled){
+	console.log("localstorage is not enabled");
+	return false;
+    }
+
     var hash = hex_md5(hl['text']);
     hl['hash'] = hash;
 
@@ -26,12 +31,14 @@ function dogeared_cache_highlights_status(){
     var count = dogeared_cache_count_for_type('highlight');
 
     if (count == 1){
-	status.html("There are pending highlights");
+	var link = dogeared_abs_root_url() + "highlights/pending/";
+	status.html('There are <a href="' + link + '">pending highlights</a>.');
 	status.show();
     }
 
     else if (count){
-	status.html("There are " + count + " pending highlights");
+	var link = dogeared_abs_root_url() + "highlights/pending/";
+	status.html('There are <a href="' + link + '">' + count + ' pending highlights</a>.');
 	status.show();
     }
 
@@ -39,4 +46,9 @@ function dogeared_cache_highlights_status(){
 	status.html("");
 	status.hide();
     }
+}
+
+function dogeared_cache_highlights(){
+
+    return dogeared_cache_get_for_type('highlight');
 }
