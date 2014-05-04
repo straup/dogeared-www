@@ -1,5 +1,3 @@
-<div class="container">
-
 <nav class="navbar" role="navigation" id="header">
 
 	  <div class="navbar-header">
@@ -9,8 +7,11 @@
       		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 	      </button>
+	      {if $cfg.user}
+    	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}-{$cfg.user.username|escape}</a>
+	      {else}
     	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
-	      <span id="network-status"></span>
+	      {/if}
           </div>
 	
         {if !$cfg.site_disabled}
@@ -18,43 +19,31 @@
 
 	     <ul class="nav navbar-nav pull-right">
 
-		{if "signin"|@features_is_enabled}
-		{if $cfg.user}
 		<li class="dropdown">
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">Hi, {$cfg.user.username|escape} <b class="caret caret-ch"></b></a>
 
+		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button"><span id="network-status">...</span></a>
+
+		{if $cfg.user}
 		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
-		<li><a href="#" onclick="return false;">Hi <span class="hey-look">{$cfg.user.username|escape}</span></a></li>
-		{if "bookmarks"|@features_is_enabled and $cfg.user and "bookmarks"|@auth_has_role:$cfg.user.id}
-		<li id="bookmarks"><a href="{$cfg.abs_root_url}me/bookmarks/" title="Your bookmarks">Your bookmarks</a></li>
-		{/if}
-		<li class="divider"></li>
+		<li><a href="{$cfg.abs_root_url}documents/">Your reading list</a></li>
+		<li><a href="{$cfg.abs_root_url}highlights/">Your highlights</a></li>
 		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">Your account</a></li>
 		<li id="signout"><a href="{$cfg.abs_root_url}signout/">Sign out</a></li>
-		{if "admin"|@auth_has_role:$cfg.user.id}
-		<li class="divider"></li>
-		<li id="admin"><a href="{$cfg.abs_root_url}admin/">Admin</a></li>
-		{/if}
 		</ul>
-		</li>
-		{else}
-		<li class="dropdown">
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">You <b class="caret caret-ch"></b></a>
+		
+		{elseif "signin"|@features_is_enabled}
 
 		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
 		{if "signup"|@features_is_enabled}<li id="signup"><a href="{$cfg.abs_root_url}signup/">Create an account</a></li>{/if}
 		<li id="signin"><a href="{$cfg.abs_root_url}signin/">Sign in</a></li>
 		</ul>
 
+		{else}
+		{/if}
+
 		</li>
-		{/if}
-		{/if}
-
-
 	      </ul>
 	</div>
       {/if}
 
 </nav>
-
-</div>

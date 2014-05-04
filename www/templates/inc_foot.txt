@@ -3,10 +3,9 @@
 
     <div class="container">
 
-      <footer>
-      </footer>
+      <footer>&nbsp;</footer>
 
-    </div> <!-- /container -->
+    </div>
 
   </body>
 </html>

@@ -1,1 +1,35 @@
-/* */
+body {
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.navbar {
+    /* border: 1px solid orange; */
+    border-radius: 0px;
+    margin-bottom:0px !important;
+}
+
+.container {
+    /* border: 1px solid blue; */
+    margin: 0px !important;
+    margin-left: 18px !important;
+    margin-right: 18px !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+.row {
+    /* border: 1px solid red; */
+    margin-top: .25em;
+    margin-bottom: .25em;
+    font-size: 1.4em;
+    line-height: 1.55em;
+}
+
+.feedback {
+    /* border: 1px solid green; */
+}
+
+.highlight {
+    margin-bottom: 2em;
+}

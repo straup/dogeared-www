@@ -46,10 +46,14 @@
 
   <div class="container">
 
-  <div class="row">
+  <div class="row feedback">
   <div id="status-pending"></div>
   </div>
 
-  <div class="row" id="feedback">
+  <div class="row feedback" id="feedback">
   <div id="feedback-body"></div>
   </div>
+
+  </div>
+
+    <div class="container">

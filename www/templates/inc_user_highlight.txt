@@ -1,9 +1,7 @@
 <div class="row highlight" id="highlight-{$highlight.id|escape}">
-	<div>{$highlight.text|escape}</div>
-	<div>
-	<a href="{$cfg.abs_root_url}documents/{$highlight.document.id|escape}">{if $highlight.document.title}{$highlight.document.title|escape}{else}{$highlight.document.url|escape}{/if}</a><br />
-	<a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}/">{$highlight.created|@date_format|escape}</a>
-	</div>
-</div>
 
-<hr />
+	<h3><a href="{$cfg.abs_root_url}documents/{$highlight.document.id|escape}">{if $highlight.document.title}{$highlight.document.title|escape}{else}{$highlight.document.url|escape}{/if}</a> <small>{$row.created|@date_format}</small></h3>
+
+	<div>{$highlight.text|escape} <small><a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}/">#{$highlight.hash|escape}</a></small></div>
+
+</div>

@@ -1,8 +1,6 @@
 {capture assign="page_title"}{if $doc.title}{$doc.title}{else}{$doc.url}{/if}{/capture}
 {include file="inc_head.txt"}
 
-<div class="container">
-
 <div class="row">
 <h3>{if $doc.title}{$doc.title|@escape}{else}{$doc.url|escape}{/if}</h3>
 
@@ -14,8 +12,6 @@
 {foreach from=$doc.body item="para"}
 <p>{$para|escape}</p>
 {/foreach}
-
-</div>
 
 </div>
 
