@@ -1,0 +1,11 @@
+<div class="container">
+<div class="row">
+
+<ul class="list-inline" id="feedback">
+<li id="feedback-general"></li>
+<li id="feedback-network-status"></li>
+<li id="feedback-pending-highlights"></li>
+</ul>
+
+</div>
+</div>

@@ -1,4 +1,4 @@
 function dogeared_feedback(msg){
-    var b = $("#feedback-body");
+    var b = $("#feedback-general");
     b.html(msg);
 }

@@ -44,16 +44,6 @@
 
   {include file="inc_head_navi.txt"}
 
-  <div class="container">
-
-  <div class="row feedback">
-  <div id="status-pending"></div>
-  </div>
-
-  <div class="row feedback" id="feedback">
-  <div id="feedback-body"></div>
-  </div>
-
-  </div>
+  {include file="inc_head_feedback.txt"}
 
     <div class="container">

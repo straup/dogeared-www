@@ -30,7 +30,7 @@ function dogeared_network_on_offline(e){
 
 function dogeared_network_status(){
 
-    var status = $("#network-status");
+    var status = $("#feedback-network-status");
 
     if (dogeared_network_is_online()){
 	status.html("You are awake and connected to the network");

@@ -31,7 +31,7 @@ function dogeared_cache_highlights_remove_key(key){
 
 function dogeared_cache_highlights_status(){
 
-    var status = $("#status-pending");
+    var status = $("#feedback-pending-highlights");
 
     var count = dogeared_cache_count_for_type('highlight');
 
