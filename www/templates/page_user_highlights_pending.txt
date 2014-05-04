@@ -1,0 +1,17 @@
+{include file="inc_head.txt"}
+
+<ul class="list" id="pending">
+</ul>
+
+<script type="text/javascript">
+{literal}
+
+$(document).ready(function(){
+
+
+});
+
+{/literal}
+</script>
+
+{include file="inc_foot.txt"}

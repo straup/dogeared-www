@@ -20,6 +20,9 @@
 </div>
 
 <script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
+<script src="{$cfg.abs_root_url}javascript/dogeared.cache.highlights.js"></script>
+<script src="{$cfg.abs_root_url}javascript/md5.js"></script>
+
 <script type="text/javascript">
 {literal}
 

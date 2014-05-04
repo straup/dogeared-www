@@ -20,6 +20,7 @@
     <script src="{$cfg.abs_root_url}javascript/dogeared.feedback.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.cache.highlights.js"></script>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -30,6 +31,7 @@
     {literal}
     $(document).ready(function(){
     	dogeared_network_init();
+	dogeared_cache_highlights_init();
     });
     {/literal}
     </script>
@@ -41,6 +43,10 @@
   {include file="inc_head_navi.txt"}
 
   <div class="container">
+
+  <div class="row">
+  <div id="status-pending"></div>
+  </div>
 
   <div class="row" id="feedback">
   <div id="feedback-body"></div>

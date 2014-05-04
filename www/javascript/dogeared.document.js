@@ -105,6 +105,16 @@ function dogeared_document_add_highlight(){
 	'text': t
     };
 
+    if (! dogeared_network_is_online()){
+
+	if (dogeared_cache_highlights_store(args)){
+	    dogeared_feedback("Your highlight has been cached until..");
+	    dogeared_cache_highlights_status();
+	}
+
+	return;
+    }
+    
     var on_success = function(rsp){
 
 	if (rsp['stat'] != 'ok'){
