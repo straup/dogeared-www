@@ -10,6 +10,7 @@
 		    <span class="icon-bar"></span>
 	      </button>
     	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
+	      <span id="network-status"></span>
           </div>
 	
         {if !$cfg.site_disabled}

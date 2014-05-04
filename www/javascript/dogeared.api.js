@@ -1,3 +1,6 @@
+// http://www.html5rocks.com/en/mobile/workingoffthegrid/#toc-xml-http-request
+// https://github.com/wycats/jquery-offline/blob/master/lib/jquery.offline.js
+
 function dogeared_api_call(method, args, on_success, on_error){
 
 	var endpoint = dogeared_api_endpoint();

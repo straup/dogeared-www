@@ -16,6 +16,7 @@
     <script src="{$cfg.abs_root_url}javascript/store.min.js"></script>
 
     <script src="{$cfg.abs_root_url}javascript/dogeared.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.network.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.feedback.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
@@ -24,6 +25,14 @@
     <!--[if lt IE 9]>
       <script src="{$cfg.abs_root}javascript/html5.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+    {literal}
+    $(document).ready(function(){
+    	dogeared_network_init();
+    });
+    {/literal}
+    </script>
 
   </head>
 
