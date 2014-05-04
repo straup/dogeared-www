@@ -1,20 +1,24 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/window.getSelection
+// http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
 var current_selection = "";
 
 function dogeared_document_init(){
 
-    $(document).bind('mouseup', dogeared_document_onselected);
+    if (typeof(window.ontouchend) != 'object'){
 
-    // This does not work well at all yet (20140503/straup)
-    // http://stackoverflow.com/questions/8991511/how-to-bind-a-handler-to-a-selection-change-on-window
+	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
+    }
 
-    // $(document).bind('selectionchange', dogeared_document_onselected);
+    else {
+
+	$(document).bind('mouseup', dogeared_document_selected_mouseup);
+    }	
 }
 
-function dogeared_document_onselected(e){
+function dogeared_document_selected_mouseup(e){
 
-    // selection change is triggered on desktop safari because...
+    console.log("on mouseup");
 
     // console.log(e.type);
     var target = e.target;
@@ -27,19 +31,6 @@ function dogeared_document_onselected(e){
     $(".highlight").remove();
 
     var sel = window.getSelection();
-    var txt = sel.toString();
-
-    if (txt == ""){
-	return;
-    }
-
-    if (txt == current_selection){
-	return;
-    }
-
-    current_selection = txt;
-
-    // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
@@ -56,15 +47,51 @@ function dogeared_document_onselected(e){
     
     range.insertNode(frag);
 
-    // this causes the highlight button to be hidden in iOS...
-
     if (lastNode){
         expandedSelRange.setEndAfter(lastNode.previousSibling);
         sel.removeAllRanges();
         sel.addRange(expandedSelRange);
     }
+}
 
+function dogeared_document_selected_selectionchange(e){
 
+    console.log("on selectionchange");
+
+    // console.log(e.type);
+    var target = e.target;
+
+    $(".highlight").remove();
+
+    var sel = window.getSelection();
+    var txt = sel.toString();
+
+    if (txt == ""){
+	return;
+    }
+
+    if (txt == current_selection){
+	return;
+    }
+
+    current_selection = txt;
+
+    range = window.getSelection().getRangeAt(0);
+    expandedSelRange = range.cloneRange();
+    range.collapse(false);
+
+    var el = document.createElement("div");
+    el.innerHTML = "<span class=\"highlight\"> <button id=\"highlight\" class=\"btn btn-sm\">Highlight</button> </span>";
+
+    var frag = document.createDocumentFragment(), node, lastNode;
+
+    while ((node = el.firstChild)){
+        lastNode = frag.appendChild(node);
+    }
+    
+    range.insertNode(frag);
+
+    $("#highlight").click(dogeared_document_add_highlight);
 }
 
 function dogeared_document_add_highlight(){
@@ -73,7 +100,7 @@ function dogeared_document_add_highlight(){
     var id = doc.attr("data-document-id");
 
     var s = window.getSelection();
-    var t = s.toString();
+    var t = (current_selection) ? current_selection : s.toString();
 
     // This requires grabbing 'current_selection' in ios
 
