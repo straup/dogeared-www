@@ -2,7 +2,7 @@
 {include file="inc_head.txt"}
 
 {foreach from=$highlights item="row"}
-{include file="inc_user_highlight.txt" highlight=$row}
+{include file="inc_user_highlight.txt" highlight=$row digest=1}
 {/foreach}
 
 {include file="inc_pagination.txt"}
