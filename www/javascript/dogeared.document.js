@@ -30,6 +30,11 @@ function dogeared_document_selected_mouseup(e){
     $(".highlight").remove();
 
     var sel = window.getSelection();
+    var txt = sel.toString();
+
+    if (txt == ""){
+	return;
+    }
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
