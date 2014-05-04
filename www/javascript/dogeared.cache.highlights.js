@@ -24,6 +24,14 @@ function dogeared_cache_highlights_store(hl){
     store.set(key, hl);
 }
 
+function dogeared_cache_highlights_remove(hl){
+
+    var hash = hl['hash'];
+    var key = "highlight_" + hash;
+
+    store.remove(key);
+}
+
 function dogeared_cache_highlights_status(){
 
     var status = $("#status-pending");

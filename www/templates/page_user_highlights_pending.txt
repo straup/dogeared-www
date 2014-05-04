@@ -20,10 +20,12 @@ $(document).ready(function(){
 	for (var i in highlights){
 
 		var item = '<li>';
+		item += '<span id="' + highlights[i]['hash'] + '" data-document-id="' + highlights[i]['document_id'] + '">';
 		item += highlights[i]['text'];
+		item += '</span>';
 		item += ' &#8212; <a href="">document</a>';
 		item += ' <button class="btn btn-sm btn-save-highlight"';
-		item += ' id="document-' + highlights[i]['document_id'] + '"';
+		item += ' data-document-hash="' + highlights[i]['hash'] + '"';
 		item += '>Save</button>';
 		item += '</li>';
 
@@ -31,8 +33,37 @@ $(document).ready(function(){
 	}
 
 	$(".btn-save-highlight").click(function(){
+
 		var el = $(this);
-		console.log(el);
+		var p = el.parent();
+
+		var hash = el.attr('data-document-hash');
+		var highlight = $("#" + hash);
+
+		var document_id = highlight.attr('data-document-id');
+		var text = highlight.html();
+
+		var method = 'dogeared.highlights.addHighlight';
+
+		var args = {
+			'document_id': document_id,
+			'text' : text,
+		};
+
+		var on_success = function(rsp){
+
+			var mock_highlight = { 'hash': hash };
+			dogeared_cache_highlights_remove(mock_highlight);
+
+			var li = el.parent();
+			li.remove();
+
+			dogeared_cache_highlights_status();
+		};
+
+		el.attr("disabled", "disabled");
+
+		dogeared_api_call(method, args, on_success);		
 	});
 
 });
