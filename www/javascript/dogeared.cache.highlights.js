@@ -18,10 +18,12 @@ function dogeared_cache_highlights_store(hl){
     // console.log(hl);
 
     if (cache = store.get(key)){
-	return;
+	return true;
     }
 
     store.set(key, hl);
+
+    return true;
 }
 
 function dogeared_cache_highlights_remove_key(key){
@@ -37,13 +39,13 @@ function dogeared_cache_highlights_status(){
 
     if (count == 1){
 	var link = dogeared_abs_root_url() + "highlights/pending/";
-	status.html('There are <a href="' + link + '">pending highlights</a>.');
+	status.html('there are <a href="' + link + '">pending highlights</a>.');
 	status.show();
     }
 
     else if (count){
 	var link = dogeared_abs_root_url() + "highlights/pending/";
-	status.html('There are <a href="' + link + '">' + count + ' pending highlights</a>.');
+	status.html('there are <a href="' + link + '">' + count + ' pending highlights</a>.');
 	status.show();
     }
 

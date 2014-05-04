@@ -33,10 +33,10 @@ function dogeared_network_status(){
     var status = $("#feedback-network-status");
 
     if (dogeared_network_is_online()){
-	status.html("You are awake and connected to the network");
+	status.html("you are awake and connected to the network");
     }
 
     else {
-	status.html("You are playing hide-and-go-seek with the sky. Currently the sky is winning.");
+	status.html("you are playing hide-and-go-seek with the sky and the sky is winning.");
     }
 }
