@@ -5,18 +5,20 @@
 <form class="form" role="form" method="POST" id="fetch">
 
       <div class="form-group">
-      <label for="url">Dogear this URL</label>
+      <label for="url"></label>
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
 
-	<button class="btn btn-primary">Fetch</button>
+	<button class="btn btn-primary">Dogear this document</button>
 </form>
 
 </div>
 
+{if 0}
 <div class="row">
-<p class="pull-right"><a href="{$cfg.abs_root_url}documents/">Jump to your readinglist</a></p>
+<p><a href="{$cfg.abs_root_url}documents/">Jump to your readinglist</a></p>
 </div>
+{/if}
 
 <script type="text/javascript">
 {literal}
