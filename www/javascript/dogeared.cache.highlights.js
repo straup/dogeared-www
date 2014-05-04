@@ -24,10 +24,7 @@ function dogeared_cache_highlights_store(hl){
     store.set(key, hl);
 }
 
-function dogeared_cache_highlights_remove(hl){
-
-    var hash = hl['hash'];
-    var key = "highlight_" + hash;
+function dogeared_cache_highlights_remove_key(key){
 
     store.remove(key);
 }

@@ -21,10 +21,14 @@ function dogeared_cache_get_for_type(type){
 
     store.forEach(function(key, val){
 
+	// store.remove(key);
+	// continue;
+
 	var parts = key.split("_");
 	var ima = parts[0];
 	
 	if (ima == type){
+	    val['cache_key'] = key;
 	    stuff.push(val);
 	}
     });
