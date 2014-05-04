@@ -5,7 +5,7 @@ var current_selection = "";
 
 function dogeared_document_init(){
 
-    if (typeof(window.ontouchend) != 'object'){
+    if (typeof(window.ontouchend) == 'object'){
 
 	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
     }
@@ -20,7 +20,6 @@ function dogeared_document_selected_mouseup(e){
 
     console.log("on mouseup");
 
-    // console.log(e.type);
     var target = e.target;
 
     if (target.nodeName == 'BUTTON'){
@@ -57,9 +56,6 @@ function dogeared_document_selected_mouseup(e){
 function dogeared_document_selected_selectionchange(e){
 
     console.log("on selectionchange");
-
-    // console.log(e.type);
-    var target = e.target;
 
     $(".highlight").remove();
 
@@ -102,8 +98,6 @@ function dogeared_document_add_highlight(){
     var s = window.getSelection();
     var t = (current_selection) ? current_selection : s.toString();
 
-    // This requires grabbing 'current_selection' in ios
-
     var method = 'dogeared.highlights.addHighlight';
 
     var args = {
@@ -111,13 +105,19 @@ function dogeared_document_add_highlight(){
 	'text': t
     };
 
-    console.log(args);
-
-    // TO DO: something...
-
     var on_success = function(rsp){
-	console.log(rsp);
+
+	if (rsp['stat'] != 'ok'){
+	    dogeared_feeback_api_error(rsp);
+	    return;
+	}
+
+	dogeared_feedback('Your highlight has been added.');	
     };
 
+    var on_error = function(){
+	dogeared_feedback();
+    };
+    
     dogeared_api_call(method, args, on_success);
 }
