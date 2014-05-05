@@ -9,6 +9,10 @@
 <p>{$para|escape}</p>
 {/foreach}
 
+<div>
+<small>{$doc.url|escape}</small>
+</div>
+
 </div>
 
 <script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
