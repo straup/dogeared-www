@@ -26,3 +26,8 @@ function dogeared_cache_documents_store(doc){
     }
 
 }
+
+function dogeared_cache_documents(){
+
+    return dogeared_cache_get_for_type('dogeared');
+}

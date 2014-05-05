@@ -1,7 +1,10 @@
+{capture assign="page_title"}reading list{/capture}
 {include file="inc_head.txt"}
 
+<div id="documents">
+
 {foreach from=$list item="row"}
-<div class="row">
+<div class="row excerpt">
 <h3><a href="{$cfg.abs_root_url}documents/{$row.document_id|escape}/">{if $row.document.title}{$row.document.title|escape}{else}{$row.document.url|escape}{/if}</a> <small>{$row.created|@date_format|@escape}</small></h3>
 <p><small>{$row.document.excerpt|escape}... <a href="{$cfg.abs_root_url}documents/{$row.document_id|escape}/">more</a></small></p>
 
@@ -9,10 +12,57 @@
 
 {/foreach}
 
+</div>
+
 <script type="text/javascript">
 {literal}
 
 $(document).ready(function(){
+
+	window.addEventListener("offline", function(e){
+		local_on_offline(e);
+	});
+
+	window.addEventListener("online", function(e){
+		local_on_online(e);
+	});
+
+	var local_on_online = function(e){
+		console.log("local: online");
+	};
+
+	var local_on_offline = function(e){
+		console.log("local: offline");
+	};
+
+	var load_cache = function(){
+
+		var docs = dogeared_cache_documents();
+
+		if (docs.length == 0){
+			return false;
+		}
+		
+		$(".excerpt").remove();
+
+		var documents = $("#documents");
+
+		for (var i in docs){
+
+			var doc = docs[i];
+			// console.log(doc);
+
+			var row = '<div class="row excerpt">';
+			row += '<h3><a href ="';
+			row += '">' + doc['title'] + '</a></h3>';
+			row += '<p><small>';
+			row += doc['excerpt'] + "...";
+			row += '</small></p>';
+			row += '</div>';
+
+			documents.append(row);			
+		}
+	};
 
 	var get_text = function(doc){
 
@@ -39,7 +89,7 @@ $(document).ready(function(){
 		}
 	};
 
-	var get_list = function(){
+	var fill_cache = function(){
 
 		var method = 'dogeared.readinglists.getDocuments';
 		var args = {};
@@ -53,7 +103,9 @@ $(document).ready(function(){
 		dogeared_api_call(method, args, onsuccess);
 	}
 
-	get_list();
+	fill_cache();
+
+	// load_cache();
 });
 
 {/literal}
