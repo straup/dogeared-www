@@ -99,6 +99,8 @@ $(document).ready(function(){
 
 			return false;
 		});
+
+		dogeared_document_init();
 	};
 
 	var get_text = function(doc){

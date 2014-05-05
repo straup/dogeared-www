@@ -15,8 +15,6 @@
 
 </div>
 
-<script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
-
 <script type="text/javascript">
 {literal}
 
