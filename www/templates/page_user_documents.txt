@@ -33,9 +33,12 @@ $(document).ready(function(){
 
 	var local_on_offline = function(e){
 		console.log("local: offline");
+		load_cache();
 	};
 
 	var load_cache = function(){
+
+		console.log("load cache");
 
 		var docs = dogeared_cache_documents();
 
@@ -46,15 +49,25 @@ $(document).ready(function(){
 		$(".excerpt").remove();
 
 		var documents = $("#documents");
+		var key = {};
+
+		var root = dogeared_abs_root_url();
 
 		for (var i in docs){
 
 			var doc = docs[i];
+			key[doc['id']] = i;
+
 			// console.log(doc);
 
 			var row = '<div class="row excerpt">';
 			row += '<h3><a href ="';
-			row += '">' + doc['title'] + '</a></h3>';
+			row += root + 'documents/' + doc['id'] + '/';
+			row += '" class="load-doc" data-document-id="';
+			row += doc['id'];
+			row += '">' + doc['title'] + '</a>';
+			row += ' <small>offline cache</small>';
+			row += '</h3>';
 			row += '<p><small>';
 			row += doc['excerpt'] + "...";
 			row += '</small></p>';
@@ -62,6 +75,30 @@ $(document).ready(function(){
 
 			documents.append(row);			
 		}
+
+		$(".load-doc").click(function(){
+
+			var el = $(this);
+
+			var id = el.attr("data-document-id");
+			var idx = key[id];
+			var doc = docs[idx];
+
+			var body = JSON.parse(doc['body']);
+
+			var txt = '<div id="document">';
+
+			for (var i in body){
+				txt += '<p>' + body[i] + '</p>';
+			}
+
+			txt += '</document>';
+
+			$(".excerpt").remove();
+			documents.append(txt);
+
+			return false;
+		});
 	};
 
 	var get_text = function(doc){
@@ -103,9 +140,14 @@ $(document).ready(function(){
 		dogeared_api_call(method, args, onsuccess);
 	}
 
-	fill_cache();
+	if (dogeared_network_is_online()){
+		fill_cache();
+	}
 
-	// load_cache();
+	else {
+		load_cache();
+	}
+
 });
 
 {/literal}
