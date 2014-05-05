@@ -3,12 +3,13 @@
 	  <div class="navbar-header">
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-head-collapse">
 	            <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar">...</span>
+		    {* http://www.fileformat.info/info/unicode/char/1f366/index.htm *}
+		    <span class="icon-bar">&#127846;</span>
       		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 	      </button>
 	      {if $cfg.user}
-    	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}-{$cfg.user.username|escape}</a>
+    	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape} <b>{$cfg.user.username|escape}</b></a>
 	      {else}
     	      <a class="navbar-brand" href="{$cfg.abs_root_url}">{$cfg.site_name|escape}</a>
 	      {/if}
@@ -21,29 +22,23 @@
 
 		<li class="dropdown">
 
-		<a href="#" id="navi-account" class="dropdown-toggle navi-label" data-toggle="dropdown" role="button">...</a>
-
 		{if $cfg.user}
-		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
-		<li><a href="#"><span id="network-status">...</span></a></li>
-		<li><a href="{$cfg.abs_root_url}documents/">Your reading list</a></li>
-		<li><a href="{$cfg.abs_root_url}highlights/">Your highlights</a></li>
-		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">Your account</a></li>
-		<li id="signout"><a href="{$cfg.abs_root_url}signout/">Sign out</a></li>
-		</ul>
-		
-		{elseif "signin"|@features_is_enabled}
-
-		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
-		{if "signup"|@features_is_enabled}<li id="signup"><a href="{$cfg.abs_root_url}signup/">Create an account</a></li>{/if}
-		<li id="signin"><a href="{$cfg.abs_root_url}signin/">Sign in</a></li>
-		</ul>
+		<li><a href="{$cfg.abs_root_url}documents/">reading list</a></li>
+		<li><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
+		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">account</a></li>
+		<li id="signout"><a href="{$cfg.abs_root_url}signout/">exit</a></li>
 
 		{else}
+		<ul class="dropdown-menu" aria-labelledby="account-navi" role="menu">
+		{if "signup"|@features_is_enabled}<li id="signup"><a href="{$cfg.abs_root_url}signup/">sign up</a></li>{/if}
+		<li id="signin"><a href="{$cfg.abs_root_url}signin/">sign in</a></li>
+		</ul>
+
 		{/if}
 
 		</li>
 	      </ul>
+
 	</div>
       {/if}
 

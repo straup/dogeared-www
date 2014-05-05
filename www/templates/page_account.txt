@@ -1,8 +1,7 @@
 {assign var="page_title" value="Your account" nav_tab='account'}
 {include file="inc_head.txt"}
 
-<div class="container">
-	<h1>Your account</h1>
+<div class="row">
 
 	{if $smarty.get.password}<p class="message">Your password has been updated.</p>{/if}
 
