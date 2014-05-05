@@ -68,6 +68,12 @@ body {
     margin-bottom: 2em;
 }
 
+.extruder {
+    text-align:center;
+    margin: 2em;
+    margin-top:1em;
+}
+
 @media (max-width: 480px){
 
     body {
