@@ -14,6 +14,8 @@
 
 </div>
 
+{* sudo put me in a .js file *}
+
 <script type="text/javascript">
 {literal}
 
@@ -47,6 +49,7 @@ $(document).ready(function(){
 		}
 		
 		$(".excerpt").remove();
+		$("#document").remove();
 
 		var documents = $("#documents");
 		var key = {};
@@ -142,6 +145,20 @@ $(document).ready(function(){
 		dogeared_api_call(method, args, onsuccess);
 	}
 
+	$("#dogeared-navi li a").click(function(){
+
+		if (! dogeared_network_is_online()){
+
+			var el = $(this);
+
+			if (el.html() == 'reading list'){
+				load_cache();
+			}
+
+			return false;
+		}
+        });
+	
 	if (dogeared_network_is_online()){
 		fill_cache();
 	}

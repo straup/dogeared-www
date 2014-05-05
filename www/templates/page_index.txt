@@ -9,7 +9,7 @@
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
 
-	<button class="btn btn-primary">Dogear this</button>
+	<button class="btn btn-primary">Dogear these words</button>
 </form>
 
 </div>
