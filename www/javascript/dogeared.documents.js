@@ -60,32 +60,37 @@ function dogeared_documents_load_cache(){
     var key = {};
     
     var root = dogeared_abs_root_url();
+
+    /*
+      move these functions in to dogeared.document.js
+      just because it would be... well, would it really?
+      (20140506/straup)
+    */
     
     for (var i = 0; i < count; i++){
 	
 	var doc = docs[i];
 	var id = doc['id'];
 
+	var title = (doc['title']) ? doc['title'] : doc['url'];
+
 	key[id] = i;
 	
 	var row = '<div class="row excerpt">';
 	row += '<h3><a href="#';
 
-	/*
-	row += root + 'documents/';
-	row += htmlspecialchars(id);
-	*/
-
 	row += '" class="load-doc" data-document-id="';
 	row += htmlspecialchars(id);
 	row += '">';
-	row += htmlspecialchars(doc['title']);
+	row += htmlspecialchars(title);
 	row += '</a>';
 	row += ' <small>offline cache</small>';
 	row += '</h3>';
-	row += '<p><small>';
+	row += '<p>';
 	row += htmlspecialchars(doc['excerpt']);
-	row += '</small></p>';
+	row += ' <a href="#" class="loc-doc" data-document-id="';
+	row += htmlspecialchars(id);
+	row += '">...</a></p>';
 	row += '</div>';
 	
 	documents.append(row);			

@@ -3,7 +3,7 @@ var de_feedback_timeout = null;
 function dogeared_feedback(msg){
 
     var b = $("#feedback-general");
-    b.html(msg);
+    b.html(htmlspecialchars(msg));
 
     if (de_feedback_timeout){
 	clearTimeout(de_feedback_timeout);

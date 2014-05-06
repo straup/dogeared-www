@@ -22,7 +22,6 @@ function dogeared_cache_highlights_store(hl){
     }
 
     store.set(key, hl);
-
     return true;
 }
 
