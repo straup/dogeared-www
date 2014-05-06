@@ -23,7 +23,7 @@
 		{if $cfg.user}
 		<li><a href="{$cfg.abs_root_url}documents/">reading list</a></li>
 		<li><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
-		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">account</a></li>
+		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">you</a></li>
 		<li id="signout"><a href="{$cfg.abs_root_url}signout/">exit</a></li>
 
 		{else}

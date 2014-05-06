@@ -45,36 +45,46 @@ function dogeared_documents_load_cache(){
     console.log("load cache");
     
     var docs = dogeared_cache_documents();
-    
-    if (docs.length == 0){
+    var count = docs.length;
+
+    if (count == 0){
 	return false;
     }
     
+    docs.reverse();
+
     $(".excerpt").remove();
-    $("#document").remove();
+    $(".document").remove();
     
     var documents = $("#documents");
     var key = {};
     
     var root = dogeared_abs_root_url();
     
-    for (var i in docs){
+    for (var i = 0; i < count; i++){
 	
 	var doc = docs[i];
-	key[doc['id']] = i;
-	
-	// console.log(doc);
+	var id = doc['id'];
+
+	key[id] = i;
 	
 	var row = '<div class="row excerpt">';
-	row += '<h3><a href ="';
-	row += root + 'documents/' + doc['id'] + '/';
+	row += '<h3><a href="#';
+
+	/*
+	row += root + 'documents/';
+	row += htmlspecialchars(id);
+	*/
+
 	row += '" class="load-doc" data-document-id="';
-	row += doc['id'];
-	row += '">' + doc['title'] + '</a>';
+	row += htmlspecialchars(id);
+	row += '">';
+	row += htmlspecialchars(doc['title']);
+	row += '</a>';
 	row += ' <small>offline cache</small>';
 	row += '</h3>';
 	row += '<p><small>';
-	row += doc['excerpt'] + "...";
+	row += htmlspecialchars(doc['excerpt']);
 	row += '</small></p>';
 	row += '</div>';
 	
@@ -88,13 +98,25 @@ function dogeared_documents_load_cache(){
 	var id = el.attr("data-document-id");
 	var idx = key[id];
 	var doc = docs[idx];
-	
+
+	var title = (doc['title']) ? doc['title'] : doc['url'];
+
 	var body = JSON.parse(doc['body']);
 	
-	var txt = '<div id="document">';
+	var txt = '<div class="row document"';
+	txt += ' data-document-id="';
+	txt += htmlspecialchars(id);
+	txt += '">';
 	
+	txt += '<h3>';
+	txt += htmlspecialchars(title);
+	txt += '<small>offline cache</small>';
+	txt += '</h3>';
+
 	for (var i in body){
-	    txt += '<p>' + body[i] + '</p>';
+	    txt += '<p>';
+	    txt += htmlspecialchars(body[i]);
+	    txt += '</p>';
 	}
 	
 	txt += '</document>';
