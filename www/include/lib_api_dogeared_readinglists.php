@@ -39,6 +39,26 @@
 	function api_dogeared_readinglists_deleteDocument(){
 
 		$id = post_int64("document_id");
+
+		if (! $id){
+			api_output_error(400, "Missing document ID");
+		}
+
+		$doc = dogeared_documents_get_by_id($id);
+
+		if (! $doc){
+			api_output_error(400, "Invalid document ID");
+		}
+
+		$user = $GLOBALS['cfg']['user'];
+
+		$rsp = dogeared_readinglists_delete_document($user, $doc);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+		
+		api_output_ok();
 	}
 
 	########################################################################

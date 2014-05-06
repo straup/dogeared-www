@@ -1,6 +1,8 @@
 function dogeared_init(){
 
-    $("#dogeared-navi li a").click(function(){
+    //$("#dogeared-navi li a").click(function(){
+
+    $("a").click(function(){
 
 	var el = $(this);
 

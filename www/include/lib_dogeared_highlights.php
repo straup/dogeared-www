@@ -40,6 +40,12 @@
 
 	########################################################################
 
+	function dogeared_highlights_delete_highlight(){
+		# please write me
+	}
+
+	########################################################################
+
 	function dogeared_highlights_get_for_user(&$user, $more=array()){
 
 		$cluster_id = $user['cluster_id'];

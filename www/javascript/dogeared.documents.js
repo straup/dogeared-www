@@ -88,7 +88,7 @@ function dogeared_documents_load_cache(){
 	row += '</h3>';
 	row += '<p>';
 	row += htmlspecialchars(doc['excerpt']);
-	row += ' <a href="#" class="loc-doc" data-document-id="';
+	row += ' <a href="#" class="load-doc" data-document-id="';
 	row += htmlspecialchars(id);
 	row += '">...</a></p>';
 	row += '</div>';

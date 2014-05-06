@@ -85,6 +85,21 @@
 
 	########################################################################
 
+	function dogeared_readinglists_delete_document(&$user, &$document){
+
+		$enc_user = AddSlashes($user['id']);
+		$enc_doc = AddSlashes($document_id);
+
+		$cluster_id = $user['cluster_id'];
+
+		$sql = "DELETE FROM ReadingLists WHERE user_id='{$enc_user}' AND document_id='{$enc_doc}'";
+		$rsp = db_write_users($cluster_id, $sql);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function dogeared_readinglists_get_for_user(&$user, $more=array()){
 
 		$enc_user = AddSlashes($user['id']);
