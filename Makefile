@@ -3,6 +3,11 @@ all: clean todo
 clean:
 	rm -f ./TODO.txt
 
+js:
+	java -Xmx64m -jar lib/google-compiler/compiler-20100616.jar --js www/javascript/dogeared.js --js www/javascript/dogeared.network.js --js www/javascript/dogeared.feedback.js  --js www/javascript/dogeared.api.js --js www/javascript/dogeared.documents.js --js www/javascript/dogeared.document.js --js www/javascript/dogeared.cache.js --js www/javascript/dogeared.cache.documents.js --js www/javascript/dogeared.cache.highlights.js > www/javascript/dogeared.bundle.min.js
+
+	cat www/javascript/jquery-1.8.2.min.js www/javascript/bootstrap.min.js www/javascript/store.min.js www/javascript/phpjs.htmlspecialchars.js www/javascript/md5.min.js > www/javascript/dogeared.dependencies.min.js
+
 todo: TODO.txt
 
 TODO.txt:
@@ -21,12 +26,3 @@ templates:
 
 secret:
 	php -q ./bin/generate_secret.php
-
-test:
-	prove -v --exec 'php --php-ini ./tests/php.ini' ./tests/*.t
-
-cover:
-	rm -f ./tests/coverage.state
-	rm -rf ./coverage
-	-make test
-	php -q ./tests/coverage.php

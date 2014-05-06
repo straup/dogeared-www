@@ -36,6 +36,13 @@
 
 	########################################################################
 
+	function api_dogeared_readinglists_deleteDocument(){
+
+		$id = post_int64("document_id");
+	}
+
+	########################################################################
+
 	function api_dogeared_readinglists_getDocuments(){
 
 		$user = $GLOBALS['cfg']['user'];
