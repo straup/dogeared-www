@@ -6,7 +6,7 @@
 {foreach from=$list item="row"}
 <div class="row excerpt">
 <h3><a href="{$cfg.abs_root_url}documents/{$row.document_id|escape}/">{if $row.document.title}{$row.document.title|escape}{else}{$row.document.url|escape}{/if}</a> <small>{$row.created|@date_format|@escape}</small></h3>
-<p><small>{$row.document.excerpt|escape}... <a href="{$cfg.abs_root_url}documents/{$row.document_id|escape}/">more</a></small></p>
+<p>{$row.document.excerpt|escape} <a href="">...</a></p>
 
 </div>
 
