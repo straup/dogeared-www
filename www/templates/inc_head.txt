@@ -33,6 +33,7 @@
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.documents.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.highlights.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.documents.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.highlights.js"></script>

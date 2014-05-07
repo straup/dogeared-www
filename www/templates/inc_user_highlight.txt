@@ -10,4 +10,8 @@
 	{/if}
 	</div>
 
+	<div class="pull-right">
+	<button class="btn btn-sm delete-highlight" data-highlight-id="{$highlight.id|escape}">Delete</delete>
+	</div>
+
 </div>
