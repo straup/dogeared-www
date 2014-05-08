@@ -16,6 +16,8 @@ function dogeared_highlights_init(){
 	    console.log(rsp);
 	};
 
+	console.log(args);
+
 	dogeared_api_call(method, args);
     });
 }

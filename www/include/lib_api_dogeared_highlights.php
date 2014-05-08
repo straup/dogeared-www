@@ -41,4 +41,31 @@
 
 	########################################################################
 
+	function api_dogeared_highlights_deleteHighlight(){
+
+		$id = post_int64("id");
+
+		if (! $id){
+			api_output_error(400, "Missing highlight ID");
+		}
+
+		$user = $GLOBALS['cfg']['user'];
+
+		$highlight = dogeared_highlights_get_by_id($user, $id);
+
+		if (! $highlight){
+			api_output_error(400, "Invalid highlight ID");
+		}
+
+		$rsp = dogeared_highlights_delete_highlight($highlight);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
+		api_output_ok();
+	}
+
+	########################################################################
+
 	# the end

@@ -42,8 +42,8 @@
 
 		"dogeared.highlights.deleteHighlight" => array(
 			"description" => "Delete a highlighted text",
-			"documented" => 0,
-			"enabled" => 0,
+			"documented" => 1,
+			"enabled" => 1,
 			"library" => "api_dogeared_highlights",
 			"requires_perms" => 2,
 			"requires_method" => "POST",

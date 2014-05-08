@@ -1,5 +1,16 @@
+{capture assign="page_title"}highlights | {$highlight.hash}{/capture}
 {include file="inc_head.txt"}
 
 {include file="inc_user_highlight.txt"}
+
+<script type="text/javascript">
+{literal}
+
+$(document).ready(function(){
+	dogeared_highlights_init();
+});
+
+{/literal}
+</script>
 
 {include file="inc_foot.txt"}
