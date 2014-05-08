@@ -52,6 +52,12 @@
 
 		$user = $GLOBALS['cfg']['user'];
 
+		$rsp = dogeared_highlights_delete_highlights_for_document($doc);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
 		$rsp = dogeared_readinglists_delete_document($user, $doc);
 
 		if (! $rsp['ok']){
