@@ -24,7 +24,10 @@ $(document).ready(function(){
 		var url = $("#url");
 		url = url.val();
 
-		var onsuccess = function(rsp){
+		var on_success = function(rsp){
+
+			dogeared_feedback("Okay! That document is ready to be dogeared.");
+
 			var document = rsp['document'];
 			dogeared_cache_documents_store(document);
 		};
@@ -35,7 +38,7 @@ $(document).ready(function(){
 		// console.log(args);
 		// return false;
 
-		dogeared_api_call(method, args, onsuccess);
+		dogeared_api_call(method, args, on_success);
 		return false;
 	});
 });
