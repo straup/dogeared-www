@@ -5,7 +5,7 @@
 <button class="btn btn-sm delete-document" data-document-id="{$doc.id|escape}">Delete</button>
 </div>
 
-<div class="row document" data-document-id="{$doc.id|escape}">
+<div class="row document" data-document-id="{$doc.id|escape}" id="document">
 
 <h3>{if $doc.title}{$doc.title|@escape}{else}{$doc.url|escape}{/if} <small>{$doc.url|escape}</small></h3>
 
