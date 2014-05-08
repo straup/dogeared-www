@@ -88,13 +88,13 @@
 	function dogeared_readinglists_delete_document(&$user, &$document){
 
 		$enc_user = AddSlashes($user['id']);
-		$enc_doc = AddSlashes($document_id);
+		$enc_doc = AddSlashes($document['id']);
 
 		$cluster_id = $user['cluster_id'];
 
 		$sql = "DELETE FROM ReadingLists WHERE user_id='{$enc_user}' AND document_id='{$enc_doc}'";
-		$rsp = db_write_users($cluster_id, $sql);
 
+		$rsp = db_write_users($cluster_id, $sql);
 		return $rsp;
 	}
 

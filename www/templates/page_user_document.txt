@@ -1,6 +1,10 @@
 {capture assign="page_title"}reading list | {if $doc.title}{$doc.title}{else}{$doc.url}{/if}{/capture}
 {include file="inc_head.txt"}
 
+<div class="row pull-right">
+<button class="btn btn-sm delete-document" data-document-id="{$doc.id|escape}">Delete</button>
+</div>
+
 <div class="row document" data-document-id="{$doc.id|escape}">
 
 <h3>{if $doc.title}{$doc.title|@escape}{else}{$doc.url|escape}{/if} <small>{$doc.url|escape}</small></h3>
@@ -13,6 +17,10 @@
 <small>{$doc.url|escape}</small>
 </div>
 
+</div>
+
+<div class="row pull-right">
+<button class="btn btn-sm delete-document" data-document-id="{$doc.id|escape}">Delete</button>
 </div>
 
 <script type="text/javascript">

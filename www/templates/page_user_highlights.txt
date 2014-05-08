@@ -1,11 +1,21 @@
 {capture assign="page_title"}highlights{/capture}
 {include file="inc_head.txt"}
 
+{if !$highlights|@count}
+
+<div class="row">
+<p>You don't have any highlights right now.</p>
+</div>
+
+{else}
+
 {foreach from=$highlights item="row"}
 {include file="inc_user_highlight.txt" highlight=$row digest=1}
 {/foreach}
 
 {include file="inc_pagination.txt"}
+
+{/if}
 
 <script type="text/javascript">
 {literal}

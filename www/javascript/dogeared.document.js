@@ -14,6 +14,30 @@ function dogeared_document_init(){
 
 	$(document).bind('mouseup', dogeared_document_selected_mouseup);
     }	
+
+    $(".delete-document").click(function(){
+
+	if (! confirm("Are you sure you want to remove this document?")){
+	    return false;
+	}
+	
+	var el = $(this);
+	var id = el.attr("data-document-id");
+
+	var method = "dogeared.readinglists.deleteDocument";
+	var args = { 'document_id': id };
+
+	var on_success = function(rsp){
+	    
+	    var root = dogeared_abs_root_url();
+	    var redir = root + "documents/?deleted=1";
+	    
+	    location.href = redir;
+	};
+
+	dogeared_api_call(method, args, on_success);
+    });
+
 }
 
 function dogeared_document_selected_mouseup(e){
@@ -123,7 +147,7 @@ function dogeared_document_add_highlight(){
     var on_success = function(rsp){
 
 	if (rsp['stat'] != 'ok'){
-	    dogeared_feeback_api_error(rsp);
+	    dogeared_feedback_api_error(rsp);
 	    return;
 	}
 

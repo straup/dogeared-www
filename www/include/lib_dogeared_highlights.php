@@ -98,8 +98,8 @@
 		$enc_user = AddSlashes($user['id']);
 
 		$sql = "DELETE FROM Highlights WHERE user_id='{$enc_user}' AND document_id='{$enc_doc}'";
-		$rsp = db_write_users($cluster_id, $sql);
 
+		$rsp = db_write_users($cluster_id, $sql);
 		return $rsp;
 	}
 

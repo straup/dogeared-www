@@ -30,8 +30,12 @@
 			'Accept' => 'application/json',
 		);
 
+		$more = array(
+			'http_timeout' => 15,
+		);
+
 		$req = $GLOBALS['cfg']['dogeared_extruder_endpoint'] . "{$service}/?{$query}";
-		$rsp = http_get($req, $headers);
+		$rsp = http_get($req, $headers, $more);
 
 		if (! $rsp['ok']){
 			return $rsp;

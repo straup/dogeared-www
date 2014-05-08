@@ -15,3 +15,7 @@ function dogeared_feedback(msg){
     }, 10000);
 
 }
+
+function dogeared_feedback_api_error(rsp){
+    dogeared_feedback(rsp['error']['message']);
+}

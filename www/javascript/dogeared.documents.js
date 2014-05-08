@@ -21,7 +21,30 @@ function dogeared_documents_init(){
 	    return false;
 	}
     });
-    
+ 
+    $(".delete-document").click(function(){
+
+	if (! confirm("Are you sure you want to remove this document?")){
+	    return false;
+	}
+	
+	var el = $(this);
+	var id = el.attr("data-document-id");
+
+	var method = "dogeared.readinglists.deleteDocument";
+	var args = { 'document_id': id };
+
+	var on_success = function(rsp){
+
+	    var doc = $("#document-" + id);
+	    doc.remove();
+
+	    dogeared_feedback("Okay, that document has been removed from your reading list");
+	};
+
+	dogeared_api_call(method, args, on_success);
+    });
+   
     if (dogeared_network_is_online()){
 	dogeared_documents_fill_cache();
     }
@@ -33,10 +56,15 @@ function dogeared_documents_init(){
 
 function dogeared_documents_on_online(e){
     console.log("local: online");
+
+    $(".delete-document").removeAttr("disabled");    
 }
 
 function dogeared_documents_on_offline(e){
     console.log("local: offline");
+
+    $(".delete-document").attr("disabled", "disabled");
+
     dogeared_documents_load_cache();
 }
 
