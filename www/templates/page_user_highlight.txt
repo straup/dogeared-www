@@ -8,6 +8,7 @@
 
 $(document).ready(function(){
 	dogeared_highlights_init();
+	dogeared_highlights_init_single();
 });
 
 {/literal}

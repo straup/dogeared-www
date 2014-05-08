@@ -1,6 +1,6 @@
 <div class="row highlight" id="highlight-{$highlight.id|escape}">
 
-	<h3><a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}">{if $highlight.document.title}{$highlight.document.title|escape}{else}{$highlight.document.url|escape}{/if}</a> <small>{$row.created|@date_format}</small></h3>
+	<h3><a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}">{if $highlight.document.title}{$highlight.document.title|escape}{else}{$highlight.document.url|escape}{/if}</a> <small>{$highlight.id|escape} {$row.created|@date_format}</small></h3>
 
 	<div>
 	{if $digest}	
@@ -10,7 +10,7 @@
 	{/if}
 	</div>
 
-	<div class="pull-right">
+	<div>
 	<button class="btn btn-sm delete-highlight" data-highlight-id="{$highlight.id|escape}">Delete</delete>
 	</div>
 
