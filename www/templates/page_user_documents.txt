@@ -22,6 +22,7 @@
 
 $(document).ready(function(){
 	dogeared_documents_init();
+	// dogeared_documents_init_list();
 });
 
 {/literal}
