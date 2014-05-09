@@ -141,3 +141,6 @@ RewriteRule ^highlights(/page([0-9]+))?/?$		user_highlights.php?page=$2	[L,QSA]
 RewriteRule ^highlights/pending/?$			user_highlights_pending.php	[L,QSA]
 RewriteRule ^highlights/([0-9]+)?/?$			user_highlight.php?id=$1	[L,QSA]
 
+# Appache / manifest stuff
+
+RewriteRule ^manifest/?$				appcache_manifest.php		[L,QSA]

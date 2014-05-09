@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# v{$version|escape}
+
+CACHE:
+
+NETWORK:
+*
+
+FALLBACK:
+
+# http://www.html5rocks.com/en/tutorials/appcache/beginner/
+# https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache
+# http://alistapart.com/article/application-cache-is-a-douchebag
