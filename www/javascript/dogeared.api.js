@@ -25,29 +25,42 @@ function dogeared_api_call(method, args, on_success, on_error){
 
 	var dothis_onerror = function(rsp){		    
 
-		var parse_rsp = function(rsp){
-	
-			if (! rsp['responseText']){
-				console.log("Missing response text");
-				return;
-			}
-
-			try {
-				rsp = JSON.parse(rsp['responseText']);
-				return rsp;
-			}
-
-			catch (e){
-				console.log("Failed to parse response text");
-				return;
-			}
-		};
-
-		rsp = parse_rsp(rsp);
-
-		if (on_error){
-			on_error(rsp);
+	    var parse_rsp = function(rsp){
+		
+		if (! rsp['responseText']){
+		    console.log("Missing response text");
+		    dogeared_feedback("The API is full of crazy-talk: Missing response text");
+		    return;
 		}
+
+		try {
+		    rsp = JSON.parse(rsp['responseText']);
+		    return rsp;
+		}
+
+		catch (e){
+		    console.log("Failed to parse response text");
+		    dogeared_feedback("The API is full of crazy-talk: Failed to parse response text");
+		    return;
+		}
+	    };
+
+	    rsp = parse_rsp(rsp);
+
+	    if (rsp){
+
+		if (rsp['error']){
+		    dogeared_feedback("The API is sad: " + rsp['error']['message']);
+		}
+
+		else {
+		    dogeared_feedback(rsp);
+		}
+	    }
+	    
+	    if (on_error){
+		on_error(rsp);
+	    }
         };
 
         $.ajax({

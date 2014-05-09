@@ -31,7 +31,7 @@
 		);
 
 		$more = array(
-			'http_timeout' => 15,
+			# 'http_timeout' => 15,
 		);
 
 		$req = $GLOBALS['cfg']['dogeared_extruder_endpoint'] . "{$service}/?{$query}";

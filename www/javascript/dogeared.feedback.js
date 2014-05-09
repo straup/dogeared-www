@@ -19,3 +19,7 @@ function dogeared_feedback(msg){
 function dogeared_feedback_api_error(rsp){
     dogeared_feedback(rsp['error']['message']);
 }
+
+function dogeared_feedback_xhr_error(rsp){
+
+}

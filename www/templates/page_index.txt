@@ -2,14 +2,13 @@
 
 <div class="row extruder">
 
-<form class="form-inline" role="form" method="POST" id="fetch">
+<form class="form" role="form" method="POST" id="fetch">
 
-      <div class="form-group">
+      <div class="form-group sr">
       <label for="url"></label>
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
-
-	<button class="btn btn-primary">Dogear these words</button>
+	<button class="btn btn-primary pull-right">Dogear these words</button>
 </form>
 
 </div>
@@ -32,11 +31,9 @@ $(document).ready(function(){
 			dogeared_cache_documents_store(document);
 		};
 
+
 		var method = "dogeared.readinglists.addDocument";
 		var args = { 'url': url };
-
-		// console.log(args);
-		// return false;
 
 		dogeared_api_call(method, args, on_success);
 		return false;
