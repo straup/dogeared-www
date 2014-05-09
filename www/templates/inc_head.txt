@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    {* REMEMBER TO ADD THINGS TO templates/page_appcache_manifest.txt *}
+
     <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/dogeared.bootstrap.css" rel="stylesheet">
     <link href="{$cfg.abs_root_url}css/dogeared.api.css" rel="stylesheet">
@@ -31,6 +33,7 @@
     <script src="{$cfg.abs_root_url}javascript/dogeared.network.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.feedback.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.extruder.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.documents.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.highlights.js"></script>
