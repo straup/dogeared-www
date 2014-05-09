@@ -56,6 +56,17 @@
 			),
 		),
 
+		"dogeared.highlights.getList" => array(
+			"description" => "Get the list of highlight for a user",
+			"documented" => 0,
+			"enabled" => 0,
+			"library" => "api_dogeared_highlights",
+			"requires_perms" => 1,
+			"requires_method" => "POST",
+			"parameters" => array(
+			),
+		),
+
 		"dogeared.readinglists.addDocument" => array(
 			"description" => "Add a document to a user's reading list",
 			"documented" => 1,

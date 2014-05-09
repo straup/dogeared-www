@@ -2,6 +2,12 @@
 
 	########################################################################
 
+	function api_dogeared_highlights_getList(){
+
+	}
+
+	########################################################################
+
 	function api_dogeared_highlights_addHighlight(){
 
 		$id = request_int64("document_id");
