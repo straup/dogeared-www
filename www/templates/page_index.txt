@@ -48,6 +48,7 @@ $(document).ready(function(){
 		var args = { 'url': url };
 
 		dogeared_api_call(method, args, on_success);
+		dogeared_feedback("Fetching your document, now...");
 
 		$("#button-dogear").attr("disabled", "disabled");
 		return false;

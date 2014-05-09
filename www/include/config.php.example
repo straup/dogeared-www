@@ -17,6 +17,7 @@
 	$GLOBALS['cfg']['display_message_text'] = '';
 
 	$GLOBALS['cfg']['dogeared_extruder_endpoint'] = 'http://localhost:8080/';
+	$GLOBALS['cfg']['dogeared_extruder_timeout'] = 15;
 
 	#
 	# Things you'll certainly need to tweak
