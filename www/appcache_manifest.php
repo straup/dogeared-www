@@ -6,7 +6,7 @@
 		error_404();
 	}
 
-	header("text/cache-manifest");
+	header("Content-Type: text/cache-manifest");
 
 	$GLOBALS['smarty']->assign("manifest_version", 1);
 
