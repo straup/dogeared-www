@@ -1,8 +1,6 @@
 {capture assign="page_title}API methods | API{/capture}
 {include file="inc_head.txt"}
 
-{include file="inc_api_header.txt" title="API methods"}
-
 <div id="api_methods">
 
 {foreach from=$method_classes item="methods" key="class"}

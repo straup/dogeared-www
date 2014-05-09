@@ -1,9 +1,6 @@
 {capture assign="page_title"}API{/capture}
 {include file="inc_head.txt"}
 
-{capture assign="title"}Application Programming Interface (API){/capture}
-{include file="inc_api_header.txt" title=$title}
-
 {if "api_documentation"|@features_is_enabled}
 
 <div class="api-sect">

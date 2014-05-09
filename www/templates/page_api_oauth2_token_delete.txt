@@ -1,8 +1,6 @@
 {capture assign="page_title"}Revoke access for the {$token.app.app_title} application | Applications | API{/capture}
 {include file="inc_head.txt"}
 
-{include file="inc_api_header.txt" title="Revoke access for this token"}
-
 {if $delete_rsp}
 
 {if $delete_rsp.ok}

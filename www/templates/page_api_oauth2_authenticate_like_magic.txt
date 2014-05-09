@@ -1,8 +1,6 @@
 {capture assign="page_title"}Authorize the {$key.app_title} application (like magic) | API{/capture}
 {include file="inc_head.txt"}
 
-{include file="inc_api_header.txt" title="Create a new access token for yourself"}
-
 {if $step==3}
 
 <div class="api-sect">

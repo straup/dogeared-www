@@ -1,8 +1,6 @@
 {capture assign="page_title"}Authorize your {$key.app_title} API key | API{/capture}
 {include file="inc_head.txt"}
 
-{include file="inc_api_header.txt" title="Register ... for yourself"}
-
 {if $has_token}
 
 <p>Hey, guess what? You've already created <a href="{$cfg.abs_root_url}api/oauth2/tokens/{$key.api_key|escape}/">an authentication token</a> for yourself and this API key!</p>
