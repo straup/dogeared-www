@@ -112,6 +112,15 @@ a {
     margin-bottom: .5em;
 }
 
+#highlight {
+    background-color:#000 !important;
+    color: #fff !important;
+    border-radius: 0px !important;
+    border: 2px solid #000;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
 @media (max-width: 480px){
 
     body {
