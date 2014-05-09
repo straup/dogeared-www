@@ -44,7 +44,7 @@ $(document).ready(function(){
 			$("#button-dogear").removeAttr("disabled");
 		};
 
-		var method = "dogeared.readinglists.addDocument";
+		var method = "dogeared.documents.addDocument";
 		var args = { 'url': url };
 
 		dogeared_api_call(method, args, on_success);
