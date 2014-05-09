@@ -54,6 +54,21 @@
 
 	########################################################################
 
+	function dogeared_highlights_get_for_user_and_document(&$user, &$doc, $more=array()){
+
+		$cluster_id = $user['cluster_id'];
+
+		$enc_user = AddSlashes($user['id']);
+		$enc_doc = AddSlashes($doc['id']);
+
+		$sql = "SELECT * FROM Highlights WHERE user_id='{$enc_user}' AND document_id='{$enc_doc}' ORDER BY created DESC";
+		$rsp = db_fetch_users($cluster_id, $sql, $more);
+
+		return $rsp;
+	}
+
+	########################################################################
+
 	function dogeared_highlights_get_by_id(&$user, $id){
 
 		$cluster_id = $user['cluster_id'];

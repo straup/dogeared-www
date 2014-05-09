@@ -31,7 +31,7 @@ function dogeared_documents_init(){
 	var el = $(this);
 	var id = el.attr("data-document-id");
 
-	var method = "dogeared.readinglists.deleteDocument";
+	var method = "dogeared.documents.deleteDocument";
 	var args = { 'document_id': id };
 
 	var on_success = function(rsp){
@@ -190,7 +190,7 @@ function dogeared_documents_store_docs(docs){
 
 function dogeared_documents_fill_cache(){
 
-    var method = 'dogeared.readinglists.getDocuments';
+    var method = 'dogeared.documents.getList';
     var args = {};
     
     var onsuccess = function(rsp){

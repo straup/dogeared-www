@@ -24,7 +24,7 @@ function dogeared_document_init(){
 	var el = $(this);
 	var id = el.attr("data-document-id");
 
-	var method = "dogeared.readinglists.deleteDocument";
+	var method = "dogeared.documents.deleteDocument";
 	var args = { 'document_id': id };
 
 	var on_success = function(rsp){

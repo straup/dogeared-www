@@ -4,6 +4,34 @@
 
 	function api_dogeared_highlights_getList(){
 
+		$args = array();
+		api_utils_ensure_pagination_args($args);
+
+		$user = $GLOBALS['cfg']['user'];
+
+		if (request_isset("document_id")){
+
+			$id = request_int64("document_id");
+			$doc = dogeared_documents_get_by_id($id);
+
+			if (! $doc){
+				api_output_error(400, "Invalid document ID");
+			}
+
+			$rsp = dogeared_highlights_get_for_user_and_document($user, $doc, $args);
+		}
+
+		else {
+
+			$rsp = dogeared_highlights_get_for_user($user, $args);
+		}
+
+		$out = array('hightlights' => array(
+			'highlight' => $rsp['rows'],
+		));
+
+		api_utils_ensure_pagination_results($out, $rsp['pagination']);
+		api_output_ok($out);
 	}
 
 	########################################################################
