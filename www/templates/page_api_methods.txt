@@ -1,22 +1,39 @@
 {capture assign="page_title}API methods | API{/capture}
 {include file="inc_head.txt"}
 
-<div id="api_methods">
+<div class="container">
 
-{foreach from=$method_classes item="methods" key="class"}
-<div class="api-sect">
+{capture assign="count_classes"}{$method_classes|@array_keys|@count}{/capture}
+{capture assign="count_split"}{$count_classes/2}{/capture}
 
-<h2>{$class|escape}</h2>
+<div class="api-methods col-md-5">
 
+{foreach from=$method_classes item="class_details" key="class" name="classes"}
+<div class="row api-sect api-sect-{$class_details.prefix|escape} api-sect-{$class|replace:".":"-"|escape}">
+
+<h3>{$class|escape}</h3>
 <ul class="api-list-o-things">
-{foreach from=$methods item="method_name}
-	<li><a href="{$cfg.abs_root_url}api/methods/{$method_name|escape:'uri'}">{$method_name|escape}</a></li>
+{foreach from=$class_details.methods item="method"}
+	<li class="api-method{if !$method.documented} api-method-undocumented{/if}{if !$method.enabled} api-method-disabled{/if}"><a href="{$cfg.abs_root_url}api/methods/{$method.name|escape:'uri'}">{$method.name|escape}</a>{if $method.description} <small>{$method.description|escape}</small>{/if}</li>
 {/foreach}
 </ul>
 
 </div>
+
+{if $smarty.foreach.classes.index+1==$count_split}
+</div>
+<div class="api-methods col-md-5 col-md-offset-2">
+{/if}
+
 {/foreach}
 
 </div>
+</div>
+
+{if 0}
+<div class="container" style="margin-top:4em;"><div class="row">
+<p class="text-center" style="font-style:italic;">There is also a handy <a href="{$cfg.abs_root_url}api/methods/print/">single-page listing of all the API methods</a> that has a friendly CSS3 print stylesheet for making a paper copy of the documentation.</p>
+</div></div>
+{/if}
 
 {include file="inc_foot.txt"}
