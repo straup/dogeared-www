@@ -24,9 +24,19 @@
 		<li><a href="{$cfg.abs_root_url}documents/">reading list</a></li>
 		<li><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
 		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">you</a></li>
+
+		{if "api"|@features_is_enabled and "api_documentation"|@features_is_enabled}
+		{include file="inc_head_navi_api.txt"}
+		{/if}
+
 		<li id="signout"><a href="{$cfg.abs_root_url}signout/">exit</a></li>
 
 		{else}
+
+		{if "api"|@features_is_enabled and "api_documentation"|@features_is_enabled}
+		{include file="inc_head_navi_api.txt"}
+		{/if}
+
 		{if "signup"|@features_is_enabled}<li id="signup"><a href="{$cfg.abs_root_url}signup/">sign up</a></li>{/if}
 		<li id="signin"><a href="{$cfg.abs_root_url}signin/">sign in</a></li>
 

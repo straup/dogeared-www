@@ -1,3 +1,4 @@
+{if 0}
 <div id="api-header">
 <h1>{$title|escape}</h1>
 <h2>
@@ -10,3 +11,4 @@
 {if "api_delegated_auth"|@features_is_enabled} – <a href="{$cfg.abs_root_url}api/oauth2/tokens/">Your access tokens</a>{/if}
 </h2>
 </div>
+{/if}
