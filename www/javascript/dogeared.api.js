@@ -29,7 +29,7 @@ function dogeared_api_call(method, args, on_success, on_error){
 		
 		if (! rsp['responseText']){
 		    console.log("Missing response text");
-		    dogeared_feedback("The API is full of crazy-talk: Missing response text");
+		    dogeared_feedback_error("The API is full of crazy-talk: Missing response text");
 		    return;
 		}
 
@@ -40,7 +40,7 @@ function dogeared_api_call(method, args, on_success, on_error){
 
 		catch (e){
 		    console.log("Failed to parse response text");
-		    dogeared_feedback("The API is full of crazy-talk: Failed to parse response text");
+		    dogeared_feedback_error("The API is full of crazy-talk: Failed to parse response text");
 		    return;
 		}
 	    };
@@ -50,7 +50,7 @@ function dogeared_api_call(method, args, on_success, on_error){
 	    if (rsp){
 
 		if (rsp['error']){
-		    dogeared_feedback("The API is sad: " + rsp['error']['message']);
+		    dogeared_feedback_error("The API is sad: " + rsp['error']['message']);
 		}
 
 		else {

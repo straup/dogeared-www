@@ -10,6 +10,7 @@
  	#################################################################
 
 	loadlib("api_output");
+	loadlib("api_output_utils");
 	loadlib("api_log");
 
 	loadlib("api_auth");

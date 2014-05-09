@@ -8,7 +8,7 @@
       <label for="url"></label>
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
-	<button class="btn btn-primary pull-right">Dogear these words</button>
+	<button class="btn btn-primary pull-right" id="dogear-button">Dogear these words</button>
 </form>
 
 </div>
@@ -25,17 +25,31 @@ $(document).ready(function(){
 
 		var on_success = function(rsp){
 
-			dogeared_feedback("Okay! That document is ready to be dogeared.");
+		    var doc = rsp['document'];
+		    var id = doc['id'];
+
+		    var root = dogeared_abs_root_url();
+		    var url = root + 'documents/' + id + '/';
+
+		    var msg = 'Okay! <a href="' + url + '">That document</a> is ready to be dogeared.';
+
+		    dogeared_feedback_ok(msg, 60);
+			$("#button-dogear").removeAttr("disabled");
 
 			var document = rsp['document'];
 			dogeared_cache_documents_store(document);
 		};
 
+		var on_error = function(rsp){
+			$("#button-dogear").removeAttr("disabled");
+		};
 
 		var method = "dogeared.readinglists.addDocument";
 		var args = { 'url': url };
 
 		dogeared_api_call(method, args, on_success);
+
+		$("#button-dogear").attr("disabled", "disabled");
 		return false;
 	});
 });
