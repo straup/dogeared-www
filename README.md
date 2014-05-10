@@ -2,5 +2,4 @@
 
 ## See also
 
-* dogeared-extruder
-* https://github.com/marcuswestin/store.js
+* [dogeared-extruder](https://github.com/straup/dogeared-extruder)
