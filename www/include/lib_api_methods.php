@@ -4,7 +4,7 @@
 
 	function api_methods_can_view_method(&$method, $viewer_id=0){
 
-		return ($method['documented']) ? 1 : 0
+		return ($method['documented']) ? 1 : 0;
 
 		# This needs some wrangling to sort out differences in lib_auth
 		# libraries (20140510/straup)
