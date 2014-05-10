@@ -10,11 +10,12 @@
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 	$version = $GLOBALS['cfg']['appcache_manifest_version'];
+	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
-	if ((! $version) || ($version == 'stat')){
+	if ((! $timestamp) || ($timestamp == 'stat')){
 		$path = $GLOBALS['smarty']->template_dir . "/page_appcache_manifest.txt";
 		$info = stat($path);
-		$version = $info[9];
+		$timestamp = $info[9];
 	}
 
 	if ($user = $GLOBALS['cfg']['user']){
@@ -25,12 +26,13 @@
 		
 		$created = $row['created'];
 
-		if ($created > $version){
-			$version = $created;
+		if ($created > $timestamp){
+			$timestamp = $created;
 		}
 	}
 	
 	$GLOBALS['smarty']->assign("manifest_version", $version);
+	$GLOBALS['smarty']->assign("manifest_timestamp", $timestamp);
 
 	$GLOBALS['smarty']->display("page_appcache_manifest.txt");
 	exit();

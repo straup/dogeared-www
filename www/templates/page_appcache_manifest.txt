@@ -1,5 +1,6 @@
 CACHE MANIFEST
 # v{$manifest_version|escape}
+# ts{$manifest_timestamp|escape}
 
 CACHE:
 # {$cfg.abs_root_url}
