@@ -7,7 +7,8 @@
 
 	header("Content-Type: text/cache-manifest");
 
-	$GLOBALS['smarty']->assign("manifest_version", 1);
+	$version = time();
+	$GLOBALS['smarty']->assign("manifest_version", $version);
 
 	$GLOBALS['smarty']->display("page_appcache_manifest.txt");
 	exit();

@@ -1,5 +1,6 @@
 {utf8_headers}<!DOCTYPE html>
-<html lang="en"{if "appcache"|@features_is_enabled} manifest="{$cfg.abs_root_url}manifest/"{/if}>
+{* appcache: see the way that's a relative path? that's deliberate (and important) *}
+<html lang="en"{if "appcache"|@features_is_enabled} manifest="/manifest"{/if}>
   <head>
     <meta charset="utf-8">
     <title>{$cfg.site_name|escape}{if $page_title} | {$page_title|escape}{/if}</title>
