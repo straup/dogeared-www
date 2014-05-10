@@ -84,7 +84,7 @@ function dogeared_document_selected_mouseup(e){
 
 function dogeared_document_selected_selectionchange(e){
 
-    console.log("on selectionchange");
+    // console.log("on selectionchange");
 
     $(".highlight").remove();
 
@@ -119,6 +119,8 @@ function dogeared_document_selected_selectionchange(e){
     $("#highlight").click(dogeared_document_add_highlight);
 }
 
+// move this in to dogeared.highlights.js ? 
+
 function dogeared_document_add_highlight(){
 
     var doc = $("#document");
@@ -137,7 +139,7 @@ function dogeared_document_add_highlight(){
     if (! dogeared_network_is_online()){
 
 	if (dogeared_cache_highlights_store(args)){
-	    dogeared_feedback("Your highlight has been cached until..");
+	    dogeared_feedback_modal("Your highlight has been cached.");
 	    dogeared_cache_highlights_status();
 	}
 
@@ -151,7 +153,7 @@ function dogeared_document_add_highlight(){
 	    return;
 	}
 
-	dogeared_feedback('Your highlight has been added.');	
+	dogeared_feedback_modal('Your highlight has been added.');	
     };
 
     var on_error = function(){
