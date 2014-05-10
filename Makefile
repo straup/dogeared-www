@@ -8,6 +8,13 @@ js:
 
 	cat www/javascript/jquery-1.8.2.min.js www/javascript/bootstrap.min.js www/javascript/store.min.js www/javascript/phpjs.htmlspecialchars.js www/javascript/md5.min.js > www/javascript/dogeared.dependencies.min.js
 
+css:
+
+	java -jar lib/yuicompressor/yuicompressor-2.4.7.jar --type css --charset utf8 -o www/css/dogeared.bootstrap.min.css www/css/dogeared.bootstrap.css 
+	java -jar lib/yuicompressor/yuicompressor-2.4.7.jar --type css --charset utf8 -o www/css/dogeared.api.min.css www/css/dogeared.api.css
+
+	cat www/css/bootstrap.min.css www/css/dogeared.bootstrap.min.css www/css/dogeared.api.min.css > www/css/dogeared.bundle.min.css
+
 todo: TODO.txt
 
 TODO.txt:

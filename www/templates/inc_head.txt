@@ -10,9 +10,17 @@
 
     {* REMEMBER TO ADD THINGS TO templates/page_appcache_manifest.txt *}
 
-    <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{$cfg.abs_root_url}css/dogeared.bootstrap.css" rel="stylesheet">
-    <link href="{$cfg.abs_root_url}css/dogeared.api.css" rel="stylesheet">
+    {if $cfg.environment=='prod'}
+
+    <link href="{$cfg.abs_root_url}css/dogeared.bundle.min.css" rel="stylesheet" />
+
+    {else}
+
+    <link href="{$cfg.abs_root_url}css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{$cfg.abs_root_url}css/dogeared.bootstrap.css" rel="stylesheet" />
+    <link href="{$cfg.abs_root_url}css/dogeared.api.css" rel="stylesheet" />
+
+    {/if}
 
     {if $cfg.environment=='prod'}
 
