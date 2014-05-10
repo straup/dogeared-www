@@ -6,8 +6,12 @@ function dogeared_init(){
 
 	var el = $(this);
 
+	if (el.attr("id") == 'reading-list'){
+	    return;
+	}
+
 	if (! dogeared_network_is_online()){
-	    dogeared_feedback("The internet says NO.");
+	    // dogeared_feedback("The internet says NO.");
 	    return false;
 	}
     });
