@@ -1,12 +1,11 @@
 <?php
-
 	include("include/init.php");
 
 	if (! features_is_enabled("appcache")){
 		error_404();
 	}
 
-	header("text/cache-manifest");
+	header("Content-Type: text/cache-manifest");
 
 	$GLOBALS['smarty']->assign("manifest_version", 1);
 
