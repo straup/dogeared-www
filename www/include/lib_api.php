@@ -13,6 +13,7 @@
 	loadlib("api_output_utils");
 	loadlib("api_log");
 
+	loadlib("api_methods");
 	loadlib("api_auth");
 	loadlib("api_keys");
 	loadlib("api_keys_utils");
