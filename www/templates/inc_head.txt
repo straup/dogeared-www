@@ -39,6 +39,7 @@
     <![endif]-->
 
     <script src="{$cfg.abs_root_url}javascript/dogeared.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.appcache.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.network.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.feedback.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>

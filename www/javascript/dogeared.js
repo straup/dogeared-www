@@ -12,15 +12,8 @@ function dogeared_init(){
 	}
     });
 
-    window.applicationCache.addEventListener('updateready', dogeared_on_appcache_update);
-
-    console.log("appcache status: " + window.applicationCache.status);
-
-    if(window.applicationCache.status === window.applicationCache.UPDATEREADY){
-	dogeared_on_appcache_update();
-    }
-
     dogeared_network_init();
+    dogeared_appcache_init();
     dogeared_cache_highlights_init();
 }
 
@@ -36,8 +29,4 @@ function dogeared_on_online(e){
 function dogeared_on_offline(e){
     dogeared_feedback("You appear to be offline.");
     console.log("offline");
-}
-
-function dogeared_on_appcache_update(){
-    console.log("appcache update");
 }
