@@ -121,6 +121,15 @@ a {
     font-family: sans-serif;
 }
 
+.delete-document {
+    border-radius: 0px !important;
+    border: 2px solid #000;
+    background-color:#888;
+    color:#fff;
+    font-weight:700;
+    margin-bottom:1.5em !important;
+}
+
 @media (max-width: 480px){
 
     body {
