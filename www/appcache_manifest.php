@@ -6,6 +6,8 @@
 	}
 
 	header("Content-Type: text/cache-manifest");
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 	$version = $GLOBALS['cfg']['appcache_manifest_version'];
 
@@ -19,10 +21,13 @@
 
 		$more = array('per_page' => 1);
 		$rsp = dogeared_readinglists_get_for_user($user, $more);
-		dumper($rsp);
 		$row = db_single($rsp);
 		
-		dumper($row);
+		$created = $row['created'];
+
+		if ($created > $version){
+			$version = $created;
+		}
 	}
 	
 	$GLOBALS['smarty']->assign("manifest_version", $version);

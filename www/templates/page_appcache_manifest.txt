@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1399733835
+# v{$manifest_version|escape}
 
 CACHE:
 # {$cfg.abs_root_url}
@@ -29,7 +29,8 @@ CACHE:
 {$cfg.abs_root_url}javascript/dogeared.dependencies.min.js
 {$cfg.abs_root_url}javascript/dogeared.bundle.min.js
 
-# NETWORK:
+NETWORK:
+*
 
 # FALLBACK:
 
@@ -37,3 +38,6 @@ CACHE:
 # https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache
 # http://alistapart.com/article/application-cache-is-a-douchebag
 # http://flailingmonkey.com/application-cache-not-a-douchebag
+# http://www.blog.jamesdbloom.com/JavaScriptAndApplicationCache.html
+# http://www.blog.jamesdbloom.com/ProblemsWithApplicationCache.html
+# http://www.blog.jamesdbloom.com/TipsForUsingApplicationCache.html
