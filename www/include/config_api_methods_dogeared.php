@@ -95,7 +95,6 @@
 			"enabled" => 1,
 			"library" => "api_dogeared_highlights",
 			"requires_perms" => 1,
-			"requires_method" => "POST",
 			"parameters" => array(
 				array(
 					"name" => "document_id",
