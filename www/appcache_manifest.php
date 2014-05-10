@@ -15,6 +15,16 @@
 		$version = $info[9];
 	}
 
+	if ($user = $GLOBALS['cfg']['user']){
+
+		$more = array('per_page' => 1);
+		$rsp = dogeared_readinglists_get_for_user($user, $more);
+		dumper($rsp);
+		$row = db_single($rsp);
+		
+		dumper($row);
+	}
+	
 	$GLOBALS['smarty']->assign("manifest_version", $version);
 
 	$GLOBALS['smarty']->display("page_appcache_manifest.txt");

@@ -2,7 +2,7 @@ CACHE MANIFEST
 # v1399733835
 
 CACHE:
-{$cfg.abs_root_url}
+# {$cfg.abs_root_url}
 {$cfg.abs_root_url}documents/
 {$cfg.abs_root_url}highlights/pending/
 {$cfg.abs_root_url}css/bootstrap.min.css
