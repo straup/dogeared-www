@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v33
+# v34
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -29,6 +29,7 @@ CACHE:
 {$cfg.abs_root_url}javascript/dogeared.cache.highlights.js
 {$cfg.abs_root_url}javascript/dogeared.dependencies.min.js
 {$cfg.abs_root_url}javascript/dogeared.bundle.min.js
+{$cfg.abs_root_url}javascript/dogeared.notepad.js
 {$cfg.abs_root_url}javascript/math.uuid.js
 {$cfg.abs_root_url}notepad/
 
