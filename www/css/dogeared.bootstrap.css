@@ -130,6 +130,21 @@ a {
     margin-bottom:1.5em !important;
 }
 
+.delete-highlight {
+    border-radius: 0px !important;
+    border: 2px solid #000;
+    background-color:#888;
+    color:#fff;
+    font-weight:700;
+    margin-bottom:1.5em !important;
+}
+
+.document-excerpt {
+    font-size: .5em !important;
+    font-weight: 100;
+    color: red !important;
+}
+
 @media (max-width: 480px){
 
     body {
@@ -158,5 +173,9 @@ a {
 
     #feedback {
 	margin-bottom: .1em !important;
+    }
+
+    .document-excerpt {
+	display: none !important;
     }
 }

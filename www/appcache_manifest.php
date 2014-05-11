@@ -9,7 +9,6 @@
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-	$version = $GLOBALS['cfg']['appcache_manifest_version'];
 	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
 	if ((! $timestamp) || ($timestamp == 'stat')){
@@ -31,7 +30,9 @@
 		}
 	}
 	
-	$GLOBALS['smarty']->assign("manifest_version", $version);
+	# version – as in '# v(\d+)' – is assigned using the 'version'
+	# Makefile command (20140511/straup)
+
 	$GLOBALS['smarty']->assign("manifest_timestamp", $timestamp);
 
 	$GLOBALS['smarty']->display("page_appcache_manifest.txt");

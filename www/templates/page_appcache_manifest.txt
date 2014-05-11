@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v{$manifest_version|escape}
+# v28
 # ts{$manifest_timestamp|escape}
 
 CACHE:
