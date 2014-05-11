@@ -35,6 +35,15 @@ function dogeared_appcache_init(){
 function dogeared_appcache_on_event(e){
     var type = e.type;
     console.log("appcache event " + type);
+
+    if (type == "progress"){
+	dogeared_feedback("checking for updates");
+    }
+
+    else {
+	dogeared_feedback_reset();
+    }
+
 }
 
 function dogeared_appcache_on_error(e){
@@ -46,7 +55,7 @@ function dogeared_appcache_on_updateready(){
 
     if (window.applicationCache.status == window.applicationCache.UPDATEREADY){
 
-	if (confirm('A new version of this site is available. Load it?')){
+	if (confirm('An updated version of site is available. Load it?')){
             window.location.reload();
 	}
     }

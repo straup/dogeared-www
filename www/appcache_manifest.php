@@ -28,6 +28,18 @@
 		if ($created > $timestamp){
 			$timestamp = $created;
 		}
+
+		else {
+
+			$rsp = dogeared_highlights_get_for_user($user, $more);
+			$row = db_single($rsp);
+		
+			$created = $row['created'];
+
+			if ($created > $timestamp){
+				$timestamp = $created;
+			}
+		}
 	}
 	
 	# version – as in '# v(\d+)' – is assigned using the 'version'
