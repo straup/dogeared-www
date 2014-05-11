@@ -1,5 +1,5 @@
 var notepad_interval = null;
-var notepad_pending_sync = false;
+var notepad_pending_sync = new Array();
 
 function dogeared_notepad_init(){
 
@@ -10,8 +10,8 @@ function dogeared_notepad_init(){
 
 function dogeared_notepad_on_online(){
 
-    if (notepad_pending_sync){
-	dogeared_notepad_sync_list();
+    if (notepad_pending_sync.length){
+	dogeared_notepad_sync_notes(notepad_pending_sync);
     }
 }
 
@@ -116,7 +116,7 @@ function dogeared_notepad_save_note(){
     console.log("update " + key);
     store.set(key, note);
 
-    dogeared_notepad_sync_list();
+    dogeared_notepad_sync_note(note);
 }
 
 function dogeared_notepad_delete_note(){
@@ -142,7 +142,7 @@ function dogeared_notepad_delete_note(){
 
     dogeared_feedback_modal("This note has been deleted");
 
-    dogeared_notepad_sync_list();
+    dogeared_notepad_sync_note(note);
 }
 
 function dogeared_notepad_close_note(){
@@ -212,17 +212,6 @@ function dogeared_notepad_build_list(){
 
 function dogeared_notepad_sync_list(){
 
-    if (! dogeared_network_is_online()){
-	notepad_pending_sync = true;
-	return false;
-    }
-
-    // TO DO: check if sync is in process...
-
-    notepad_pending_sync = false;
-
-    console.log("do sync");
-
     var notepad = new Array();
 
     store.forEach(function(key, note){
@@ -234,13 +223,35 @@ function dogeared_notepad_sync_list(){
 	   return;
 	}
 
-	notepad.push(note);
+	dogeared_notepad_sync_note(note);
     });
+}
 
-    notepad = JSON.stringify(notepad);
+function dogeared_notepad_sync_pending_notes(pending){
 
-    var method = 'dogeared.notepad.syncNotepad';
-    var args = { 'notepad': notepad };
+    for (id in pending){
+	var key = dogeared_notepad_key({ 'id': id });
+	var note = store.get(key);
+	dogeared_notepad_sync_note(note);
+    }
+}
+
+function dogeared_notepad_sync_note(note){
+
+    // still not sure how this will work
+    // (20140511/straup)
+
+    if (! dogeared_network_is_online()){
+	notepad_pending_sync[note['id']] = true;
+	return false;
+    }
+
+    // TO DO: check if sync is in process...
+
+    delete(notepad_pending_sync[note['id']]);
+
+    var method = 'dogeared.notepad.syncNote';
+    var args = note;
 
     var on_success = function(rsp){
 	console.log("sync ok");

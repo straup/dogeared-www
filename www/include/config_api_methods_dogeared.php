@@ -104,7 +104,7 @@
 			),
 		),
 
-		"dogeared.notepad.syncNotepad" => array(
+		"dogeared.notepad.syncNote" => array(
 			"description" => "",
 			"documented" => 1,
 			"enabled" => 1,
