@@ -2,7 +2,7 @@
 
 	########################################################################
 
-	function dogeared_notepad_syncNote(){
+	function api_dogeared_notepad_syncNote(){
 
 		if (! post_isset("id")){
 			api_output_error(400, "Missing note ID");
