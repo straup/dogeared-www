@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS `Notes`;
+
+CREATE TABLE `Notes` (
+  `id` CHAR(36) NOT NULL,       
+  `user_id` INT(11) UNSIGNED NOT NULL,
+  `source_id` INT(11) UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `body` MEDIUMTEXT NOT NULL,
+  `created` INT(11) UNSIGNED NOT NULL,
+  `lastmodified` INT(11) UNSIGNED NOT NULL,
+  `deleted` INT(11) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `by_user` (`user_id`, `created`),
+  KEY `by_source` (`source_id`, `created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

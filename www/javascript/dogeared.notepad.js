@@ -19,9 +19,12 @@ function dogeared_notepad_add_note(){
 
     var id = Math.uuid();
     var now = dogeared_now();
-    
+
+    var source_id = dogeared_notepad_source();
+
     var note = {
 	'id': id,
+	'source_id': source_id,
 	'created': now,
 	'lastmodified': 0,
 	'deleted': 0,
@@ -177,16 +180,27 @@ function dogeared_notepad_build_list(){
 	   return;
 	}
 
+	if (! note['id']){
+	    store.remove(key);
+	}
+	
 	if (note['deleted']){
 	    return;
 	}
 
+	if (! note['source_id']){
+	    var source_id = dogeared_notepad_source();
+	    note['source_id'] = source_id;
+	    store.set(key, note);
+	}
+
 	var title = note['title'];
 	var created = note['created'];
+	var source_id = note['source_id'];
 
 	items += '<li>';
 	items += '<a href="#" class="note-item" data-note-key="' + key + '">' + title + '</a> ';
-	items += '<small>' + created + '</small>';
+	items += '<small>' + source_id + '</small>';
 	items += '</li>';
     });
 
@@ -292,4 +306,9 @@ function dogeared_notepad_get_current_note(){
 function dogeared_notepad_key(note){
     var key = "notepad_" + note['id'];
     return key;
+}
+
+function dogeared_notepad_source(){
+    var fingerprint = new Fingerprint();
+    return fingerprint.get();
 }
