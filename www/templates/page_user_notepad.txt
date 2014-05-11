@@ -10,6 +10,7 @@
      <div id="note-body" contenteditable="true"></div>
 
      <button class="btn btn-sm" id="note-editor-close">Close</button>
+     <button class="btn btn-sm" id="note-editor-delete">Delete</button>
 </div>
 
 <script type="text/javascript">

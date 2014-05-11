@@ -12,6 +12,13 @@ function dogeared_abs_root_url(){
 	return document.body.getAttribute("data-abs-root-url");
 }
 
+function dogeared_now(){
+    var dt = new Date();
+    var ts = dt.getTime();
+    ts = parseInt(ts / 1000);
+    return ts;
+}
+
 function dogeared_on_online(e){
 
     console.log("came offline at " + e.timeStamp);
