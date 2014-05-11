@@ -33,6 +33,7 @@
     <script src="{$cfg.abs_root_url}javascript/bootstrap.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/store.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/phpjs.htmlspecialchars.min.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/math.uuid.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/md5.min.js"></script>
     <!--[if lt IE 9]>
       <script src="{$cfg.abs_root}javascript/html5.js"></script>
@@ -46,6 +47,7 @@
     <script src="{$cfg.abs_root_url}javascript/dogeared.extruder.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.documents.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.document.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/dogeared.notepad.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.highlights.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.documents.js"></script>

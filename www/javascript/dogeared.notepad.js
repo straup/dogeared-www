@@ -1,10 +1,10 @@
-var ts = null;
+var notepad_interval = null;
 
-function notepad_init(){
-	 notepad_build_list();	 
+function dogeared_notepad_init(){
+	 dogeared_notepad_build_list();	 
 }
 
-function notepad_add_note(){
+function dogeared_notepad_add_note(){
 
 	 var id = Math.uuid();
 	 var key = "notepad_" + id;
@@ -15,10 +15,10 @@ function notepad_add_note(){
 	 };
 
 	 store.set(key, note);
-	 notepad_load_note(key);
+	 dogeared_notepad_load_note(key);
 }
 
-function notepad_load_note(key){
+function dogeared_notepad_load_note(key){
 
 	 var note = store.get(key);
 	 console.log(note);
@@ -36,26 +36,29 @@ function notepad_load_note(key){
 	 body.html(note['body']);
 
 	 button.click(function(){
-	 	notepad_close_note();
+	 	dogeared_notepad_close_note();
 		return false;
 	 });
 
 	 list.hide();
 	 editor.show();
 
-	 var ts = setInterval(function(){
-	 	notepad_save_note();
+	 notepad_interval = setInterval(function(){
+	 	dogeared_notepad_save_note();
 	 }, 5000);
 
- 	console.log("set interval " + ts);
+ 	console.log("set interval " + notepad_interval);
 }
 
-function notepad_save_note(){
+function dogeared_notepad_save_note(){
 
 	 var editor = $("#note-editor");
 	 var key = editor.attr("data-note-id");
 
 	 if (! key){
+	 	console.log("clear interval " + notepad_interval);
+	 	clearInterval(notepad_interval);
+
 	 	return;
 	 }
 
@@ -72,22 +75,22 @@ function notepad_save_note(){
 
 }
 
-function notepad_close_note(){
+function dogeared_notepad_close_note(){
 
-	 if (ts){
-	 	console.log("clear interval " + ts);
-	 	clearInterval(ts);
+	 if (notepad_interval){
+	 	console.log("clear interval " + notepad_interval);
+	 	clearInterval(notepad_interval);
 	 }
 
-	 notepad_save_note();
+	 dogeared_notepad_save_note();
 
 	 var editor = $("#note-editor");
 	 editor.hide();
 
-	 notepad_build_list();	 
+	 dogeared_notepad_build_list();	 
 }
 
-function notepad_build_list(){
+function dogeared_notepad_build_list(){
 
 	 var list = $("#notes-list");
 
@@ -113,7 +116,7 @@ function notepad_build_list(){
 
 	 $("#note-add").click(function(){
 
-	 	notepad_add_note();
+	 	dogeared_notepad_add_note();
 		return false;
 	 });
 
@@ -122,7 +125,7 @@ function notepad_build_list(){
 		var el = $(this);
 		var key = el.attr("data-note-key");
 		console.log(key);
-	 	notepad_load_note(key);
+	 	dogeared_notepad_load_note(key);
 		return false;
 	 });
 

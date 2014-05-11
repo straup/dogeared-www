@@ -145,6 +145,21 @@ a {
     color: red !important;
 }
 
+#note-editor {
+	     display:none;
+}
+
+#note-title {
+	    margin-bottom: .5em;
+	    font-weight:700;
+}
+
+#note-body {
+	    border: solid thin;
+	    background-color:#ededed;
+	    padding: 1em;
+}
+
 @media (max-width: 480px){
 
     body {

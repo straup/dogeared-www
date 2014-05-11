@@ -14,7 +14,6 @@ function dogeared_network_is_online(){
 
 function dogeared_network_on_online(e){
 
-    console.log("came back online at " + e.timeStamp);
     dogeared_network_status();
 
     $(".btn-save-highlight").removeAttr("disabled");
@@ -22,7 +21,6 @@ function dogeared_network_on_online(e){
 
 function dogeared_network_on_offline(e){
 
-    console.log("went offline at " + e.timeStamp);
     dogeared_network_status();
 
     $(".btn-save-highlight").attr("disabled", "disabled");

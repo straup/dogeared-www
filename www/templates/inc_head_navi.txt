@@ -22,14 +22,15 @@
 
 		{if $cfg.user}
 		<li><a href="{$cfg.abs_root_url}documents/" id="reading-list">reading list</a></li>
-		<li><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
-		<li id="account"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">you</a></li>
+		<li class="appcache_equals_no"><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
+		<li><a href="{$cfg.abs_root_url}notepad/">notepad</a></li>
+		<li id="account" class="appcache_equals_no"><a href="{$cfg.abs_root_url}account/" title="hello, {$cfg.user.username|escape}">you</a></li>
 
 		{if "api"|@features_is_enabled and "api_documentation"|@features_is_enabled}
 		{include file="inc_head_navi_api.txt"}
 		{/if}
 
-		<li id="signout"><a href="{$cfg.abs_root_url}signout/">exit</a></li>
+		<li id="signout" class="appcache_equals_no"><a href="{$cfg.abs_root_url}signout/">exit</a></li>
 
 		{else}
 

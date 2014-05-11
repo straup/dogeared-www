@@ -1,11 +1,15 @@
 CACHE MANIFEST
-# v34
+# v43
 # ts{$manifest_timestamp|escape}
 
 CACHE:
 # {$cfg.abs_root_url}
+{$cfg.abs_root_url}documents
 {$cfg.abs_root_url}documents/
+{$cfg.abs_root_url}highlights/pending
 {$cfg.abs_root_url}highlights/pending/
+{$cfg.abs_root_url}notepad
+{$cfg.abs_root_url}notepad/
 {$cfg.abs_root_url}css/bootstrap.min.css
 {$cfg.abs_root_url}css/dogeared.bootstrap.css
 {$cfg.abs_root_url}css/dogeared.api.css
@@ -31,7 +35,6 @@ CACHE:
 {$cfg.abs_root_url}javascript/dogeared.bundle.min.js
 {$cfg.abs_root_url}javascript/dogeared.notepad.js
 {$cfg.abs_root_url}javascript/math.uuid.js
-{$cfg.abs_root_url}notepad/
 
 NETWORK:
 *

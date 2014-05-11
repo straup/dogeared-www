@@ -1,20 +1,7 @@
 function dogeared_init(){
 
-    //$("#dogeared-navi li a").click(function(){
-
-    $("a").click(function(){
-
-	var el = $(this);
-
-	if (el.attr("id") == 'reading-list'){
-	    return;
-	}
-
-	if (! dogeared_network_is_online()){
-	    // dogeared_feedback("The internet says NO.");
-	    return false;
-	}
-    });
+    window.addEventListener("offline", dogeared_on_offline);
+    window.addEventListener("online", dogeared_on_online);
 
     dogeared_network_init();
     dogeared_appcache_init();
@@ -26,11 +13,17 @@ function dogeared_abs_root_url(){
 }
 
 function dogeared_on_online(e){
+
+    console.log("came offline at " + e.timeStamp);
     dogeared_feedback("You appear to be online again.");
-    console.log("online");
+
+    $(".appcache_equals_no").show();
 }
 
 function dogeared_on_offline(e){
+
+    console.log("went offline at " + e.timeStamp);
     dogeared_feedback("You appear to be offline.");
-    console.log("offline");
+
+    $(".appcache_equals_no").hide();
 }

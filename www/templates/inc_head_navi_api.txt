@@ -1,4 +1,4 @@
-		<li class="dropdown">
+		<li class="dropdown appcache_equals_no">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">api <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 			<li><a href="{$cfg.abs_root_url}api/">api documentation</a></li>

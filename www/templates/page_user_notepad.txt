@@ -1,25 +1,5 @@
+{capture assign="page_title"}notepad{/capture}
 {include file="inc_head.txt" appcache_make_me_a_sandwich=1}
-
-<style type="text/css">
-{literal}
-
-#note-editor {
-	     display:none;
-}
-
-#note-title {
-	    margin-bottom: .5em;
-	    font-weight:700;
-}
-
-#note-body {
-	    border: solid thin;
-	    background-color:#ededed;
-	    padding: 1em;
-}
-
-{/literal}
-</style>
 
 <div class="row">
 <ul class="list" id="notes-list"></ul>
@@ -32,13 +12,11 @@
      <button class="btn btn-sm" id="note-editor-close">Close</button>
 </div>
 
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/dogeared.notepad.js"></script>
-<script type="text/javascript" src="{$cfg.abs_root_url}javascript/math.uuid.js"></script>
 <script type="text/javascript">
 {literal}
 
 $(document).ready(function(){
-	notepad_init();
+	dogeared_notepad_init();
 });
 
 {/literal}
