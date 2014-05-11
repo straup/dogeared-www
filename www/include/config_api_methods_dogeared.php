@@ -104,6 +104,21 @@
 			),
 		),
 
+		"dogeared.notepad.syncNotepad" => array(
+			"description" => "",
+			"documented" => 1,
+			"enabled" => 1,
+			"library" => "api_dogeared_notepad",
+			"requires_perms" => 2,
+			"parameters" => array(
+				array(
+					"name" => "notes",
+					"description" => "",
+					"required" => 1,
+				)
+			),
+		),
+
 	), $GLOBALS['cfg']['api']['methods']);
 
 	########################################################################

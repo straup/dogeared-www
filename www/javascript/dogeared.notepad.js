@@ -1,7 +1,18 @@
 var notepad_interval = null;
+var notepad_pending_sync = false;
 
 function dogeared_notepad_init(){
-	 dogeared_notepad_build_list();	 
+
+    window.addEventListener("online", dogeared_notepad_on_online);
+
+    dogeared_notepad_build_list();	 
+}
+
+function dogeared_notepad_on_online(){
+
+    if (notepad_pending_sync){
+	dogeared_notepad_sync_list();
+    }
 }
 
 function dogeared_notepad_add_note(){
@@ -65,7 +76,7 @@ function dogeared_notepad_load_note(key){
 	dogeared_notepad_save_note();
     }, 5000);
     
-    console.log("set interval " + notepad_interval);
+    // console.log("set interval " + notepad_interval);
 }
 
 function dogeared_notepad_save_note(){
@@ -96,15 +107,16 @@ function dogeared_notepad_save_note(){
     }
 
     if (! update){
-	console.log("no updates");
 	return;
     }
 
     var now = dogeared_now();
     note['lastmodified' ] = now;
 
-    console.log("save " + key);
+    console.log("update " + key);
     store.set(key, note);
+
+    dogeared_notepad_sync_list();
 }
 
 function dogeared_notepad_delete_note(){
@@ -129,12 +141,13 @@ function dogeared_notepad_delete_note(){
     store.set(key, note);
 
     dogeared_feedback_modal("This note has been deleted");
+
+    dogeared_notepad_sync_list();
 }
 
 function dogeared_notepad_close_note(){
 
     if (notepad_interval){
-	console.log("clear interval " + notepad_interval);
 	clearInterval(notepad_interval);
     }
     
@@ -163,8 +176,6 @@ function dogeared_notepad_build_list(){
 	if (ima != "notepad"){
 	   return;
 	}
-
-	console.log(note);
 
 	if (note['deleted']){
 	    return;
@@ -197,6 +208,53 @@ function dogeared_notepad_build_list(){
 
     editor.hide();
     list.show();
+}
+
+function dogeared_notepad_sync_list(){
+
+    if (! dogeared_network_is_online()){
+	notepad_pending_sync = true;
+	return false;
+    }
+
+    // TO DO: check if sync is in process...
+
+    notepad_pending_sync = false;
+
+    console.log("do sync");
+
+    var notepad = new Array();
+
+    store.forEach(function(key, note){
+	
+	var parts = key.split("_");
+	var ima = parts[0];
+	
+	if (ima != "notepad"){
+	   return;
+	}
+
+	notepad.push(note);
+    });
+
+    notepad = JSON.stringify(notepad);
+
+    var method = 'dogeared.notepad.syncNotepad';
+    var args = { 'notepad': notepad };
+
+    var on_success = function(rsp){
+	console.log("sync ok");
+	console.log(rsp);
+    };
+
+    var on_error = function(rsp){
+	console.log("sync NOT ok");
+	console.log(rsp);
+    };
+
+    dogeared_api_call(method, args, on_success, on_error);
+    console.log(method);
+    console.log(args);
 }
 
 function dogeared_notepad_get_current_note(){
