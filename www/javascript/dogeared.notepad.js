@@ -91,7 +91,7 @@ function dogeared_notepad_load_note(key){
     
     notepad_interval = setInterval(function(){
 	dogeared_notepad_save_note();
-    }, 5000);
+    }, 30000);
     
     // console.log("set interval " + notepad_interval);
 }
