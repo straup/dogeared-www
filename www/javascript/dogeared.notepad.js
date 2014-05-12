@@ -185,6 +185,8 @@ function dogeared_notepad_build_list(){
     
     items += '<li><a href="#" id="note-add">Add a note</a></li>';
     
+    // TO DO: sort by lastmodified (20140512/straup)
+
     store.forEach(function(key, note){
 
 	var parts = key.split("_");
@@ -237,6 +239,8 @@ function dogeared_notepad_build_list(){
 
 function dogeared_notepad_sync_list(){
 
+    dogeared_feedback("Synching local documents in progress");
+
     store.forEach(function(key, note){
 	
 	var parts = key.split("_");
@@ -244,11 +248,6 @@ function dogeared_notepad_sync_list(){
 	
 	if (ima != "notepad"){
 	   return;
-	}
-
-	if (note['delete']){
-	    store.remove(key);
-	    return;
 	}
 
 	dogeared_notepad_sync_note(note);
@@ -260,21 +259,19 @@ function dogeared_notepad_sync_list(){
 
 	if (! count){
 
-	    dogeared_feedback_ok("Syncing complete", 5);
+	    dogeared_feedback_ok("Syncing local documents complete", 5);
 	    clearInterval(sync_interval);
 
 	    dogeared_notepad_get_list();
 	}
 
-	else {
-	    dogeared_feedback("Synching in progress");
-	}
-	
     }, 1000);
 
 }
 
 function dogeared_notepad_get_list(){
+
+    dogeared_feedback("Synching remote documents in progress");
 
     var method = 'dogeared.notepad.getList';
     var args = {};
@@ -288,18 +285,20 @@ function dogeared_notepad_get_list(){
 
 	    var note = notes[i];
 	    var key = dogeared_notepad_key(note);
-	    console.log("k " + key);
+
 	    if (! store.get(key)){
 		console.log("add " + key);
 		store.set(key, note);
 	    }
 	}
 
+	dogeared_feedback("Synching remote documents complete", 5);
 	dogeared_notepad_build_list();
     };
 
     var on_error = function(){
-
+	dogeared_feedback_error("Synching remote documents failed, so just loading local ones");
+	dogeared_notepad_build_list();
     };
 
     dogeared_api_call(method, args, on_success, on_error);

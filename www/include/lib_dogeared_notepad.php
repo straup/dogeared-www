@@ -23,7 +23,7 @@
 
 		$enc_user = AddSlashes($user['id']);
 
-		$sql = "SELECT * FROM Notes WHERE user_id='{$enc_user}'";
+		$sql = "SELECT * FROM Notes WHERE user_id='{$enc_user}' ORDER BY created DESC";
 		$rsp = db_fetch_paginated_users($cluster_id, $sql, $more);
 		
 		return $rsp;
