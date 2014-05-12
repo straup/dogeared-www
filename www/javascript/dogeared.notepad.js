@@ -11,7 +11,6 @@ function dogeared_notepad_init(){
     var sync_interval = setInterval(function(){
 
 	var count = notepad_inprocess_sync.length;
-	console.log("in process: " + count);
 
 	if (! count){
 	    clearInterval(sync_interval);
@@ -301,13 +300,10 @@ function dogeared_notepad_sync_note(note){
     };
 
     var on_error = function(rsp){
-	console.log("sync NOT ok");
-	console.log(rsp);
+	notepad_inprocess_sync[ id ] = false;
     };
 
     dogeared_api_call(method, args, on_success, on_error);
-    console.log(method);
-    console.log(args);
 }
 
 function dogeared_notepad_get_current_note(){
