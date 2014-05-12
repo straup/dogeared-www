@@ -104,6 +104,16 @@
 			),
 		),
 
+		"dogeared.notepad.getList" => array(
+			"description" => "",
+			"documented" => 1,
+			"enabled" => 1,
+			"library" => "api_dogeared_notepad",
+			"requires_perms" => 1,
+			"parameters" => array(
+			),
+		),
+
 		"dogeared.notepad.syncNote" => array(
 			"description" => "",
 			"documented" => 1,
@@ -112,7 +122,7 @@
 			"requires_perms" => 2,
 			"parameters" => array(
 				array(
-					"name" => "notes",
+					"name" => "note",
 					"description" => "",
 					"required" => 1,
 				)

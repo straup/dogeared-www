@@ -6,24 +6,14 @@ function dogeared_notepad_init(){
 
     window.addEventListener("online", dogeared_notepad_on_online);
 
-    dogeared_notepad_sync_list();
+    if (dogeared_network_is_online()){
+	dogeared_notepad_sync_list();
+    }
 
-    var sync_interval = setInterval(function(){
+    else {
+	dogeared_notepad_build_list();
+    }
 
-	var count = notepad_inprocess_sync.length;
-
-	if (! count){
-
-	    dogeared_feedback_ok("Synching complete", 5);
-	    clearInterval(sync_interval);
-	    dogeared_notepad_build_list();
-	}
-
-	else {
-	    dogeared_feedback("Synching in progress");
-	}
-	
-    }, 1000);
 }
 
 function dogeared_notepad_on_online(){
@@ -197,6 +187,8 @@ function dogeared_notepad_build_list(){
     
     store.forEach(function(key, note){
 	
+	console.log("b " + key);
+
 	var parts = key.split("_");
 	var ima = parts[0];
 	
@@ -209,6 +201,7 @@ function dogeared_notepad_build_list(){
 	}
 	
 	if (note['deleted']){
+	    console.log(key + " is deleted");
 	    return;
 	}
 
@@ -217,6 +210,8 @@ function dogeared_notepad_build_list(){
 	    note['source_id'] = source_id;
 	    store.set(key, note);
 	}
+
+	console.log(note);
 
 	var title = note['title'];
 	var created = note['created'];
@@ -266,7 +261,58 @@ function dogeared_notepad_sync_list(){
 
 	dogeared_notepad_sync_note(note);
     });
+
+    var sync_interval = setInterval(function(){
+
+	var count = notepad_inprocess_sync.length;
+
+	if (! count){
+
+	    dogeared_feedback_ok("Syncing complete", 5);
+	    clearInterval(sync_interval);
+
+	    dogeared_notepad_get_list();
+	}
+
+	else {
+	    dogeared_feedback("Synching in progress");
+	}
+	
+    }, 1000);
+
 }
+
+function dogeared_notepad_get_list(){
+
+    var method = 'dogeared.notepad.getList';
+    var args = {};
+
+    var on_success = function(rsp){
+
+	var notes = rsp['notes']['note'];
+	var count = notes.length;
+
+	for (var i=0; i < count; i++){
+
+	    var note = notes[i];
+	    var key = dogeared_notepad_key(note);
+	    console.log("k " + key);
+	    if (! store.get(key)){
+		console.log("add " + key);
+		store.set(key, note);
+	    }
+	}
+
+	dogeared_notepad_build_list();
+    };
+
+    var on_error = function(){
+
+    };
+
+    dogeared_api_call(method, args, on_success, on_error);
+}
+
 
 function dogeared_notepad_sync_pending_notes(pending){
 

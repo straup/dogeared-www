@@ -17,6 +17,20 @@
 
 	########################################################################
 
+	function dogeared_notepad_get_notes_for_user(&$user, $more=array()){
+
+		$cluster_id = $user['cluster_id'];
+
+		$enc_user = AddSlashes($user['id']);
+
+		$sql = "SELECT * FROM Notes WHERE user_id='{$enc_user}'";
+		$rsp = db_fetch_paginated_users($cluster_id, $sql, $more);
+		
+		return $rsp;
+	}
+
+	########################################################################
+
 	function dogeared_notepad_add_note(&$user, $note){
 
 		$cluster_id = $user['cluster_id'];

@@ -2,6 +2,21 @@
 
 	########################################################################
 
+	function api_dogeared_notepad_getList(){
+
+		$user = $GLOBALS['cfg']['user'];
+
+		$rsp = dogeared_notepad_get_notes_for_user($user);
+
+		$out = array('notes' => array(
+			'note' => $rsp['rows'],
+		));
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_dogeared_notepad_syncNote(){
 
 		$user = $GLOBALS['cfg']['user'];
