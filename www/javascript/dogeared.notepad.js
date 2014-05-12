@@ -108,7 +108,7 @@ function dogeared_notepad_save_note(){
     var update = false;
 
     var title = $("#note-title");
-    title = title.html();
+    title = title.text();
     
     var body = $("#note-body");
     body = body.html();
