@@ -1,11 +1,24 @@
 var notepad_interval = null;
+var notepad_inprocess_sync = new Array();
 var notepad_pending_sync = new Array();
 
 function dogeared_notepad_init(){
 
     window.addEventListener("online", dogeared_notepad_on_online);
 
-    dogeared_notepad_build_list();	 
+    dogeared_notepad_sync_list();
+
+    var sync_interval = setInterval(function(){
+
+	var count = notepad_inprocess_sync.length;
+	console.log("in process: " + count);
+
+	if (! count){
+	    clearInterval(sync_interval);
+	    dogeared_notepad_build_list();
+	}
+
+    }, 1000);
 }
 
 function dogeared_notepad_on_online(){
@@ -226,8 +239,6 @@ function dogeared_notepad_build_list(){
 
 function dogeared_notepad_sync_list(){
 
-    var notepad = new Array();
-
     store.forEach(function(key, note){
 	
 	var parts = key.split("_");
@@ -235,6 +246,11 @@ function dogeared_notepad_sync_list(){
 	
 	if (ima != "notepad"){
 	   return;
+	}
+
+	if (note['delete']){
+	    store.remove(key);
+	    return;
 	}
 
 	dogeared_notepad_sync_note(note);
@@ -252,24 +268,36 @@ function dogeared_notepad_sync_pending_notes(pending){
 
 function dogeared_notepad_sync_note(note){
 
+    var id = note['id'];
+
     // still not sure how this will work
     // (20140511/straup)
 
     if (! dogeared_network_is_online()){
-	notepad_pending_sync[note['id']] = true;
+	notepad_pending_sync[ id ] = true;
 	return false;
     }
 
     // TO DO: check if sync is in process...
 
-    delete(notepad_pending_sync[note['id']]);
+    delete(notepad_pending_sync[ id ]);
+    
+    notepad_inprocess_sync[ id ] = true;
+
+    var str_note = JSON.stringify(note);
 
     var method = 'dogeared.notepad.syncNote';
-    var args = note;
+    var args = { 'note': str_note };
 
     var on_success = function(rsp){
-	console.log("sync ok");
-	console.log(rsp);
+
+	var note = rsp['note'];
+	var id = note['id'];
+
+	var key = dogeared_notepad_key(note);
+	store.set(key, note);
+
+	notepad_inprocess_sync[ id ] = false;
     };
 
     var on_error = function(rsp){
