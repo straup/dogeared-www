@@ -13,10 +13,16 @@ function dogeared_notepad_init(){
 	var count = notepad_inprocess_sync.length;
 
 	if (! count){
+
+	    dogeared_feedback_ok("Synching complete", 5);
 	    clearInterval(sync_interval);
 	    dogeared_notepad_build_list();
 	}
 
+	else {
+	    dogeared_feedback("Synching in progress");
+	}
+	
     }, 1000);
 }
 
@@ -29,6 +35,12 @@ function dogeared_notepad_on_online(){
 
 function dogeared_notepad_add_note(){
 
+    var title = prompt("What is the title of your note?");
+
+    if (! title){
+	return false;
+    }
+
     var id = Math.uuid();
     var now = dogeared_now();
 
@@ -40,7 +52,7 @@ function dogeared_notepad_add_note(){
 	'created': now,
 	'lastmodified': 0,
 	'deleted': 0,
-	'title': 'Untitled Note #' + id,
+	'title': title,
 	'body': 'This note left intentionally blank.'
     };
 
@@ -269,17 +281,16 @@ function dogeared_notepad_sync_note(note){
 
     var id = note['id'];
 
-    // still not sure how this will work
-    // (20140511/straup)
-
     if (! dogeared_network_is_online()){
 	notepad_pending_sync[ id ] = true;
 	return false;
     }
 
-    // TO DO: check if sync is in process...
-
     delete(notepad_pending_sync[ id ]);
+
+    if (notepad_inprocess_sync[ id ] == true){
+	return false;
+    }
     
     notepad_inprocess_sync[ id ] = true;
 
