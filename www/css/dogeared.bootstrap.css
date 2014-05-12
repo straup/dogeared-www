@@ -8,6 +8,11 @@ a {
     color: blue;
 }
 
+h3 small {
+    display: block;
+    margin-top: .5em;
+}
+
 .navbar {
     /* border: 1px solid orange; */
     border-radius: 0px;
@@ -140,9 +145,10 @@ a {
 }
 
 .document-excerpt {
-    font-size: .5em !important;
-    font-weight: 100;
-    color: red !important;
+    font-size: .6em !important;
+    font-weight: 200;
+    line-height: 1.3em;
+    margin-bottom: 2em;
 }
 
 #note-editor {

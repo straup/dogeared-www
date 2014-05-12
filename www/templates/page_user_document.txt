@@ -7,7 +7,7 @@
 
 <div class="row document" data-document-id="{$doc.id|escape}" id="document">
 
-<h3>{if $doc.title}{$doc.title|@escape}{else}{$doc.url|escape}{/if} <small>{$doc.url|escape}</small></h3>
+<h3>{$doc|@dogeared_documents_display_title|escape} <small>{$doc.url|escape}</small></h3>
 
 {foreach from=$doc.body item="para"}
 <p>{$para|escape}</p>

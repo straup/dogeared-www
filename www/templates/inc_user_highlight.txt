@@ -1,9 +1,9 @@
 <div class="row highlight" id="highlight-{$highlight.id|escape}">
 
-	<h3><a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}">{if $highlight.document.title}{$highlight.document.title|escape}{else}{$highlight.document.url|escape}{/if}</a> <small>{$row.created|@date_format}</small></h3>
+	<h3><a href="{$cfg.abs_root_url}highlights/{$highlight.id|escape}">{$highlight.document|@dogeared_documents_display_title|escape}</a> <small>{$row.created|@date_format}</small></h3>
 
 	<div>
-	{if $digest}	
+	{if 0 and $digest}	
 	<p>{$highlight.text|truncate:100:"..."|escape}</p>
 	{else}
 	<p>{$highlight.text|escape} &#8212; <a href="{$cfg.abs_root_url}documents/{$highlight.document_id|escape}/">source</a></p>

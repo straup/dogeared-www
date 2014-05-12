@@ -73,7 +73,7 @@
 
 	########################################################################
 
-	function dogeared_documents_generate_excerpt(&$paras, $count_words=100){
+	function dogeared_documents_generate_excerpt(&$paras, $count_words=25){
 
 		$excerpt = array();
 
@@ -94,6 +94,24 @@
 
 		$excerpt = implode(" ", $excerpt);
 		return $excerpt;
+	}
+
+	########################################################################
+
+	function dogeared_documents_display_title(&$document){
+
+		$info = parse_url($document['url']);
+		$host = $info['host'];
+
+		$title = $document['title'];
+
+		if (! $title){
+
+			$title = basename($info['path']);
+		}
+
+		$title = str_replace("-", " ", $title);
+		return "{$host} – $title";
 	}
 
 	########################################################################
