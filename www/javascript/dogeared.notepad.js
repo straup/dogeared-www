@@ -196,14 +196,12 @@ function dogeared_notepad_build_list(){
 	   return;
 	}
 
- 	console.log("b " + key + " - " + note['title']);
-
 	if (! note['id']){
 	    store.remove(key);
 	}
 	
 	if (parseInt(note['deleted'])){
-	    console.log(key + " is deleted " + note['deleted']);
+	    // console.log(key + " is deleted " + note['deleted']);
 	    return;
 	}
 

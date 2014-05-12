@@ -21,7 +21,7 @@ function dogeared_now(){
 
 function dogeared_on_online(e){
 
-    console.log("came offline at " + e.timeStamp);
+    console.log("came online at " + e.timeStamp);
     dogeared_feedback("You appear to be online again.");
 
     $(".appcache_equals_no").show();
