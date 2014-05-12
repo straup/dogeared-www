@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v66
+# v67
 # ts{$manifest_timestamp|escape}
 
 CACHE:

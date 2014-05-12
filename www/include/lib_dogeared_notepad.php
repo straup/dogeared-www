@@ -68,7 +68,7 @@
 		$enc_id = AddSlashes($note['id']);
 		$where = "id='{$enc_id}'";
 
-		$rsp = db_update_users($cluster_id, 'Notes', $update, $where);
+		$rsp = db_update_users($cluster_id, 'Notes', $insert, $where);
 
 		if ($rsp['ok']){
 			$note = array_merge($note, $update);

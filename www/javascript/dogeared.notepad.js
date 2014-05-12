@@ -186,8 +186,6 @@ function dogeared_notepad_build_list(){
     items += '<li><a href="#" id="note-add">Add a note</a></li>';
     
     store.forEach(function(key, note){
-	
-	console.log("b " + key);
 
 	var parts = key.split("_");
 	var ima = parts[0];
@@ -196,22 +194,16 @@ function dogeared_notepad_build_list(){
 	   return;
 	}
 
+ 	console.log("b " + key + " - " + note['title']);
+
 	if (! note['id']){
 	    store.remove(key);
 	}
 	
-	if (note['deleted']){
-	    console.log(key + " is deleted");
+	if (parseInt(note['deleted'])){
+	    console.log(key + " is deleted " + note['deleted']);
 	    return;
 	}
-
-	if (! note['source_id']){
-	    var source_id = dogeared_notepad_source();
-	    note['source_id'] = source_id;
-	    store.set(key, note);
-	}
-
-	console.log(note);
 
 	var title = note['title'];
 	var created = note['created'];
