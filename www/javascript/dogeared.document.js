@@ -126,6 +126,11 @@ function dogeared_document_add_highlight(){
     var doc = $("#document");
     var id = doc.attr("data-document-id");
 
+    if (! id){
+	dogeared_feedback_error("Unable to determine what document I am looking at!");
+	return false;
+    }
+
     var s = window.getSelection();
     var t = (current_selection) ? current_selection : s.toString();
 
@@ -137,6 +142,8 @@ function dogeared_document_add_highlight(){
     };
 
     if (! dogeared_network_is_online()){
+
+    console.log(args);
 
 	if (dogeared_cache_highlights_store(args)){
 	    dogeared_feedback_modal("Your highlight has been cached.");

@@ -211,7 +211,15 @@ function dogeared_notepad_build_list(){
 
 	items += '<li>';
 	items += '<a href="#" class="note-item" data-note-key="' + key + '">' + title + '</a> ';
-	items += '<small>' + source_id + '</small>';
+
+	if (parseInt(source_id)){
+	    items += '<small>device id #' + source_id + '</small>';
+	}
+
+	else {
+	    items += '<small>unknown source</small>';
+	}
+
 	items += '</li>';
     });
 

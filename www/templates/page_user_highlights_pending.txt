@@ -21,6 +21,7 @@ $(document).ready(function(){
 	for (var i in highlights){
 
 		var hl = highlights[i];
+		console.log(hl);
 
 		var item = '<li';
 		item += ' id="li-' + hl['cache_key'] + '"';

@@ -14,12 +14,8 @@ function dogeared_cache_highlights_store(hl){
 
     var key = "highlight_" + hash;
 
-    // console.log(key);
-    // console.log(hl);
-
-    if (cache = store.get(key)){
-	return true;
-    }
+    console.log("store " + key);
+    console.log(hl);
 
     store.set(key, hl);
     return true;

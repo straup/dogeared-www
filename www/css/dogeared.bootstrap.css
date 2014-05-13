@@ -199,4 +199,21 @@ h3 small {
     .document-excerpt {
 	display: none !important;
     }
+
+    #notes-list {
+	margin: 0px !important;
+	padding: 0px !important;
+    }
+
+    #notes-list li {
+	font-size: 1.4em;
+	margin-top:.5em;
+	margin-bottom:.75em;
+	list-style-type: none !important;
+    }
+
+    #notes-list li small {
+	font-size: 11px;
+	color: #ccc;
+    }
 }
