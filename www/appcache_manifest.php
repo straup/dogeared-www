@@ -41,6 +41,13 @@
 			}
 		}
 	}
+
+        if (features_is_enabled(array("api", "api_site_keys", "api_site_tokens"))){
+		$token = api_oauth2_access_tokens_fetch_site_token($GLOBALS['cfg']['user']);
+		$key = api_keys_get_by_id($token['api_key_id']);
+		$hash = hash_hmac('sha256', $token['access_token'], $key['app_secret']);
+		$GLOBALS['smarty']->assign("auth_hash", $hash);
+	}
 	
 	# version – as in '# v(\d+)' – is assigned using the 'version'
 	# Makefile command (20140511/straup)
