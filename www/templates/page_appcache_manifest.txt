@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v87
+# v90
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -19,7 +19,7 @@ CACHE:
 {$cfg.abs_root_url}javascript/jquery-1.8.2.min.js
 {$cfg.abs_root_url}javascript/bootstrap.min.js
 {$cfg.abs_root_url}javascript/store.min.js
-{$cfg.abs_root_url}javascript/phpjs.htmlspecialchars.min.js
+{$cfg.abs_root_url}javascript/phpjs.min.js
 {$cfg.abs_root_url}javascript/md5.min.js
 {$cfg.abs_root_url}javascript/dogeared.js
 {$cfg.abs_root_url}javascript/dogeared.appcache.js

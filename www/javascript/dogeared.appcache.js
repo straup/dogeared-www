@@ -37,7 +37,10 @@ function dogeared_appcache_on_event(e){
     console.log("appcache event " + type);
 
     if (type == "progress"){
-	dogeared_feedback("checking for updates");
+
+	if (dogeared_network_is_online()){
+	    dogeared_feedback("checking for updates");
+	}
     }
 
     else {

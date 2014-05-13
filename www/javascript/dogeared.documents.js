@@ -79,6 +79,7 @@ function dogeared_documents_load_cache(){
 	return false;
     }
     
+    // console.log(docs);
     docs.reverse();
 
     $(".excerpt").remove();
@@ -200,4 +201,8 @@ function dogeared_documents_fill_cache(){
     };
     
     dogeared_api_call(method, args, onsuccess);
+}
+
+function dogeared_documents_sort(docs){
+
 }
