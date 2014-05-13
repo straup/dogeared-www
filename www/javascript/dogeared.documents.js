@@ -73,6 +73,8 @@ function dogeared_documents_load_cache(){
     console.log("load cache");
     
     var docs = dogeared_cache_documents();
+    docs = dogeared_documents_sort(docs);
+
     var count = docs.length;
 
     if (count == 0){
@@ -205,4 +207,20 @@ function dogeared_documents_fill_cache(){
 
 function dogeared_documents_sort(docs){
 
+    // http://phpjs.org/functions/usort/
+    // http://phpjs.org/functions/array_values/
+
+    var sort = function(a, b){
+
+	if (a['created'] == b['created']) {
+            return 0;
+	}
+
+	return (a['created'] < b['created']) ? -1 : 1;
+    };
+
+    docs = usort(docs, sort);
+    docs = array_values(docs);
+
+    return docs;
 }
