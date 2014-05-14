@@ -110,6 +110,8 @@
 			api_output_error(404, "Invalid document ID");
 		}
 
+		$doc['display_title'] = dogeared_documents_display_title($doc);
+
 		$out = array(
 			'document' => $doc
 		);

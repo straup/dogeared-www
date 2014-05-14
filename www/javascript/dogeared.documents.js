@@ -106,7 +106,13 @@ function dogeared_documents_load_cache(){
 	var doc = docs[i];
 	var id = doc['id'];
 
-	var title = (doc['title']) ? doc['title'] : doc['url'];
+	var title = doc['display_title'];
+
+	if (title == undefined){
+	    title = "Unknown title #" + id;
+	}
+
+	console.log("title is " + title);
 
 	key[id] = i;
 	
@@ -137,7 +143,11 @@ function dogeared_documents_load_cache(){
 	var idx = key[id];
 	var doc = docs[idx];
 
-	var title = (doc['title']) ? doc['title'] : doc['url'];
+	var title = doc['display_title'];
+
+	if (title == undefined){
+	    title = "Unknown title #" + id;
+	}
 
 	var body = JSON.parse(doc['body']);
 	
