@@ -39,6 +39,9 @@ function dogeared_documents_init(){
 	    var doc = $("#document-" + id);
 	    doc.remove();
 
+	    var key = "dogeared_" + id;
+	    store.remove(key);
+
 	    dogeared_feedback("Okay, that document has been removed from your reading list");
 	};
 
