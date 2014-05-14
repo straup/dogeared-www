@@ -111,6 +111,7 @@
 		}
 
 		$title = str_replace("-", " ", $title);
+		$title = str_replace("_", " ", $title);
 		return "{$host} – $title";
 	}
 
