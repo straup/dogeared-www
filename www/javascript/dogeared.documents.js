@@ -1,5 +1,7 @@
 function dogeared_documents_init(){
 
+    dogeared_document_init_highlight_controls();
+
     window.addEventListener("offline", function(e){
 	dogeared_documents_on_offline(e);
     });
@@ -111,8 +113,6 @@ function dogeared_documents_load_cache(){
 	if (title == undefined){
 	    title = "Unknown title #" + id;
 	}
-
-	console.log("title is " + title);
 
 	key[id] = i;
 	

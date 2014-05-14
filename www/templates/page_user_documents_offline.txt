@@ -1,0 +1,16 @@
+{capture assign="page_title"}offline | reading list{/capture}
+{include file="inc_head.txt" appcache_make_me_a_sandwich=1}
+
+<p>WAKKA WAKKA WAKKA</p>
+
+<div id="documents"></div>
+
+<script type="text/javascript">
+{literal}
+$(document).ready(function(){
+	dogeared_documents_init();
+});
+{/literal}
+</script>
+
+{include file="inc_foot.txt"}

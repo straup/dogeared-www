@@ -5,15 +5,7 @@ var current_selection = "";
 
 function dogeared_document_init(){
 
-    if (typeof(window.ontouchend) == 'object'){
-
-	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
-    }
-
-    else {
-
-	$(document).bind('mouseup', dogeared_document_selected_mouseup);
-    }	
+    dogeared_document_init_highlight_controls();
 
     $(".delete-document").click(function(){
 
@@ -37,6 +29,20 @@ function dogeared_document_init(){
 
 	dogeared_api_call(method, args, on_success);
     });
+
+}
+
+function dogeared_document_init_highlight_controls(){
+
+    if (typeof(window.ontouchend) == 'object'){
+	console.log("enable touch based highlight controls");
+	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
+    }
+
+    else {
+
+	$(document).bind('mouseup', dogeared_document_selected_mouseup);
+    }	
 
 }
 
@@ -80,24 +86,30 @@ function dogeared_document_selected_mouseup(e){
         sel.removeAllRanges();
         sel.addRange(expandedSelRange);
     }
+
 }
 
 function dogeared_document_selected_selectionchange(e){
 
-    // console.log("on selectionchange");
+    console.log("on selectionchange");
 
     $(".highlight").remove();
 
     var sel = window.getSelection();
     var txt = sel.toString();
 
+    console.log("text is " + txt);
+
     if (txt == ""){
 	return;
     }
 
+    /*
     if (txt == current_selection){
+	console.log("selection is same same");
 	return;
     }
+    */
 
     current_selection = txt;
 
@@ -116,6 +128,7 @@ function dogeared_document_selected_selectionchange(e){
     
     range.insertNode(frag);
 
+    console.log("do highlight");
     $("#highlight").click(dogeared_document_add_highlight);
 }
 

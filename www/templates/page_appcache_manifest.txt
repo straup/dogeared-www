@@ -1,13 +1,13 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v109
+# v120
 # ts{$manifest_timestamp|escape}
 
 CACHE:
 # {$cfg.abs_root_url}
-{$cfg.abs_root_url}documents
-{$cfg.abs_root_url}documents/
+{$cfg.abs_root_url}documents/offline/
+{$cfg.abs_root_url}documents/offline/
 {$cfg.abs_root_url}highlights/pending
 {$cfg.abs_root_url}highlights/pending/
 {$cfg.abs_root_url}notepad
@@ -44,6 +44,8 @@ NETWORK:
 *
 
 # FALLBACK:
+documents	documents/offline/
+documents/	documents/offline/
 
 # http://www.html5rocks.com/en/tutorials/appcache/beginner/
 # https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache
