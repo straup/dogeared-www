@@ -35,6 +35,10 @@
 			$rsp['highlight'] = $highlight;
 		}
 
+		if ($rsp['ok']){
+			users_last_activity($user);
+		}
+
 		return $rsp;
 	}
 
@@ -100,6 +104,10 @@
 		$sql = "DELETE FROM Highlights WHERE id='{$enc_id}'";
 		$rsp = db_write_users($cluster_id, $sql);
 
+		if ($rsp['ok']){
+			users_last_activity($user);
+		}
+
 		return $rsp;
 	}
 
@@ -113,8 +121,12 @@
 		$enc_user = AddSlashes($user['id']);
 
 		$sql = "DELETE FROM Highlights WHERE user_id='{$enc_user}' AND document_id='{$enc_doc}'";
-
 		$rsp = db_write_users($cluster_id, $sql);
+
+		if ($rsp['ok']){
+			users_last_activity($user);
+		}
+
 		return $rsp;
 	}
 
@@ -128,6 +140,10 @@
 
 		$sql = "DELETE FROM Highlights WHERE user_id='{$enc_user}'";
 		$rsp = db_write_users($cluster_id, $sql);
+
+		if ($rsp['ok']){
+			users_last_activity($user);
+		}
 
 		return $rsp;
 	}

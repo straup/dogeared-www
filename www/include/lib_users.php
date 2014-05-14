@@ -77,6 +77,19 @@
 
 	#################################################################
 
+	function users_last_activity(&$user){
+
+		$now = time();
+
+		$update = array(
+			'lastactivity' => $now,
+		);
+
+		return users_update_user($user, $update);
+	}
+
+	#################################################################
+
 	function users_update_password(&$user, $new_password){
 
 		$enc_password = passwords_encrypt_password($new_password);

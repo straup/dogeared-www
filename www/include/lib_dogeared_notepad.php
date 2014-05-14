@@ -49,6 +49,10 @@
 			$rsp['note'] = $note;
 		}
 
+		if ($rsp['ok']){
+			users_last_activity($user);
+		}
+
 		return $rsp;
 	}
 
@@ -73,6 +77,10 @@
 		if ($rsp['ok']){
 			$note = array_merge($note, $update);
 			$rsp['note'] = $note;
+		}
+
+		if ($rsp['ok']){
+			users_last_activity($user);
 		}
 
 		return $rsp;
