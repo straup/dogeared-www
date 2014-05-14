@@ -109,7 +109,6 @@ function dogeared_documents_load_cache(){
 	
 	var row = '<div class="row excerpt">';
 	row += '<h3><a href="#';
-
 	row += '" class="load-doc" data-document-id="';
 	row += htmlspecialchars(id);
 	row += '">';
@@ -139,7 +138,7 @@ function dogeared_documents_load_cache(){
 
 	var body = JSON.parse(doc['body']);
 	
-	var txt = '<div class="row document"';
+	var txt = '<div class="row document" id="document"';
 	txt += ' data-document-id="';
 	txt += htmlspecialchars(id);
 	txt += '">';

@@ -143,8 +143,6 @@ function dogeared_document_add_highlight(){
 
     if (! dogeared_network_is_online()){
 
-    console.log(args);
-
 	if (dogeared_cache_highlights_store(args)){
 	    dogeared_feedback_modal("Your highlight has been cached.");
 	    dogeared_cache_highlights_status();
