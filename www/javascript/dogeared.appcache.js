@@ -1,5 +1,7 @@
 // http://www.html5rocks.com/en/tutorials/appcache/beginner/
 
+var dogeared_appcache_progress = 0;
+
 function dogeared_appcache_init(){
 
     // var status = dogeared_appcache_status();
@@ -32,14 +34,21 @@ function dogeared_appcache_init(){
     window.applicationCache.addEventListener('updateready', dogeared_appcache_on_updateready, false);
 }
 
+
 function dogeared_appcache_on_event(e){
     var type = e.type;
     console.log("appcache event " + type);
 
-    if (type == "progress"){
+    if (type == "checking"){
+	dogeared_appcache_progress = 0;
+    }
+
+    else if (type == "progress"){
+
+	dogeared_appcache_progress += 1;
 
 	if (dogeared_network_is_online()){
-	    dogeared_feedback("checking for updates");
+	    dogeared_feedback("checking for updates (" + dogeared_appcache_progress + ")");
 	}
     }
 

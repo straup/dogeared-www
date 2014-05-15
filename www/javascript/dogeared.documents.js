@@ -51,7 +51,16 @@ function dogeared_documents_init(){
     });
    
     if (dogeared_network_is_online()){
-	dogeared_documents_fill_cache();
+
+	try {
+	    dogeared_documents_fill_cache();
+	    dogeared_documents_load_cache();
+	}
+
+	catch(e){
+	    dogeared_feedback_error("Oh no! There was a problem loading your documents: " + e);
+	    console.log(e);
+	}
     }
     
     else {
@@ -60,15 +69,17 @@ function dogeared_documents_init(){
 }
 
 function dogeared_documents_on_online(e){
-    console.log("local: online");
+    console.log("documents: online");
 
-    $(".delete-document").removeAttr("disabled");    
+    // Why doesn't this work?
+    // $(".delete-document").show();
 }
 
 function dogeared_documents_on_offline(e){
-    console.log("local: offline");
+    console.log("documents: offline");
 
-    $(".delete-document").attr("disabled", "disabled");
+    // Why doesn't this work?
+    // $(".delete-document").hide();
 
     dogeared_documents_load_cache();
 }
@@ -116,27 +127,37 @@ function dogeared_documents_load_cache(){
 
 	key[id] = i;
 	
+	var document_url = dogeared_abs_root_url();
+	document_url += 'documents/' + id + '/';
+
 	var row = '<div class="row excerpt">';
-	row += '<h3><a href="#';
+	row += '<h3><a href="';
+	row += document_url;
 	row += '" class="load-doc" data-document-id="';
 	row += htmlspecialchars(id);
 	row += '">';
 	row += htmlspecialchars(title);
 	row += '</a>';
-	row += ' <small>offline cache</small>';
+	row += ' <small>' + htmlspecialchars(doc['url']) + '</small>';
 	row += '</h3>';
-	row += '<p>';
-	row += htmlspecialchars(doc['excerpt']);
-	row += ' <a href="#" class="load-doc" data-document-id="';
-	row += htmlspecialchars(id);
-	row += '">...</a></p>';
+
+	row += '<div>';
+	row += '<button class="btn btn-sm delete-document" data-document-id="';
+	row += id;
+	row += '" data-button-action="delete">Delete</button>';
+	row += '</div>';
+
 	row += '</div>';
 	
 	documents.append(row);			
     }
     
     $(".load-doc").click(function(){
-	
+
+	if (dogeared_network_is_online()){
+	    return true;
+	}
+
 	var el = $(this);
 	
 	var id = el.attr("data-document-id");

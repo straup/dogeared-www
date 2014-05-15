@@ -9,6 +9,11 @@ function dogeared_document_init(){
 
     $(".delete-document").click(function(){
 
+	if (! dogeared_network_is_online()){
+	    alert("Offline deletes are not supported yet.");
+	    return false;
+	}
+
 	if (! confirm("Are you sure you want to remove this document?")){
 	    return false;
 	}
@@ -20,9 +25,12 @@ function dogeared_document_init(){
 	var args = { 'document_id': id };
 
 	var on_success = function(rsp){
-	    
+
+	    var key = "dogeared_" + id;
+	    store.remove(key);
+
 	    var root = dogeared_abs_root_url();
-	    var redir = root + "documents/?deleted=1";
+	    var redir = root + "documents/";
 	    
 	    location.href = redir;
 	};
@@ -51,8 +59,16 @@ function dogeared_document_selected_mouseup(e){
     console.log("on mouseup");
 
     var target = e.target;
+    // console.log(target);
 
     if (target.nodeName == 'BUTTON'){
+
+	var el = $(target);
+	
+	if (el.attr("data-button-action") == "delete"){
+	    return;
+	}
+    
 	dogeared_document_add_highlight();
 	return;
     }

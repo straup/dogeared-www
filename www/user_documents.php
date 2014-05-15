@@ -6,6 +6,7 @@
 	$viewer = $GLOBALS['cfg']['user'];
 	$owner = $viewer;
 
+	if (0){
 	$more = array();
 	
 	if ($page = get_int32("page")){
@@ -23,6 +24,7 @@
 
 	$GLOBALS['smarty']->assign_by_ref("list", $list);
 	$GLOBALS['smarty']->assign_by_ref("pagination", $rsp['pagination']);
+	}
 
 	$GLOBALS['smarty']->display("page_user_documents.txt");
 	exit();

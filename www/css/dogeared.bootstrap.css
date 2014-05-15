@@ -117,6 +117,13 @@ h3 small {
     margin-bottom: .5em;
 }
 
+button {
+    border-radius: 0px !important;
+    border: 2px solid #000;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
 #highlight {
     background-color:#000 !important;
     color: #fff !important;

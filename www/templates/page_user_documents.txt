@@ -2,7 +2,7 @@
 {include file='inc_head.txt' appcache_make_me_a_sandwich=1}
 
 <div id="documents">
-
+{if 0}
 {foreach from=$list item="row"}
 <div class="row excerpt" id="document-{$row.document_id|escape}">
 <h3><a href="{$cfg.abs_root_url}documents/{$row.document_id|escape}/">{$row.document|@dogeared_documents_display_title|escape}</a> <small>{$row.document.url|escape}</small>{if 0}<small>{$row.created|@date_format|@escape}</small>{/if}</h3>
@@ -15,6 +15,7 @@
 </div>
 
 {/foreach}
+{/if}
 
 </div>
 
