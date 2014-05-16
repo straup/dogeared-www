@@ -75,14 +75,32 @@
 		return FLAMEWORK_INCLUDE_DIR . $lib;		
 	}
 
+        # load config file(s)
 
-	#
-	# load config
-	#
+        $host = gethostname();
+        $host = explode(".", $host);
+        $host = $host[0];
 
-	if (!isset($GLOBALS['cfg']['flamework_skip_init_config'])){
-		include(FLAMEWORK_INCLUDE_DIR."config.php");
-	}
+        $config_files = array();
+
+        $global_config = FLAMEWORK_INCLUDE_DIR . "config.php";
+        $global_secrets = FLAMEWORK_INCLUDE_DIR . "secrets.php";
+
+        $local_config = FLAMEWORK_INCLUDE_DIR . "config_local_{$host}.php";
+        $local_secrets = FLAMEWORK_INCLUDE_DIR . "secrets_local_{$host}.php";
+
+        $config_files[] = $global_config;
+
+        foreach (array($global_secrets, $local_config, $local_secrets) as $path){
+
+                if (file_exists($path)){
+                        $config_files[] = $path;
+                }
+        }
+
+        foreach ($config_files as $path){
+                include($path);
+        }
 
 	# First, ensure that 'abs_root_url' is both assigned and properly
 	# set up to run out of user's public_html directory (if need be).

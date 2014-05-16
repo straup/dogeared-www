@@ -1,5 +1,8 @@
 *~
-www/include/config.php
+.#*
+*#
+www/include/config_*.php
+www/include/secrets*.php
 .vagrant
 tests/coverage.state
 coverage/
