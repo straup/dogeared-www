@@ -173,6 +173,10 @@ button {
 	    padding: 1em;
 }
 
+pre {
+    margin-top:1em !important;
+}
+
 @media (max-width: 480px){
 
     body {

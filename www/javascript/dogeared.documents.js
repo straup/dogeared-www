@@ -1,5 +1,6 @@
 function dogeared_documents_init(){
 
+    // THIS IS CAUSING ALL KINDS OF PROBLEMS
     dogeared_document_init_highlight_controls();
 
     window.addEventListener("offline", function(e){
@@ -138,7 +139,7 @@ function dogeared_documents_load_cache(){
 	row += '">';
 	row += htmlspecialchars(title);
 	row += '</a>';
-	row += ' <small>' + htmlspecialchars(doc['url']) + '</small>';
+	row += ' <pre><small>' + htmlspecialchars(doc['url']) + '</small></pre>';
 	row += '</h3>';
 
 	row += '<div>';
@@ -172,6 +173,8 @@ function dogeared_documents_load_cache(){
 
 	var body = JSON.parse(doc['body']);
 	
+	var url = htmlspecialchars(doc['url']);
+
 	var txt = '<div class="row document" id="document"';
 	txt += ' data-document-id="';
 	txt += htmlspecialchars(id);
@@ -179,8 +182,12 @@ function dogeared_documents_load_cache(){
 	
 	txt += '<h3>';
 	txt += htmlspecialchars(title);
-	txt += '<small>offline cache</small>';
+	txt += ' <pre><small>' + url + '</small></pre>';
 	txt += '</h3>';
+
+	txt += '</div>';
+
+	txt += '<div>';
 
 	for (var i in body){
 	    txt += '<p>';
@@ -188,6 +195,12 @@ function dogeared_documents_load_cache(){
 	    txt += '</p>';
 	}
 	
+	txt += '</div>';
+
+	txt += '<div>';
+	txt += ' <pre><small>' + url + '</small></pre>';
+	txt += '</div>';
+
 	txt += '</document>';
 	
 	$(".excerpt").remove();
