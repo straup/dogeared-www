@@ -1,26 +1,22 @@
 {capture assign="page_title"}reading list | {if $doc.title}{$doc.title}{else}{$doc.url}{/if}{/capture}
 {include file="inc_head.txt"}
 
-<div class="row pull-right">
-<button class="btn btn-sm delete-document" data-document-id="{$doc.id|escape}">Delete</button>
-</div>
-
 <div class="row document" data-document-id="{$doc.id|escape}" id="document">
 
-<h3>{$doc|@dogeared_documents_display_title|escape} <small>{$doc.url|escape}</small></h3>
+<h3>{$doc|@dogeared_documents_display_title|escape} <pre><small>{$doc.url|escape}</small></pre></h3>
 
 {foreach from=$doc.body item="para"}
 <p>{$para|escape}</p>
 {/foreach}
 
-<div>
-<small>{$doc.url|escape}</small>
-</div>
+<pre><small>{$doc.url|escape}</small></pre>
 
 </div>
 
 <div class="row pull-right">
 <button class="btn btn-sm delete-document" data-document-id="{$doc.id|escape}">Delete</button>
+</div>
+
 </div>
 
 <script type="text/javascript">
