@@ -175,6 +175,7 @@ button {
 
 pre {
     margin-top:1em !important;
+    border-radius: 0px !important;
 }
 
 @media (max-width: 480px){

@@ -280,6 +280,8 @@ function dogeared_documents_fill_cache(){
 	    console.log("delete " + key);
 	    store.remove(key);
 	}
+
+	dogeared_feedback_reset();
     };
     
     dogeared_feedback("Fetching documents");
