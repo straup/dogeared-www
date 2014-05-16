@@ -239,15 +239,50 @@ function dogeared_documents_store_docs(docs){
 
 function dogeared_documents_fill_cache(){
 
+    var cache = {};
+
+    var docs = dogeared_cache_documents();
+    var count = docs.length;
+
+    for (var i=0; i < count; i++){
+	var id = docs[i]['id'];
+	cache[id] = 1;
+    }
+
     var method = 'dogeared.documents.getList';
     var args = {};
     
     var onsuccess = function(rsp){
 	
-	// dogeared_cache_readinglists_store(rsp['documents']);
-	dogeared_documents_store_docs(rsp['documents']['document'])
+	dogeared_feedback("Storing documents");
+
+	var fresh_docs = rsp['documents']['document'];
+	var count_fresh = fresh_docs.length;
+
+	dogeared_documents_store_docs(fresh_docs);
+
+	dogeared_feedback("Cleaning up document cache");
+
+	for (var i=0; i < count_fresh; i++){
+
+	    // See the way that's 'document_id' and not 'id'
+	    // Yeah, that's not great... (20140516/straup)
+
+	    var id = fresh_docs[i]['document_id'];
+
+	    if (cache[id]){
+		delete(cache[id]);
+	    }
+	}
+
+	for (id in cache){
+	    var key = "dogeared_" + id;
+	    console.log("delete " + key);
+	    store.remove(key);
+	}
     };
     
+    dogeared_feedback("Fetching documents");
     dogeared_api_call(method, args, onsuccess);
 }
 
