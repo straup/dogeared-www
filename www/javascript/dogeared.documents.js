@@ -167,8 +167,8 @@ function dogeared_documents_load_cache(){
 	txt += '<div class="row">';
 	txt += '<h3>';
 	txt += htmlspecialchars(title);
-	txt += ' <pre><small>' + url + '</small></pre>';
 	txt += '</h3>';
+	txt += ' <pre><small>' + url + '</small></pre>';
 	txt += '</div>';
 
 	txt += '<div class="row">';

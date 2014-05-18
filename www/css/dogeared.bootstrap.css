@@ -117,7 +117,7 @@ h3 small {
     margin-bottom: .5em;
 }
 
-button {
+x-button {
     border-radius: 0px !important;
     border: 2px solid #000 !important;
     font-weight: 700 !important;
