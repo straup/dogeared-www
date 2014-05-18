@@ -90,15 +90,13 @@ function dogeared_documents_load_cache(){
     console.log("load cache");
     
     var docs = dogeared_cache_documents();
-    docs = dogeared_documents_sort(docs);
-
     var count = docs.length;
 
     if (count == 0){
 	return false;
     }
     
-    // console.log(docs);
+    docs = dogeared_documents_sort(docs);
     docs.reverse();
 
     $(".excerpt").remove();
@@ -109,12 +107,6 @@ function dogeared_documents_load_cache(){
     
     var root = dogeared_abs_root_url();
 
-    /*
-      move these functions in to dogeared.document.js
-      just because it would be... well, would it really?
-      (20140506/straup)
-    */
-    
     for (var i = 0; i < count; i++){
 	
 	var doc = docs[i];
@@ -143,7 +135,7 @@ function dogeared_documents_load_cache(){
 	row += '</h3>';
 
 	row += '<div>';
-	row += '<button class="btn btn-sm delete-document" data-document-id="';
+	row += '<button class="btn btn-sm delete-document pull-right" data-document-id="';
 	row += id;
 	row += '" data-button-action="delete">Delete</button>';
 	row += '</div>';
@@ -156,7 +148,7 @@ function dogeared_documents_load_cache(){
     $(".load-doc").click(function(){
 
 	if (dogeared_network_is_online()){
-	    return true;
+	    // return true;
 	}
 
 	var el = $(this);
@@ -175,19 +167,19 @@ function dogeared_documents_load_cache(){
 	
 	var url = htmlspecialchars(doc['url']);
 
-	var txt = '<div class="row document" id="document"';
+	var txt = '<div class="document" id="document"';
 	txt += ' data-document-id="';
 	txt += htmlspecialchars(id);
 	txt += '">';
 	
+	txt += '<div class="row">';
 	txt += '<h3>';
 	txt += htmlspecialchars(title);
 	txt += ' <pre><small>' + url + '</small></pre>';
 	txt += '</h3>';
-
 	txt += '</div>';
 
-	txt += '<div>';
+	txt += '<div class="row">';
 
 	for (var i in body){
 	    txt += '<p>';
@@ -197,11 +189,15 @@ function dogeared_documents_load_cache(){
 	
 	txt += '</div>';
 
-	txt += '<div>';
+	txt += '<div class="row">';
 	txt += ' <pre><small>' + url + '</small></pre>';
 	txt += '</div>';
 
-	txt += '</document>';
+	txt += '<div>';
+	txt += '<a href="">reading list</a>';
+	txt += '</div>';
+
+	txt += '</div>';
 	
 	$(".excerpt").remove();
 	documents.append(txt);

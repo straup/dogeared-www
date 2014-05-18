@@ -22,11 +22,11 @@ function dogeared_feedback_ok(msg, timeout){
 
 function dogeared_feedback_error(msg){
     dogeared_feedback(msg);
+    alert(msg);
 }
 
 function dogeared_feedback_api_error(rsp){
     dogeared_feeback_error(rsp['error']['message']);
-    alert(msg);
 }
 
 function dogeared_feedback_modal(msg){

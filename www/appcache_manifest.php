@@ -11,9 +11,11 @@
 
 	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
+	/*
 	if ((! $timestamp) && ($user = $GLOBALS['cfg']['user'])){
 		$timestamp = $user['lastactivity'];
 	}
+	*/
 
 	if ((! $timestamp) || ($timestamp == 'stat')){
 		$path = $GLOBALS['smarty']->template_dir . "/page_appcache_manifest.txt";
