@@ -10,6 +10,10 @@
 			return;
 		}
 
+		if (isset($data['access_token'])){
+			$data['access_token'] = "#" . sha1($data['access_token']);
+		}
+
 		# We could also use apache_note to store data (serialized to
 		# JSON) as we go but since that's really just ... a global
 		# variable it seems kind of pointless not to just do this
