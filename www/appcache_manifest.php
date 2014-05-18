@@ -11,11 +11,9 @@
 
 	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
-	/*
 	if ((! $timestamp) && ($user = $GLOBALS['cfg']['user'])){
-		$timestamp = $user['lastactivity'];
+		# $timestamp = $user['lastactivity'];
 	}
-	*/
 
 	if ((! $timestamp) || ($timestamp == 'stat')){
 		$path = $GLOBALS['smarty']->template_dir . "/page_appcache_manifest.txt";
@@ -28,6 +26,10 @@
 		$key = api_keys_get_by_id($token['api_key_id']);
 		$hash = hash_hmac('sha256', $token['access_token'], $key['app_secret']);
 		$GLOBALS['smarty']->assign("auth_hash", $hash);
+
+		if ((! $timestamp) || ($token['created'] > $timestamp)){
+			$timestamp = $token['created'];
+		}
 	}
 	
 	# version – as in '# v(\d+)' – is assigned using the 'version'
