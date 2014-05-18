@@ -71,17 +71,10 @@ function dogeared_documents_init(){
 
 function dogeared_documents_on_online(e){
     console.log("documents: online");
-
-    // Why doesn't this work?
-    // $(".delete-document").show();
 }
 
 function dogeared_documents_on_offline(e){
     console.log("documents: offline");
-
-    // Why doesn't this work?
-    // $(".delete-document").hide();
-
     dogeared_documents_load_cache();
 }
 

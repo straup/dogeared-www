@@ -119,9 +119,9 @@ h3 small {
 
 button {
     border-radius: 0px !important;
-    border: 2px solid #000;
-    font-weight: 700;
-    font-family: sans-serif;
+    border: 2px solid #000 !important;
+    font-weight: 700 !important;
+    font-family: sans-serif !important;
 }
 
 #highlight {

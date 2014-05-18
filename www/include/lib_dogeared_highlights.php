@@ -51,7 +51,7 @@
 		$enc_user = AddSlashes($user['id']);
 
 		$sql = "SELECT * FROM Highlights WHERE user_id='{$enc_user}' ORDER BY created DESC";
-		$rsp = db_fetch_users($cluster_id, $sql, $more);
+		$rsp = db_fetch_paginated_users($cluster_id, $sql, $more);
 
 		return $rsp;
 	}
