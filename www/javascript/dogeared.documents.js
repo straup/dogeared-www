@@ -97,7 +97,6 @@ function dogeared_documents_load_cache(){
     }
     
     docs = dogeared_documents_sort(docs);
-    docs.reverse();
 
     $(".excerpt").remove();
     $(".document").remove();
@@ -295,7 +294,7 @@ function dogeared_documents_sort(docs){
             return 0;
 	}
 
-	return (a['created'] < b['created']) ? -1 : 1;
+	return (a['created'] > b['created']) ? -1 : 1;
     };
 
     docs = usort(docs, sort);

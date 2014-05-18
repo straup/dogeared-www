@@ -6,6 +6,10 @@ function dogeared_notepad_init(){
 
     window.addEventListener("online", dogeared_notepad_on_online);
 
+    $("#notes-list").html("Wranging your notepad and comparing it to the sky. Tasteful Muzak plays.");
+
+    dogeared_feedback("Building notes lists.");
+
     if (dogeared_network_is_online()){
 	dogeared_notepad_sync_list();
     }
@@ -178,12 +182,7 @@ function dogeared_notepad_close_note(){
 
 function dogeared_notepad_build_list(){
 
-    var editor = $("#note-editor");
-    var list = $("#notes-list");
-
-    var items = '';
-    
-    items += '<li><a href="#" id="note-add">Add a note</a></li>';
+    var notes = new Array();
     
     // TO DO: sort by lastmodified (20140512/straup)
 
@@ -205,6 +204,23 @@ function dogeared_notepad_build_list(){
 	    return;
 	}
 
+	notes.push(note);
+    });
+
+    notes = dogeared_notepad_sort(notes);
+
+    var editor = $("#note-editor");
+    var list = $("#notes-list");
+
+    var items = '';
+
+    var count = notes.length;
+
+    for (var i=0; i < count; i++){
+
+	var note = notes[i];
+	var key = "notepad_" + note['id'];
+
 	var title = note['title'];
 	var created = note['created'];
 	var source_id = note['source_id'];
@@ -221,7 +237,9 @@ function dogeared_notepad_build_list(){
 	}
 
 	items += '</li>';
-    });
+    }
+    
+    items += '<li><a href="#" id="note-add">Add a note</a></li>';
 
     list.html(items);
 
@@ -389,4 +407,24 @@ function dogeared_notepad_key(note){
 function dogeared_notepad_source(){
     var fingerprint = new Fingerprint();
     return fingerprint.get();
+}
+
+function dogeared_notepad_sort(notes){
+
+    // http://phpjs.org/functions/usort/
+    // http://phpjs.org/functions/array_values/
+
+    var sort = function(a, b){
+
+	if (a['lastmodified'] == b['lastmodified']) {
+            return 0;
+	}
+
+	return (a['lastmodified'] > b['lastmodified']) ? -1 : 1;
+    };
+
+    notes = usort(notes, sort);
+    notes = array_values(notes);
+
+    return notes;
 }
