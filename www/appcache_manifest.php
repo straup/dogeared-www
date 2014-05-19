@@ -12,7 +12,7 @@
 	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
 	if ((! $timestamp) && ($user = $GLOBALS['cfg']['user'])){
-		# $timestamp = $user['lastactivity'];
+		$timestamp = $user['lastactivity'];
 	}
 
 	if ((! $timestamp) || ($timestamp == 'stat')){

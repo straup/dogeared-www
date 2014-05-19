@@ -4,6 +4,8 @@
 
 *This is pre-alpha version software. It basically works. Until it doesn't. It does not have any documentation to speak of, yet. No refunds are accepted.*
 
+Here is [a long blog post](http://www.aaronland.info/weblog/2014/05/12/non/#dogeared) describing the current state of affairs.
+
 ## See also
 
 * [dogeared-extruder](https://github.com/straup/dogeared-extruder)
