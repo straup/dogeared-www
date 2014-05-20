@@ -67,9 +67,13 @@ function dogeared_appcache_on_updateready(){
 
     if (window.applicationCache.status == window.applicationCache.UPDATEREADY){
 
+	/*
 	if (confirm('An updated version of site is available. Load it?')){
             window.location.reload();
 	}
+	*/
+
+        window.location.reload();	
     }
 }
 
