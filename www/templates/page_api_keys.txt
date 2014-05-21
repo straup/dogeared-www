@@ -11,8 +11,6 @@
 {/if}
 {/capture}
 
-{include file="inc_api_header.txt" title="Your API keys"}
-
 <div class="api-sect">
 
 <h2>API keys</h2>

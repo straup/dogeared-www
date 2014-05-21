@@ -4,8 +4,6 @@
 {capture assign="title"}Your auth token for the {$token.app.app_title} application{/capture}
 {capture assign="subtitle"}It was created {$token.created|date_format}{if $token.created != $token.last_modified} / It was last updated {$token.last_modified|date_format}{/if}{/capture}
 
-{include file="inc_api_header.txt" title=$title}
-
 {if $update_rsp}
 
 {if $update_rsp.ok}
