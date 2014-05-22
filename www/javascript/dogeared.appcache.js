@@ -37,7 +37,6 @@ function dogeared_appcache_init(){
 
 function dogeared_appcache_on_event(e){
     var type = e.type;
-    console.log("appcache event " + type);
 
     if (type == "checking"){
 	dogeared_appcache_progress = 0;
@@ -67,11 +66,11 @@ function dogeared_appcache_on_updateready(){
 
     if (window.applicationCache.status == window.applicationCache.UPDATEREADY){
 
-	if ($("#document").html()){
-	    return;
+	if (! dogeared_documents_currently_reading()){
+	    console.log("appcache onupdateready reload");
+            window.location.reload();	
 	}
 
-        window.location.reload();	
     }
 }
 

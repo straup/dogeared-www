@@ -75,7 +75,10 @@ function dogeared_documents_on_online(e){
 
 function dogeared_documents_on_offline(e){
     console.log("documents: offline");
-    dogeared_documents_load_cache();
+
+    if (! dogeared_documents_currently_reading()){
+	dogeared_documents_load_cache();
+    }
 }
 
 function dogeared_documents_load_cache(){
@@ -294,4 +297,11 @@ function dogeared_documents_sort(docs){
     docs = array_values(docs);
 
     return docs;
+}
+
+function dogeared_documents_currently_reading(){
+    // sudo make me better...
+    var reading = ($("#document").html()) ? 1 : 0;
+    console.log("currently reading: " + reading);
+    return reading;
 }
