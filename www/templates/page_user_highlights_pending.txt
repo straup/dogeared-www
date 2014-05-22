@@ -21,7 +21,6 @@ $(document).ready(function(){
 	for (var i in highlights){
 
 		var hl = highlights[i];
-		console.log(hl);
 
 		var item = '<li';
 		item += ' id="li-' + hl['cache_key'] + '"';
@@ -53,12 +52,17 @@ $(document).ready(function(){
 		var document_id = highlight.attr('data-document-id');
 		var text = highlight.html();
 
-		var method = 'dogeared.highlights.addHighlight';
+		var now = dogeared_now();
 
+		var method = 'dogeared.highlights.addHighlight';
+		
 		var args = {
 			'document_id': document_id,
 			'text' : text,
+			'created': now,
 		};
+
+		console.log(args);
 
 		var on_success = function(rsp){
 

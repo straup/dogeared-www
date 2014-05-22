@@ -5,6 +5,7 @@ function dogeared_init(){
 
     dogeared_network_init();
     dogeared_appcache_init();
+    dogeared_highlights_init();
     dogeared_cache_highlights_init();
 }
 

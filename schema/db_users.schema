@@ -8,3 +8,19 @@ CREATE TABLE `ReadingLists` (
   PRIMARY KEY (`document_id`, `user_id`),
   KEY `by_user` (`user_id`, `created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `Highlights`;
+
+CREATE TABLE `Highlights` (
+  `id` BIGINT(20) UNSIGNED AUTO_INCREMENT, 
+  `user_id` INT(11) UNSIGNED NOT NULL,
+  `document_id` BIGINT(20) UNSIGNED NOT NULL,
+  `created` INT(11) UNSIGNED NOT NULL,
+  `lastmodified` INT(11) UNSIGNED NOT NULL,
+  `text` TEXT NOT NULL,
+  `hash` CHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `by_user` (`user_id`, `created`),
+  KEY `by_user_doc` (`user_id`, `document_id`, `created`),  
+  UNIQUE KEY `by_hash` (`user_id`, `document_id`, `hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

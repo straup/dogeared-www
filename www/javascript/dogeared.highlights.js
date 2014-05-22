@@ -1,5 +1,42 @@
 function dogeared_highlights_init(){
 
+    console.log("init highlights");
+
+    window.addEventListener("online", function(e){
+	console.log("online highlights");
+
+	setTimeout(function(){
+	    dogeared_highlights_on_online(e);
+	}, 3000);
+    });
+
+}
+
+function dogeared_highlights_on_online(){
+
+    var highlights = dogeared_cache_highlights();
+    var count = highlights.length;
+
+    console.log(count + " pending highlights");
+
+    for (var i=0; i < count; i++){
+
+	var method = 'dogeared.highlights.addHighlight';
+	var cache = highlights[i];
+
+	var key = cache['cache_key'];
+
+	var args = { 'document_id': cache['document_id'], 'text': cache['text'], 'created': cache['created'] };
+	console.log(args);
+
+	var on_success = function(rsp){
+	    console.log("remove " + key);
+	    store.remove(key);
+	};
+
+	dogeared_api_call(method, args, on_success);
+    }
+
 }
 
 function dogeared_highlights_init_list(){

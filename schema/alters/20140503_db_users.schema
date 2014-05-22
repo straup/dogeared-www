@@ -10,5 +10,6 @@ CREATE TABLE `Highlights` (
   `hash` CHAR(32) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `by_user` (`user_id`, `created`),
-  KEY `by_user_doc` (`user_id`, `document_id`, `created`)  
+  KEY `by_user_doc` (`user_id`, `document_id`, `created`),  
+  UNIQUE KEY `by_hash` (`user_id`, `document_id`, `hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

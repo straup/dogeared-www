@@ -1,0 +1,1 @@
+ALTER TABLE Highlights ADD UNIQUE `by_hash` (`user_id`, `document_id`, `hash`);

@@ -58,6 +58,8 @@
 			api_output_error(400, "Missing text");
 		}
 
+		$created = (post_isset("created")) ? intval(post_int32("created")) : 0;
+
 		$user = $GLOBALS['cfg']['user'];
 
 		$rsp = dogeared_highlights_add_highlight($user, $doc, $text);

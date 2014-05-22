@@ -29,6 +29,7 @@ function dogeared_api_call(method, args, on_success, on_error){
 		
 		if (! rsp['responseText']){
 		    console.log("Missing response text");
+		    console.log(rsp);
 		    dogeared_feedback_error("The API is full of crazy-talk: Missing response text");
 		    return;
 		}

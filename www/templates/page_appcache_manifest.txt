@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v199
+# v212
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -40,6 +40,8 @@ CACHE:
 {$cfg.abs_root_url}javascript/math.uuid.js
 
 NETWORK:
+{$cfg.abs_root_url}api/rest
+{$cfg.abs_root_url}api/rest/
 
 # FALLBACK:
 
@@ -50,3 +52,4 @@ NETWORK:
 # http://www.blog.jamesdbloom.com/JavaScriptAndApplicationCache.html
 # http://www.blog.jamesdbloom.com/ProblemsWithApplicationCache.html
 # http://www.blog.jamesdbloom.com/TipsForUsingApplicationCache.html
+# http://appcache.offline.technology/

@@ -2,10 +2,14 @@
 
 	########################################################################
 
-	function dogeared_highlights_add_highlight(&$user, &$document, $text){
+	function dogeared_highlights_add_highlight(&$user, &$document, $text, $created=0){
 
 		$cluster_id = $user['cluster_id'];
 		$now = time();
+
+		if (! $created){
+			$created = $now;
+		}
 
 		$hash = dogeared_highlights_hash_text($text);
 
@@ -14,7 +18,7 @@
 			'document_id' => $document['id'],
 			'text' => $text,
 			'hash' => $hash,
-			'created' => $now,
+			'created' => $created,
 			'lastmodified' => $now,
 		);
 
