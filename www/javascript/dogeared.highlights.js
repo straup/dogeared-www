@@ -1,42 +1,44 @@
 function dogeared_highlights_init(){
 
-    console.log("init highlights");
-
     window.addEventListener("online", function(e){
-	console.log("online highlights");
-
-	setTimeout(function(){
-	    dogeared_highlights_on_online(e);
-	}, 3000);
+	dogeared_highlights_on_online();
     });
-
 }
 
 function dogeared_highlights_on_online(){
+    dogeared_highlights_flush_pending();
+}
+
+function dogeared_highlights_flush_pending(){
+
+    console.log("flush pending highlights");
 
     var highlights = dogeared_cache_highlights();
     var count = highlights.length;
 
-    console.log(count + " pending highlights");
-
     for (var i=0; i < count; i++){
 
-	var method = 'dogeared.highlights.addHighlight';
-	var cache = highlights[i];
-
-	var key = cache['cache_key'];
-
-	var args = { 'document_id': cache['document_id'], 'text': cache['text'], 'created': cache['created'] };
-	console.log(args);
-
-	var on_success = function(rsp){
-	    console.log("remove " + key);
-	    store.remove(key);
-	};
-
-	dogeared_api_call(method, args, on_success);
+	var pending = highlights[i];
+	dogeared_highlights_flush_pending_single(pending);
     }
 
+}
+
+function dogeared_highlights_flush_pending_single(pending){
+
+    var method = 'dogeared.highlights.addHighlight';
+	
+    var key = pending['cache_key'];
+    console.log("flush pending highlight " + key);
+    
+    var args = { 'document_id': pending['document_id'], 'text': pending['text'], 'created': pending['created'] };
+
+    var on_success = function(rsp){
+	store.remove(key);
+	dogeared_cache_highlights_status();
+    };
+
+    dogeared_api_call(method, args, on_success);
 }
 
 function dogeared_highlights_init_list(){

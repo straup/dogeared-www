@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v212
+# v219
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -40,6 +40,8 @@ CACHE:
 {$cfg.abs_root_url}javascript/math.uuid.js
 
 NETWORK:
+{$cfg.abs_root_url}documents/manifest
+{$cfg.abs_root_url}documents/manifest/
 {$cfg.abs_root_url}api/rest
 {$cfg.abs_root_url}api/rest/
 

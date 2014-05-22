@@ -253,7 +253,7 @@
 	$GLOBALS['cfg']['pagination_style'] = 'pretty';
 
 	$GLOBALS['cfg']['pagination_keyboard_shortcuts'] = 1;
-	$GLOBALS['cfg']['pagination_touch_shortcuts'] = 1;
+	$GLOBALS['cfg']['pagination_touch_shortcuts'] = 0;
 
 	#
 	# Feature flags

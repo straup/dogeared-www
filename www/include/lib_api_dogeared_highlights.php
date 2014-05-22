@@ -46,7 +46,9 @@
 
 		$user = $GLOBALS['cfg']['user'];
 
-		$doc = dogeared_readinglists_get_document_for_user($user, $id);
+		$doc = dogeared_documents_get_by_id($id);
+
+		# $doc = dogeared_readinglists_get_document_for_user($user, $id);
 
 		if (! $doc){
 			api_output_error(404, "Invalid document ID");
