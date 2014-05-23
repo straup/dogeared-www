@@ -200,9 +200,16 @@ function dogeared_documents_load_cache(){
 	
 	$(".excerpt").remove();
 
-	if (doc['pos']){
-	    window.scrollto(0, doc['pos']);
+	dogeared_document_init_doc(id);
+
+	/*
+	var pos = dogeared_whosonfirst_get(id);
+	console.log('pos for ' + id + ' : ' + pos);
+
+	if (pos){
+	    window.scrollTo(0, pos);
 	}
+	*/
 
 	return false;
     });

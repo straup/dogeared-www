@@ -7,8 +7,6 @@ function dogeared_document_init(){
 
     console.log("document init");
 
-    dogeared_document_init_highlight_controls();
-
     $(".delete-document").click(function(){
 
 	if (! dogeared_network_is_online()){
@@ -39,8 +37,23 @@ function dogeared_document_init(){
 
 	dogeared_api_call(method, args, on_success);
     });
+}
+
+function dogeared_document_init_doc(id){
+
+    console.log("document init (doc) " + id);
+
+    dogeared_document_init_highlight_controls();
 
     window.onscroll = dogeared_document_on_scroll;
+
+    var pos = dogeared_whosonfirst_get(id);
+    console.log('pos for ' + id + ' : ' + pos);
+
+    if (pos){
+	window.scrollTo(0, pos);
+    }
+
 }
 
 function dogeared_document_on_scroll(e){
@@ -48,19 +61,12 @@ function dogeared_document_on_scroll(e){
     var doc = $("#document");
     var id = doc.attr("data-document-id");
 
-    console.log("scroll " + id);
-
     if (! id){
 	return;
     }
 
-    var key = "dogeared_" + id;
-    var cache = store.get(key);
-
-    cache['pos'] = window.scrollY;
-    store.set(key, cache);
-
-    console.log(key + ":" + window.scrollY);
+    var pos = window.scrollY;
+    dogeared_whosonfirst_set(id, pos);
 }
 
 function dogeared_document_init_highlight_controls(){

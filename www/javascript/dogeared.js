@@ -7,6 +7,7 @@ function dogeared_init(){
     dogeared_appcache_init();
     dogeared_highlights_init();
     dogeared_cache_highlights_init();
+    dogeared_whosonfirst_init();
 }
 
 function dogeared_abs_root_url(){
@@ -34,4 +35,35 @@ function dogeared_on_offline(e){
     dogeared_feedback("You appear to be offline.");
 
     $(".appcache_equals_no").hide();
+}
+
+function dogeared_whosonfirst_init(){
+
+    var key = dogeared_whosonfirst_key();
+    var who = store.get(key);
+
+    console.log("whosonfirst init");
+    console.log(who);
+
+    if (! who){
+	store.set(key, {});
+    }
+}
+
+function dogeared_whosonfirst_key(){
+    return "dogeared_whosonfirst";
+}
+
+function dogeared_whosonfirst_get(id){
+    var key = dogeared_whosonfirst_key();
+    var who = store.get(key);
+    return who[id];
+}
+
+function dogeared_whosonfirst_set(id, pos){
+    var key = dogeared_whosonfirst_key();
+    var who = store.get(key);
+
+    who[id] = pos;
+    store.set(key, who);
 }

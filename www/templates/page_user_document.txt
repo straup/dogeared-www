@@ -24,6 +24,7 @@
 
 $(document).ready(function(){
 	dogeared_document_init();
+	dogeared_document_init_doc({/literal}{$doc.id|escape}{literal});
 });
 
 {/literal}
