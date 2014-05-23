@@ -38,6 +38,19 @@ function dogeared_document_init(){
 	dogeared_api_call(method, args, on_success);
     });
 
+    window.onscroll = dogeared_document_on_scroll;
+}
+
+function dogeared_document_on_scroll(e){
+
+    var doc = $("#document");
+    var id = doc.attr("data-document-id");
+
+    if (! id){
+	return;
+    }
+
+    doc.attr("data-scroll-y", window.scrollY);
 }
 
 function dogeared_document_init_highlight_controls(){
