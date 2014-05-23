@@ -50,7 +50,15 @@ function dogeared_document_on_scroll(e){
 	return;
     }
 
-    doc.attr("data-scroll-y", window.scrollY);
+    var key = "dogeared_" + id;
+    var cache = store.get(key);
+    
+    cache['pos'] = window.scrollY;
+    store.set(key, cache);
+
+    console.log(id + ":" + window.scrollY);
+
+    // doc.attr("data-scroll-y", window.scrollY);
 }
 
 function dogeared_document_init_highlight_controls(){
