@@ -118,6 +118,8 @@ function dogeared_documents_load_cache(){
 	var document_url = dogeared_abs_root_url();
 	document_url += 'documents/' + id + '/';
 
+	//document_url = "#";
+
 	var row = '<div class="row excerpt">';
 	row += '<h3><a href="';
 	row += document_url;
@@ -147,10 +149,10 @@ function dogeared_documents_load_cache(){
 	}
 
 	var el = $(this);
-	
 	var id = el.attr("data-document-id");
-	var idx = key[id];
-	var doc = docs[idx];
+	
+	var key = "dogeared_" + id;
+	var doc = store.get(key);
 
 	var title = doc['display_title'];
 
@@ -159,7 +161,7 @@ function dogeared_documents_load_cache(){
 	}
 
 	var body = JSON.parse(doc['body']);
-	
+
 	var url = htmlspecialchars(doc['url']);
 
 	var txt = '<div class="document" id="document"';
@@ -194,9 +196,14 @@ function dogeared_documents_load_cache(){
 
 	txt += '</div>';
 	
-	$(".excerpt").remove();
 	documents.append(txt);
 	
+	$(".excerpt").remove();
+
+	if (doc['pos']){
+	    window.scrollto(0, doc['pos']);
+	}
+
 	return false;
     });
     

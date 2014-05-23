@@ -5,6 +5,8 @@ var current_selection = "";
 
 function dogeared_document_init(){
 
+    console.log("document init");
+
     dogeared_document_init_highlight_controls();
 
     $(".delete-document").click(function(){
@@ -46,19 +48,19 @@ function dogeared_document_on_scroll(e){
     var doc = $("#document");
     var id = doc.attr("data-document-id");
 
+    console.log("scroll " + id);
+
     if (! id){
 	return;
     }
 
     var key = "dogeared_" + id;
     var cache = store.get(key);
-    
+
     cache['pos'] = window.scrollY;
     store.set(key, cache);
 
-    console.log(id + ":" + window.scrollY);
-
-    // doc.attr("data-scroll-y", window.scrollY);
+    console.log(key + ":" + window.scrollY);
 }
 
 function dogeared_document_init_highlight_controls(){
