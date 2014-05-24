@@ -37,6 +37,11 @@ function dogeared_documents_init(){
 	dogeared_api_call(method, args, on_success);
     });
    
+    dogeared_documents_load_index();
+}
+
+function dogeared_documents_load_index(){
+
     if (dogeared_network_is_online()){
 
 	try {

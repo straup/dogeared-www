@@ -1,21 +1,26 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v259
+# v262
 # ts{$manifest_timestamp|escape}
 
 CACHE:
+{$cfg.abs_root_url}
 {$cfg.abs_root_url}documents
 {$cfg.abs_root_url}documents/
 {$cfg.abs_root_url}highlights/pending
 {$cfg.abs_root_url}highlights/pending/
 {$cfg.abs_root_url}notepad
 {$cfg.abs_root_url}notepad/
+{if $this-does-not-work-yet}
+
+{else}
 {$cfg.abs_root_url}css/bootstrap.min.css
 {$cfg.abs_root_url}css/dogeared.bootstrap.css
 {$cfg.abs_root_url}css/dogeared.api.css
 {$cfg.abs_root_url}css/dogeared.bundle.min.css
 {$cfg.abs_root_url}javascript/jquery-1.8.2.min.js
+{$cfg.abs_root_url}javascript/jquery.touchwipe.min.js
 {$cfg.abs_root_url}javascript/bootstrap.min.js
 {$cfg.abs_root_url}javascript/store.min.js
 {$cfg.abs_root_url}javascript/phpjs.min.js
@@ -38,6 +43,7 @@ CACHE:
 {$cfg.abs_root_url}javascript/dogeared.bundle.min.js
 {$cfg.abs_root_url}javascript/dogeared.notepad.js
 {$cfg.abs_root_url}javascript/math.uuid.js
+{/if}
 
 NETWORK:
 {$cfg.abs_root_url}documents/manifest

@@ -17,11 +17,38 @@ function dogeared_init(){
 	}
     });
 
+    dogeared_init_touch_controls();
+
     dogeared_network_init();
     dogeared_appcache_init();
     dogeared_highlights_init();
     dogeared_cache_highlights_init();
     dogeared_whosonfirst_init();
+}
+
+function dogeared_init_touch_controls(){
+
+    $(document).touchwipe({
+	wipeLeft: dogeared_on_swipe,
+	wipeRight: dogeared_on_swipe,
+	wipeUp: function(){},
+	wipeDown: function(){},
+	min_move_x: 100,
+	min_move_y: 100,
+	preventDefaultEvents: false,
+	allowPageScroll: 'vertical'
+    });
+
+}
+
+function dogeared_on_swipe(){
+
+    if (! dogeared_documents_currently_reading()){
+	return false;
+    }
+
+    console.log("swipe: load index");
+    dogeared_documents_load_index();
 }
 
 function dogeared_abs_root_url(){
