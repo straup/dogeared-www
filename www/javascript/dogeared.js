@@ -52,12 +52,10 @@ function dogeared_on_offline(e){
 }
 
 function dogeared_whosonfirst_init(){
+    console.log("whosonfirst init");
 
     var key = dogeared_whosonfirst_key();
     var who = store.get(key);
-
-    console.log("whosonfirst init");
-    console.log(who);
 
     if (! who){
 	store.set(key, {});

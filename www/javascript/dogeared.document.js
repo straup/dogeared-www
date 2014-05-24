@@ -4,7 +4,6 @@
 var current_selection = "";
 
 function dogeared_document_init(){
-
     console.log("document init");
 
     $(".delete-document").click(function(){
@@ -40,7 +39,6 @@ function dogeared_document_init(){
 }
 
 function dogeared_document_init_doc(id){
-
     console.log("document init (doc) " + id);
 
     dogeared_document_init_highlight_controls();
@@ -48,7 +46,6 @@ function dogeared_document_init_doc(id){
     window.onscroll = dogeared_document_on_scroll;
 
     var pos = dogeared_whosonfirst_get(id);
-    console.log('pos for ' + id + ' : ' + pos);
 
     if (pos){
 	window.scrollTo(0, pos);
@@ -84,11 +81,9 @@ function dogeared_document_init_highlight_controls(){
 }
 
 function dogeared_document_selected_mouseup(e){
-
-    console.log("on mouseup");
+    console.log("document: on mouseup");
 
     var target = e.target;
-    // console.log(target);
 
     if (target.nodeName == 'BUTTON'){
 
@@ -143,8 +138,6 @@ function dogeared_document_selected_selectionchange(e){
     var sel = window.getSelection();
     var txt = sel.toString();
 
-    console.log("text is " + txt);
-
     if (txt == ""){
 	return;
     }
@@ -173,7 +166,6 @@ function dogeared_document_selected_selectionchange(e){
     
     range.insertNode(frag);
 
-    console.log("do highlight");
     $("#highlight").click(dogeared_document_add_highlight);
 }
 

@@ -217,7 +217,6 @@ function dogeared_documents_fill_cache(){
 
 	for (id in cache){
 	    var key = "dogeared_" + id;
-	    // console.log("delete " + key);
 	    store.remove(key);
 	}
 
@@ -251,7 +250,6 @@ function dogeared_documents_sort(docs){
 function dogeared_documents_currently_reading(){
     // sudo make me better...
     var reading = ($("#document").html()) ? 1 : 0;
-    console.log("currently reading: " + reading);
     return reading;
 }
 
