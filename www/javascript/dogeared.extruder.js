@@ -28,6 +28,8 @@ function dogeared_extruder_init(){
 	    
 	    var document = rsp['document'];
 	    dogeared_cache_documents_store(document);
+
+	    $("#url").val("");
 	};
 	
 	var on_error = function(rsp){
