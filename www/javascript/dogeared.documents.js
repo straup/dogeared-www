@@ -11,20 +11,6 @@ function dogeared_documents_init(){
 	dogeared_documents_on_online(e);
     });
     
-    $("#dogeared-navi li a").click(function(){
-	
-	if (! dogeared_network_is_online()){
-	    
-	    var el = $(this);
-	    
-	    if (el.html() == 'reading list'){
-		dogeared_documents_load_cache();
-	    }
-	    
-	    return false;
-	}
-    });
- 
     $(".delete-document").click(function(){
 
 	if (! confirm("Are you sure you want to remove this document?")){
@@ -82,8 +68,9 @@ function dogeared_documents_on_offline(e){
 }
 
 function dogeared_documents_load_cache(){
-
     console.log("load cache");
+
+    window.scrollTo(0,0);
     
     var docs = dogeared_cache_documents();
     var count = docs.length;
@@ -98,7 +85,6 @@ function dogeared_documents_load_cache(){
     $(".document").remove();
     
     var documents = $("#documents");
-    var key = {};
     
     var root = dogeared_abs_root_url();
 
@@ -107,18 +93,18 @@ function dogeared_documents_load_cache(){
 	var doc = docs[i];
 	var id = doc['id'];
 
+	if (! id){
+	    continue;
+	}
+
 	var title = doc['display_title'];
 
 	if (title == undefined){
 	    title = "Unknown title #" + id;
 	}
 
-	key[id] = i;
-	
 	var document_url = dogeared_abs_root_url();
 	document_url += 'documents/' + id + '/';
-
-	//document_url = "#";
 
 	var row = '<div class="row excerpt">';
 	row += '<h3><a href="';
@@ -144,72 +130,21 @@ function dogeared_documents_load_cache(){
     
     $(".load-doc").click(function(){
 
-	if (dogeared_network_is_online()){
-	    // return true;
-	}
-
-	var el = $(this);
-	var id = el.attr("data-document-id");
-	
-	var key = "dogeared_" + id;
-	var doc = store.get(key);
-
-	var title = doc['display_title'];
-
-	if (title == undefined){
-	    title = "Unknown title #" + id;
-	}
-
-	var body = JSON.parse(doc['body']);
-
-	var url = htmlspecialchars(doc['url']);
-
-	var txt = '<div class="document" id="document"';
-	txt += ' data-document-id="';
-	txt += htmlspecialchars(id);
-	txt += '">';
-	
-	txt += '<div class="row">';
-	txt += '<h3>';
-	txt += htmlspecialchars(title);
-	txt += '</h3>';
-	txt += ' <pre><small>' + url + '</small></pre>';
-	txt += '</div>';
-
-	txt += '<div class="row">';
-
-	for (var i in body){
-	    txt += '<p>';
-	    txt += htmlspecialchars(body[i]);
-	    txt += '</p>';
+	try {
+	    if (dogeared_network_is_online()){
+		// return true;
+	    }
+	    
+	    var el = $(this);
+	    var id = el.attr("data-document-id");
+	    
+	    dogeared_documents_load_doc(id);
 	}
 	
-	txt += '</div>';
-
-	txt += '<div class="row">';
-	txt += ' <pre><small>' + url + '</small></pre>';
-	txt += '</div>';
-
-	txt += '<div>';
-	txt += '<a href="">reading list</a>';
-	txt += '</div>';
-
-	txt += '</div>';
-	
-	documents.append(txt);
-	
-	$(".excerpt").remove();
-
-	dogeared_document_init_doc(id);
-
-	/*
-	var pos = dogeared_whosonfirst_get(id);
-	console.log('pos for ' + id + ' : ' + pos);
-
-	if (pos){
-	    window.scrollTo(0, pos);
+	catch(e) {
+	    dogeared_feedback("Failed to load document because " + e);
+	    console.log(e);
 	}
-	*/
 
 	return false;
     });
@@ -282,7 +217,7 @@ function dogeared_documents_fill_cache(){
 
 	for (id in cache){
 	    var key = "dogeared_" + id;
-	    console.log("delete " + key);
+	    // console.log("delete " + key);
 	    store.remove(key);
 	}
 
@@ -318,4 +253,59 @@ function dogeared_documents_currently_reading(){
     var reading = ($("#document").html()) ? 1 : 0;
     console.log("currently reading: " + reading);
     return reading;
+}
+
+function dogeared_documents_load_doc(id){
+
+    var key = "dogeared_" + id;
+    var doc = store.get(key);
+    
+    var title = doc['display_title'];
+
+    if (title == undefined){
+	title = "Unknown title #" + id;
+    }
+    
+    var body = JSON.parse(doc['body']);
+    
+    var url = htmlspecialchars(doc['url']);
+    
+    var txt = '<div class="document" id="document"';
+    txt += ' data-document-id="';
+    txt += htmlspecialchars(id);
+    txt += '">';
+    
+    txt += '<div class="row">';
+    txt += '<h3>';
+    txt += htmlspecialchars(title);
+    txt += '</h3>';
+    txt += ' <pre><small>' + url + '</small></pre>';
+    txt += '</div>';
+    
+    txt += '<div class="row">';
+    
+    for (var i in body){
+	txt += '<p>';
+	txt += htmlspecialchars(body[i]);
+	txt += '</p>';
+    }
+    
+    txt += '</div>';
+    
+    txt += '<div class="row">';
+    txt += ' <pre><small>' + url + '</small></pre>';
+    txt += '</div>';
+    
+    txt += '<div>';
+    txt += '<a href="">reading list</a>';
+    txt += '</div>';
+    
+    txt += '</div>';
+    
+    var documents = $("#documents");
+    documents.append(txt);
+    
+    $(".excerpt").remove();
+    
+    dogeared_document_init_doc(id);
 }

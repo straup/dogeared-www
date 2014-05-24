@@ -3,6 +3,20 @@ function dogeared_init(){
     window.addEventListener("offline", dogeared_on_offline);
     window.addEventListener("online", dogeared_on_online);
 
+    $("a").click(function(){
+	
+	if (! dogeared_network_is_online()){
+	    
+	    var el = $(this);
+	    
+	    if (el.html() == 'reading list'){
+		dogeared_documents_load_cache();
+	    }
+	    
+	    return false;
+	}
+    });
+
     dogeared_network_init();
     dogeared_appcache_init();
     dogeared_highlights_init();
