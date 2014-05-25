@@ -5,37 +5,6 @@ var current_selection = "";
 
 function dogeared_document_init(){
     console.log("document init");
-
-    $(".delete-document").click(function(){
-
-	if (! dogeared_network_is_online()){
-	    alert("Offline deletes are not supported yet.");
-	    return false;
-	}
-
-	if (! confirm("Are you sure you want to remove this document?")){
-	    return false;
-	}
-	
-	var el = $(this);
-	var id = el.attr("data-document-id");
-
-	var method = "dogeared.documents.deleteDocument";
-	var args = { 'document_id': id };
-
-	var on_success = function(rsp){
-
-	    var key = "dogeared_" + id;
-	    store.remove(key);
-
-	    var root = dogeared_abs_root_url();
-	    var redir = root + "documents/";
-	    
-	    location.href = redir;
-	};
-
-	dogeared_api_call(method, args, on_success);
-    });
 }
 
 function dogeared_document_init_doc(id){
@@ -69,12 +38,12 @@ function dogeared_document_on_scroll(e){
 function dogeared_document_init_highlight_controls(){
 
     if (typeof(window.ontouchend) == 'object'){
-	console.log("enable touch based highlight controls");
+	console.log("init touch based highlight controls");
 	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
     }
 
     else {
-
+	console.log("init mouse based highlight controls");
 	$(document).bind('mouseup', dogeared_document_selected_mouseup);
     }	
 
@@ -88,8 +57,9 @@ function dogeared_document_selected_mouseup(e){
     if (target.nodeName == 'BUTTON'){
 
 	var el = $(target);
-	
+
 	if (el.attr("data-button-action") == "delete"){
+	    console.log("mouse up: ignore delete button");
 	    return;
 	}
     

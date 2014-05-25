@@ -1,3 +1,8 @@
+function dogeared_omgwtf(bbq){
+    // var c = arguments.callee.caller.toString();
+    console.log(bbq);
+}
+
 function dogeared_init(){
 
     window.addEventListener("offline", dogeared_on_offline);
@@ -17,13 +22,13 @@ function dogeared_init(){
 	}
     });
 
-    dogeared_init_touch_controls();
-
     dogeared_network_init();
     dogeared_appcache_init();
     dogeared_highlights_init();
     dogeared_cache_highlights_init();
     dogeared_whosonfirst_init();
+
+    dogeared_init_touch_controls();
 }
 
 function dogeared_init_touch_controls(){
@@ -47,7 +52,7 @@ function dogeared_on_swipe(){
 	return false;
     }
 
-    console.log("swipe: load index");
+    dogeared_omgwtf("swipe: load index");
     dogeared_documents_load_index();
 }
 
@@ -64,7 +69,7 @@ function dogeared_now(){
 
 function dogeared_on_online(e){
 
-    console.log("came online at " + e.timeStamp);
+    doeared_omgwtf("came online at " + e.timeStamp);
     dogeared_feedback("You appear to be online again.");
 
     $(".appcache_equals_no").show();
@@ -72,14 +77,14 @@ function dogeared_on_online(e){
 
 function dogeared_on_offline(e){
 
-    console.log("went offline at " + e.timeStamp);
+    dogeared_omgwtf("went offline at " + e.timeStamp);
     dogeared_feedback("You appear to be offline.");
 
     $(".appcache_equals_no").hide();
 }
 
 function dogeared_whosonfirst_init(){
-    console.log("whosonfirst init");
+    dogeared_omgwtf("whosonfirst init");
 
     var key = dogeared_whosonfirst_key();
     var who = store.get(key);

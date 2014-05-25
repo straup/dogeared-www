@@ -10,34 +10,9 @@ function dogeared_documents_init(){
     window.addEventListener("online", function(e){
 	dogeared_documents_on_online(e);
     });
-    
-    $(".delete-document").click(function(){
-
-	if (! confirm("Are you sure you want to remove this document?")){
-	    return false;
-	}
-	
-	var el = $(this);
-	var id = el.attr("data-document-id");
-
-	var method = "dogeared.documents.deleteDocument";
-	var args = { 'document_id': id };
-
-	var on_success = function(rsp){
-
-	    var doc = $("#document-" + id);
-	    doc.remove();
-
-	    var key = "dogeared_" + id;
-	    store.remove(key);
-
-	    dogeared_feedback("Okay, that document has been removed from your reading list");
-	};
-
-	dogeared_api_call(method, args, on_success);
-    });
-   
+       
     dogeared_documents_load_index();
+    dogeared_documents_init_delete_controls();
 }
 
 function dogeared_documents_load_index(){
@@ -60,6 +35,78 @@ function dogeared_documents_load_index(){
     }
 }
 
+function dogeared_documents_init_delete_controls(){
+
+    dogeared_omgwtf("init documents delete controls");
+
+    var delete_document = function(el){
+
+	if (! confirm("Are you sure you want to remove this document?")){
+	    return false;
+	}
+	
+	var id = el.attr("data-document-id");
+
+	if (! id){
+	    alert("Unable to determine document ID");
+	    return false;
+	}
+	
+	dogeared_omgwtf("delete document " + id);
+	
+	if (! dogeared_network_is_online()){
+
+	    var key = "dogeared_to_delete";
+	    var cache = store.get(key);
+
+	    if (! cache){
+		cache = {};
+	    }
+
+	    cache[id] = true;
+	    store.set(key, cache);
+
+	    var wrapper = $("#dogeared-document-" + id);
+	    wrapper.remove();
+
+	    dogeared_feedback_modal("Okay. That document has been queued for deletion.");
+	    return false;
+	}
+
+	var method = "dogeared.documents.deleteDocument";
+	var args = { 'document_id': id };
+
+	var on_success = function(rsp){
+
+	    var doc = $("#document-" + id);
+	    doc.remove();
+
+	    var key = "dogeared_" + id;
+	    store.remove(key);
+
+	    dogeared_feedback("Okay, that document has been removed from your reading list");
+	    dogeared_documents_load_index();
+	};
+
+	dogeared_api_call(method, args, on_success);
+    };
+
+    $(".delete-document").click(function(e){
+
+	dogeared_omgwtf("click to delete");	
+	
+	try {
+	    var el = $(this);
+	    delete_document(el);
+	}
+
+	catch(e){
+	    dogeared_feedback_error("Huh. Deleting your document failed because: " + e);	
+	}
+    });
+
+}
+
 function dogeared_documents_on_online(e){
     console.log("documents: online");
 }
@@ -73,10 +120,13 @@ function dogeared_documents_on_offline(e){
 }
 
 function dogeared_documents_load_cache(){
-    console.log("load cache");
+    dogeared_omgwtf("load documents cache");
 
     window.scrollTo(0,0);
     
+    var delete_key = "dogeared_to_delete";
+    var to_delete = store.get(delete_key);
+
     var docs = dogeared_cache_documents();
     var count = docs.length;
 
@@ -102,6 +152,11 @@ function dogeared_documents_load_cache(){
 	    continue;
 	}
 
+	if ((to_delete) && (to_delete[id])){
+	    dogeared_omgwtf("skipping document " + id + " because it is set to be deleted");
+	    continue;
+	}
+	
 	var title = doc['display_title'];
 
 	if (title == undefined){
@@ -111,7 +166,9 @@ function dogeared_documents_load_cache(){
 	var document_url = dogeared_abs_root_url();
 	document_url += 'documents/' + id + '/';
 
-	var row = '<div class="row excerpt">';
+	var row = '<div class="row excerpt"';
+	row += ' id="dogeared-document-' + id + '"';
+	row += '>';
 	row += '<h3><a href="';
 	row += document_url;
 	row += '" class="load-doc" data-document-id="';
