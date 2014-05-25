@@ -15,6 +15,49 @@ function dogeared_documents_init(){
     dogeared_documents_init_delete_controls();
 }
 
+function dogeared_documents_on_online(e){
+    dogeared_omgwtf("documents: online");
+
+    dogeared_documents_process_to_delete();
+}
+
+function dogeared_documents_on_offline(e){
+    dogeared_omgwtf("documents: offline");
+
+    if (! dogeared_documents_currently_reading()){
+	dogeared_documents_load_cache();
+    }
+}
+
+function dogeared_documents_process_to_delete(){
+
+    var key = "dogeared_to_delete";
+    var to_delete = store.get(key);
+
+    for (id in to_delete){
+	dogeared_omgwtf("process pending delete for document " + id);
+
+	if (! id){
+	    delete(to_delete[id]);
+	    store.set(key, to_delete);
+	    continue;
+	}
+
+	var method = "dogeared.documents.deleteDocument";
+	var args = { 'document_id': id };
+
+	var on_success = function(rsp){
+
+	    var _key = "dogeared_to_delete";
+	    var _cache = store.get(_key);
+	    delete(_cache[id]);
+	    store.set(_key, _cache);
+	};
+
+	dogeared_api_call(method, args, on_success);	
+    }
+}
+
 function dogeared_documents_load_index(){
 
     if (dogeared_network_is_online()){
@@ -105,18 +148,6 @@ function dogeared_documents_init_delete_controls(){
 	}
     });
 
-}
-
-function dogeared_documents_on_online(e){
-    console.log("documents: online");
-}
-
-function dogeared_documents_on_offline(e){
-    console.log("documents: offline");
-
-    if (! dogeared_documents_currently_reading()){
-	dogeared_documents_load_cache();
-    }
 }
 
 function dogeared_documents_load_cache(){
