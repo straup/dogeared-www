@@ -74,6 +74,15 @@
 	$user = users_get_by_id($opts['user_id']);
 
 	if (! $user){
+		echo "Unknown user\n";
+		exit();
+	}
+
+	# To do: store in the database (maybe?) and look up on the fly
+	# (20140526/straup)
+
+	if (! $opts['auth_token']){
+		echo "Missing auth token\n";
 		exit();
 	}
 
