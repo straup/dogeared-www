@@ -228,4 +228,8 @@ pre {
 	font-size: 11px;
 	color: #ccc;
     }
+
+    .pagination-numbered {
+	display: none !important;
+    }
 }
