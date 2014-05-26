@@ -38,6 +38,7 @@
 			"dt:year={$year}",
 			"dt:month={$month}",
 			"dt:day={$day}",
+			"dt:timestamp={$created}",
 		);
 
 		$tags = implode(" ", $tags);
