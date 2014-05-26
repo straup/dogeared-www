@@ -18,12 +18,16 @@ function dogeared_api_call(method, args, on_success, on_error){
 
 	var dothis_onsuccess = function(rsp){
 
-		if (on_success){
-			on_success(rsp);
-		}
+	    dogeared_omgwtf(rsp);
+	    
+	    if (on_success){
+		on_success(rsp);
+	    }
 	};
 
 	var dothis_onerror = function(rsp){		    
+
+	    dogeared_omgwtf(rsp);
 
 	    var parse_rsp = function(rsp){
 		

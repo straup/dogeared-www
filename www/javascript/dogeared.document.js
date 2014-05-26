@@ -2,6 +2,7 @@
 // http://stackoverflow.com/questions/3597116/insert-html-after-a-selection
 
 var current_selection = "";
+var highlight_controls = 0;
 
 function dogeared_document_init(){
     console.log("document init");
@@ -9,8 +10,6 @@ function dogeared_document_init(){
 
 function dogeared_document_init_doc(id){
     console.log("document init (doc) " + id);
-
-    dogeared_document_init_highlight_controls();
 
     window.onscroll = dogeared_document_on_scroll;
 
@@ -20,6 +19,7 @@ function dogeared_document_init_doc(id){
 	window.scrollTo(0, pos);
     }
 
+    dogeared_document_bind_highlight_controls();
 }
 
 function dogeared_document_on_scroll(e){
@@ -35,16 +35,32 @@ function dogeared_document_on_scroll(e){
     dogeared_whosonfirst_set(id, pos);
 }
 
-function dogeared_document_init_highlight_controls(){
+function dogeared_document_bind_highlight_controls(){
+
+    dogeared_omgwtf("bind highlight controls");
 
     if (typeof(window.ontouchend) == 'object'){
-	console.log("init touch based highlight controls");
+	dogeared_omgwtf("init touch based highlight controls");
 	$(document).bind('selectionchange', dogeared_document_selected_selectionchange);
     }
 
     else {
-	console.log("init mouse based highlight controls");
+	dogeared_omgwtf("init mouse based highlight controls");
 	$(document).bind('mouseup', dogeared_document_selected_mouseup);
+    }	
+
+}
+
+function dogeared_document_unbind_highlight_controls(){
+
+    dogeared_omgwtf("unbind highlight controls");
+
+    if (typeof(window.ontouchend) == 'object'){
+	$(document).unbind('selectionchange', dogeared_document_selected_selectionchange);
+    }
+
+    else {
+	$(document).unbind('mouseup', dogeared_document_selected_mouseup);
     }	
 
 }
@@ -111,13 +127,6 @@ function dogeared_document_selected_selectionchange(e){
     if (txt == ""){
 	return;
     }
-
-    /*
-    if (txt == current_selection){
-	console.log("selection is same same");
-	return;
-    }
-    */
 
     current_selection = txt;
 

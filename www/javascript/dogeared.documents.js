@@ -2,9 +2,6 @@ var dogeared_fill_cache_count = 0;
 
 function dogeared_documents_init(){
 
-    // THIS IS CAUSING ALL KINDS OF PROBLEMS
-    dogeared_document_init_highlight_controls();
-
     window.addEventListener("offline", function(e){
 	dogeared_documents_on_offline(e);
     });
@@ -97,6 +94,8 @@ function dogeared_documents_load_index(){
     else {
 	dogeared_documents_load_cache();
     }
+
+    dogeared_document_unbind_highlight_controls();
 }
 
 function dogeared_documents_init_delete_controls(){
