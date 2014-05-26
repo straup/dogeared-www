@@ -1,3 +1,5 @@
+var dogeared_fill_cache_count = 0;
+
 function dogeared_documents_init(){
 
     // THIS IS CAUSING ALL KINDS OF PROBLEMS
@@ -63,8 +65,27 @@ function dogeared_documents_load_index(){
     if (dogeared_network_is_online()){
 
 	try {
-	    dogeared_documents_fill_cache();
-	    dogeared_documents_load_cache();
+
+	    var callback = function(){
+
+		var _load = function(){
+		    
+		    // dogeared_omgwtf("checking fill count: " + dogeared_fill_cache_count);
+		    
+		    if (! dogeared_fill_cache_count){
+			dogeared_documents_load_cache();
+			return;
+		    }
+		    
+		    dogeared_feedback("Loading documents, " + dogeared_fill_cache_count + " left");
+		    setTimeout(_load, 500);
+		};
+		
+		_load();
+	    };
+
+	    dogeared_documents_fill_cache(callback);
+
 	}
 
 	catch(e){
@@ -152,6 +173,7 @@ function dogeared_documents_init_delete_controls(){
 
 function dogeared_documents_load_cache(){
     dogeared_omgwtf("load documents cache");
+    dogeared_feedback_reset();
 
     window.scrollTo(0,0);
     
@@ -193,6 +215,8 @@ function dogeared_documents_load_cache(){
 	if (title == undefined){
 	    title = "Unknown title #" + id;
 	}
+
+	dogeared_omgwtf("load " + title + " (" + id + ") " + doc['created']);
 
 	var document_url = dogeared_abs_root_url();
 	document_url += 'documents/' + id + '/';
@@ -256,36 +280,66 @@ function dogeared_documents_get_text(doc){
     var method = 'dogeared.documents.getInfo';
     var args = { 'document_id': id };
     
-    var onsuccess = function(rsp){
-	dogeared_cache_documents_store(rsp['document']);
+    var on_success = function(rsp){
+
+	var _doc = rsp['document'];
+
+	var ok = dogeared_cache_documents_store(_doc);
+
+	dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ") " + ok);
+	dogeared_documents_fill_cache_decr();
     };
     
-    dogeared_api_call(method, args, onsuccess);
+    var on_error = function(rsp){
+	dogeared_documents_fill_cache_decr();
+    };
+   
+    dogeared_api_call(method, args, on_success, on_error);
+    dogeared_documents_fill_cache_incr();
 }
 
 function dogeared_documents_store_docs(docs){
+
+    dogeared_documents_fill_cache_reset();
 
     for (i in docs){
 	dogeared_documents_get_text(docs[i]);
     }
 }
 
-function dogeared_documents_fill_cache(){
+function dogeared_documents_fill_cache_reset(){
+    dogeared_fill_cache_count = 0;
+}
 
-    var cache = {};
+function dogeared_documents_fill_cache_incr(){
+    dogeared_fill_cache_count += 1;
+}
+
+function dogeared_documents_fill_cache_decr(){
+
+    if (dogeared_fill_cache_count){
+	dogeared_fill_cache_count -= 1;
+    }
+
+}
+
+function dogeared_documents_fill_cache(callback){
+
+    var purge_cache = {};
 
     var docs = dogeared_cache_documents();
     var count = docs.length;
 
     for (var i=0; i < count; i++){
 	var id = docs[i]['id'];
-	cache[id] = 1;
+	var lastmod = docs[i]['lastmodified'];
+	purge_cache[id] = lastmod;
     }
 
     var method = 'dogeared.documents.getList';
     var args = {};
     
-    var onsuccess = function(rsp){
+    var on_success = function(rsp){
 	
 	dogeared_feedback("Storing documents");
 
@@ -303,22 +357,35 @@ function dogeared_documents_fill_cache(){
 
 	    var id = fresh_docs[i]['document_id'];
 
-	    if (cache[id]){
-		delete(cache[id]);
+	    if (purge_cache[id]){
+		// dogeared_omgwtf("remove " + id + " from purge cache");
+		delete(purge_cache[id]);
 	    }
 	}
 
-	for (id in cache){
+	for (id in purge_cache){
 	    var key = "dogeared_" + id;
+	    // dogeared_omgwtf("remove " + key + " from list");
 	    store.remove(key);
 	}
 
 	dogeared_feedback_reset();
+
+	if (callback){
+	    callback();
+	}
     };
     
+    var on_error = function(rsp){
+
+    };
+
     dogeared_feedback("Fetching documents");
-    dogeared_api_call(method, args, onsuccess);
+    dogeared_api_call(method, args, on_success, on_error);
 }
+
+// This is not working correctly because... computers?
+// (20140526/straup)
 
 function dogeared_documents_sort(docs){
 
