@@ -11,7 +11,6 @@ function dogeared_documents_init(){
     });
        
     dogeared_documents_load_index();
-    dogeared_documents_init_delete_controls();
 }
 
 function dogeared_documents_on_online(e){
@@ -265,6 +264,7 @@ function dogeared_documents_load_cache(){
 	return false;
     });
     
+    dogeared_documents_init_delete_controls();
     dogeared_document_init();
 };
 
