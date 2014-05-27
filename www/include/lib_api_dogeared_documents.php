@@ -104,6 +104,15 @@
 			api_output_error(404, "Invalid document ID");
 		}
 
+		/*
+		if ($ts = post_int32("lastmodified")){
+
+			if ($ts == $doc['lastmodified']){
+				api_output_error(304, "Same same");
+			}
+		}
+		*/
+
 		$doc['display_title'] = dogeared_documents_display_title($doc);
 
 		$out = array(

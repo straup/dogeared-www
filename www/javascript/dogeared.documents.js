@@ -271,14 +271,19 @@ function dogeared_documents_load_cache(){
 function dogeared_documents_get_text(doc){
 
     var id = doc['document_id'];
-    
+
+    // This shouldn't ever happen but you know... computers
+    // (20140527/straup)
+
     if (id=='0'){
 	return false;
     }
     
+    var lastmod = doc['lastmodified'];
+
     var method = 'dogeared.documents.getInfo';
-    var args = { 'document_id': id };
-    
+    var args = { 'document_id': id, 'lastmodified': lastmod };
+
     var on_success = function(rsp){
 
 	var _doc = rsp['document'];
