@@ -1,0 +1,22 @@
+{capture assign="page_title"}Upload{/capture}
+{include file="inc_head.txt"}
+
+<form method="POST" enctype="multipart/form-data" id="upload-form" role="form" class="form-inline">
+
+      <div class="fileUpload btn btn-primary">
+          <span>choose</span>
+      	  <input type="file" class="upload" name="upload" id="upload" data-upload-crumb="" />
+      </div>
+
+	<button class="btn btn-lg btn-primary" type="submit" id="dogear-this" style="display:none;">upload</button>
+</form>
+
+<script type="text/javascript" src="{$cfg.abs_root_url}javascript/dogeared.uploads.js"></script>
+<script type="text/javascript">{literal}
+
+$(document).ready(function(){
+	dogeared_uploads_init();
+});
+
+{/literal}</script>
+{include file="inc_foot.txt"}

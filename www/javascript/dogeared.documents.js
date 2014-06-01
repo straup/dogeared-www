@@ -140,8 +140,14 @@ function dogeared_documents_init_delete_controls(){
 
 	var on_success = function(rsp){
 
-	    var doc = $("#document-" + id);
-	    doc.remove();
+	    // var doc = $("#document-" + id);
+	    // doc.remove();
+
+	    // overkill as it's already been done but
+	    // just in case... (20140601/straup)
+
+	    var wrapper = $("#dogeared-document-" + id);
+	    wrapper.remove();
 
 	    var key = "dogeared_" + id;
 	    store.remove(key);
@@ -151,6 +157,9 @@ function dogeared_documents_init_delete_controls(){
 	};
 
 	dogeared_api_call(method, args, on_success);
+
+	var wrapper = $("#dogeared-document-" + id);
+	wrapper.remove();
     };
 
     $(".delete-document").click(function(e){

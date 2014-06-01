@@ -36,6 +36,38 @@
 
 	########################################################################
 
+	function api_dogeared_documents_uploadDocument(){
+
+		if (! features_is_enabled("uploads")){
+			api_output_error(999, "Uploads are not enabled.");
+		}
+
+		if (! $_FILES['document']){
+			api_output_error(400, "Missing upload");
+		}
+
+		if ($_FILES['document']['error']){
+			api_output_error(500, "server error: {$_FILES['document']['error']}");
+		}
+
+		$file = $_FILES['document']['tmp_name'];
+
+		$user = $GLOBALS['cfg']['user'];
+		$rsp = dogeared_readinglists_add_file($user, $file);
+
+		if (! $rsp['ok']){
+			api_output_error(500, $rsp['error']);
+		}
+
+		$out = array(
+			'document' => $rsp['document'],
+		);
+
+		api_output_ok($out);
+	}
+
+	########################################################################
+
 	function api_dogeared_documents_deleteDocument(){
 
 		$id = post_int64("document_id");

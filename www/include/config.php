@@ -19,6 +19,7 @@
 	$GLOBALS['cfg']['dogeared_extruder_endpoint'] = 'http://localhost:8080/';
 	$GLOBALS['cfg']['dogeared_extruder_timeout'] = 30;
 
+	$GLOBALS['cfg']['enable_feature_uploads'] = 0;
 	$GLOBALS['cfg']['enable_feature_notepad'] = 1;
 
 	$GLOBALS['cfg']['db_main'] = array(

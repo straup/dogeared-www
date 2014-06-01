@@ -19,7 +19,15 @@
 
 	########################################################################
 
+	# Deprecated (20140601/straup)
+
 	function dogeared_extruder($url, $service){
+		return dogeared_extruder_extrude_url($url, $service);
+	}
+
+	########################################################################
+
+	function dogeared_extruder_extrude_url($url, $service){
 
 		$service = urlencode($service);
 
@@ -36,6 +44,49 @@
 
 		$req = $GLOBALS['cfg']['dogeared_extruder_endpoint'] . "{$service}/?{$query}";
 		$rsp = http_get($req, $headers, $more);
+
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$data = json_decode($rsp['body'], 'as hash');
+
+		if (! $data){
+			return array('ok' => 0, 'error' => 'Failed to parse JSON');
+		}
+
+		$rsp['data'] = $data;
+		return $rsp;
+	}
+
+	########################################################################
+
+	function dogeared_extruder_extrude_file($file, $service){
+
+		if (! file_exists($file)){
+			return array('ok' => 0, 'error' => 'File does not exist.');
+		}
+
+		$service = urlencode($service);
+
+		# FIX ME (20140601/straup)
+		# curl_setopt(): The usage of the @filename API for file uploading is deprecated.
+		# Please use the CURLFile class instead
+
+		$args = array(
+			"file" => "@{$file}",
+		);
+
+		$headers = array(
+			'Accept' => 'application/json',
+		);
+
+		$more = array(
+			'http_timeout' => $GLOBALS['cfg']['dogeared_extruder_timeout'],
+		);
+
+		$req = $GLOBALS['cfg']['dogeared_extruder_endpoint'] . "{$service}/";
+		$rsp = http_post($req, $args, $headers, $more);
 
 		if (! $rsp['ok']){
 			return $rsp;

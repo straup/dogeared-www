@@ -13,6 +13,15 @@
 			"requires_method" => "POST",
 		),
 
+		"dogeared.documents.uploadDocument" => array(
+			"description" => "Upload a document to a user's reading list",
+			"documented" => 1,
+			"enabled" => 1,
+			"library" => "api_dogeared_documents",
+			"requires_perms" => 2,
+			"requires_method" => "POST",
+		),
+
 		"dogeared.documents.deleteDocument" => array(
 			"description" => "Delete a document from a user's reading list",
 			"documented" => 1,

@@ -132,8 +132,9 @@ RewriteRule  ^account/delete/?$		account_delete.php	[L]
 RewriteRule ^about/?$			about.php 		[L,QSA]
 RewriteRule ^contact/?$			contact.php 		[L,QSA]
 
-
 # Reading lists and documents
+
+RewriteRule ^upload/?$					upload.php	[L,QSA]
 
 RewriteRule ^documents(/page([0-9]+))?/?$		user_documents.php?page=$2		[L,QSA]
 RewriteRule ^documents/offline/?$			user_documents_offline.php		[L,QSA]
