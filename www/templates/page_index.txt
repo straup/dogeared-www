@@ -9,6 +9,9 @@
 	<input type="text" name="url" id="url" class="form-control" />
 	</div>
 	<button class="btn btn-primary pull-right" id="dogear-button">Dogear these words</button>
+{if "uploads"|@features_is_enabled}
+	<button class="btn pull-right" style="margin-right:1em;" onclick="location.href='{$cfg.abs_root_url}upload/';return false;">Upload a file instead</button>
+{/if}
 </form>
 
 </div>
