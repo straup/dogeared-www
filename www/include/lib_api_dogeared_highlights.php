@@ -70,6 +70,16 @@
 			api_output_error(500, $rsp['error']);
 		}
 
+		if (0){
+
+			$highlight = $rsp['highlight'];
+
+			$pinboard_user = pinboard_users_get_by_user_id($user['id']);
+			$more = array('auth_token' => $pinboard_user['auth_token']);
+
+			dogeared_pinboard_post_highlight($highlight, $more);
+		}
+
 		$out = array(
 			'highlight' => $rsp['highlight'],
 		);
