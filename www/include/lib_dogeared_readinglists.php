@@ -8,18 +8,30 @@
 
 		if (! $document){
 
-			$service = (preg_match("/\.pdf$/", $url)) ? "tika" : "boilerpipe";
+			$doc = null;
+			$processors = $GLOBALS['cfg']['dogeared_extruder_processors'];
 
-			$service_map = dogeared_extruder_services_map('string keys');
-			$service_id = $service_map[ $service ];
+			$try = (preg_match("/\.pdf$/", $url)) ? $processors['pdf'] : $processors['*'];
 
-			$rsp = dogeared_extruder_extrude_url($url, $service);
+			while (count($try)){
 
-			if (! $rsp['ok']){
-				return $rsp;
+				$service = array_shift($try);
+
+				$service_map = dogeared_extruder_services_map('string keys');
+				$service_id = $service_map[ $service ];
+
+				$rsp = dogeared_extruder_extrude_url($url, $service);
+
+				if ($rsp['ok']){
+					$doc = $rsp['data']['document'];
+					break;
+				}
 			}
 
-			$doc = $rsp['data']['document'];
+			if (! $doc){
+				return array('ok' => 0, 'error' => 'Failed to parse URL');
+			}
+
 			$title = $doc['title'];
 
 			$blocks = $doc['blocks'];

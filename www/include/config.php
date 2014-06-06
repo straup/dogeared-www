@@ -19,6 +19,13 @@
 	$GLOBALS['cfg']['dogeared_extruder_endpoint'] = 'http://localhost:8080/';
 	$GLOBALS['cfg']['dogeared_extruder_timeout'] = 30;
 
+	# See also: dogeared_readinglists_add_url()
+
+	$GLOBALS['cfg']['dogeared_extruder_processors'] = array(
+		'pdf' => array('tika'),
+		'*' => array('boilerpipe', 'java-readability', 'tika'),
+	);
+
 	$GLOBALS['cfg']['enable_feature_uploads'] = 0;
 	$GLOBALS['cfg']['enable_feature_notepad'] = 1;
 
