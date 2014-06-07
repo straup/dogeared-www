@@ -9,7 +9,14 @@ function dogeared_documents_init(){
     window.addEventListener("online", function(e){
 	dogeared_documents_on_online(e);
     });
-       
+
+    $(document).keydown(function(e){
+
+	if ((e.keyCode == 70) && (e.shiftKey)){
+    	    screenfull.request();
+	}
+    });
+
     dogeared_documents_load_index();
 }
 
@@ -59,6 +66,8 @@ function dogeared_documents_process_to_delete(){
 function dogeared_documents_load_index(){
 
     if (dogeared_network_is_online()){
+
+	dogeared_documents_load_cache();
 
 	try {
 

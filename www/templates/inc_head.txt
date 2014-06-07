@@ -38,6 +38,7 @@
     <script src="{$cfg.abs_root_url}javascript/math.uuid.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/md5.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/fingerprint.min.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/screenfull.min.js"></script>
     <!--[if lt IE 9]>
       <script src="{$cfg.abs_root}javascript/html5.js"></script>
     <![endif]-->

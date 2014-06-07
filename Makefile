@@ -9,7 +9,7 @@ js:
 
 	java -Xmx64m -jar lib/google-compiler/compiler-20100616.jar --js www/javascript/phpjs.htmlspecialchars.js --js www/javascript/phpjs.usort.js --js www/javascript/phpjs.array_values.js > www/javascript/phpjs.min.js
 
-	cat www/javascript/jquery-1.8.2.min.js www/javascript/bootstrap.min.js www/javascript/store.min.js www/javascript/phpjs.min.js www/javascript/md5.min.js www/javascript/math.uuid.min.js www/javascript/fingerprint.min.js > www/javascript/dogeared.dependencies.min.js
+	cat www/javascript/jquery-1.8.2.min.js www/javascript/bootstrap.min.js www/javascript/store.min.js www/javascript/phpjs.min.js www/javascript/md5.min.js www/javascript/math.uuid.min.js www/javascript/fingerprint.min.js www/javascript/screenfull.min.js > www/javascript/dogeared.dependencies.min.js
 
 css:
 
