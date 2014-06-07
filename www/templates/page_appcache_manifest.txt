@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v333
+# v334
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -43,7 +43,7 @@ CACHE:
 {$cfg.abs_root_url}javascript/dogeared.bundle.min.js
 {$cfg.abs_root_url}javascript/dogeared.notepad.js
 {$cfg.abs_root_url}javascript/math.uuid.js
-{$cfg.abs_root_url}javascript/screenful.min.js
+{$cfg.abs_root_url}javascript/screenfull.min.js
 {/if}
 
 NETWORK:
