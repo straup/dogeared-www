@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `PinboardUsers`;
+
+CREATE TABLE `PinboaedUsers` (
+  `user_id` INT(11) UNSIGNED NOT NULL,
+  `auth_token` VARCHAR(32) NOT NULL,
+  UNIQUE KEY (`user_id`),
+  UNIQUE KEY (`auth_token`),
+  KEY `by_user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
