@@ -23,11 +23,13 @@
 
 	$GLOBALS['cfg']['dogeared_extruder_processors'] = array(
 		'pdf' => array('tika'),
-		'*' => array('boilerpipe', 'java-readability', 'tika'),
+		'_default_' => array('boilerpipe', 'java-readability', 'tika'),
 	);
 
 	$GLOBALS['cfg']['enable_feature_uploads'] = 0;
 	$GLOBALS['cfg']['enable_feature_notepad'] = 1;
+
+	$GLOBALS['cfg']['enable_feature_send_to_pinboard'] = 0;
 
 	$GLOBALS['cfg']['db_main'] = array(
 		'host' => 'localhost',

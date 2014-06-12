@@ -70,19 +70,25 @@
 			api_output_error(500, $rsp['error']);
 		}
 
-		if (0){
+		$rsp['highlight'];
+
+		$out = array(
+			'highlight' => $highlight,
+		);
+
+		if (features_is_enabled("send_to_pinboard")){
+
+			loadlib("dogeared_pinboard");
+			loadlib("pinboard_users");
 
 			$highlight = $rsp['highlight'];
 
 			$pinboard_user = pinboard_users_get_by_user_id($user['id']);
 			$more = array('auth_token' => $pinboard_user['auth_token']);
 
+			# return status?
 			dogeared_pinboard_post_highlight($highlight, $more);
 		}
-
-		$out = array(
-			'highlight' => $rsp['highlight'],
-		);
 
 		api_output_ok($out);
 	}

@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `PinboardUsers`;
 
-CREATE TABLE `PinboaedUsers` (
+CREATE TABLE `PinboardUsers` (
   `user_id` INT(11) UNSIGNED NOT NULL,
   `auth_token` VARCHAR(32) NOT NULL,
   UNIQUE KEY (`user_id`),

@@ -11,7 +11,7 @@
 			$doc = null;
 			$processors = $GLOBALS['cfg']['dogeared_extruder_processors'];
 
-			$try = (preg_match("/\.pdf$/", $url)) ? $processors['pdf'] : $processors['*'];
+			$try = (preg_match("/\.pdf$/", $url)) ? $processors['pdf'] : $processors['_default_'];
 
 			while (count($try)){
 
