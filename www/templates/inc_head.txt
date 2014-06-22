@@ -1,7 +1,7 @@
 {utf8_headers}<!DOCTYPE html>
 {* appcache: see the way that's a relative path? that's deliberate (and important) *}
 {* appcache: see also the corresponding rule in the .htaccess file - sad face *}
-<html lang="en"{if "appcache"|@features_is_enabled and $appcache_make_me_a_sandwich} manifest="manifest/"{/if}>
+<html lang="en"{if "appcache"|@features_is_enabled and $appcache_make_me_a_sandwich} manifest="manifest.appcache?cb={$cfg.user.lastactivity|escape}"{/if}>
   <head>
     <meta charset="utf-8">
     <title>{$cfg.site_name|escape}{if $page_title} | {$page_title|escape}{/if}</title>

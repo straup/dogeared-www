@@ -149,4 +149,5 @@ RewriteRule ^notepad/?$					user_notepad.php	[L,QSA]
 
 # Appache / manifest stuff
 
+RewriteRule (.*)?manifest.appcache$				appcache_manifest.php		[L,QSA]
 RewriteRule (.*)?manifest/?$				appcache_manifest.php		[L,QSA]

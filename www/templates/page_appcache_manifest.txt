@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v344
+# v347
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -47,8 +47,7 @@ CACHE:
 {/if}
 
 NETWORK:
-{$cfg.abs_root_url}documents/manifest
-{$cfg.abs_root_url}documents/manifest/
+appache.manifest
 {$cfg.abs_root_url}api/rest
 {$cfg.abs_root_url}api/rest/
 

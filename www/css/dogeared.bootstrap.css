@@ -76,14 +76,17 @@ h3 small {
     margin-bottom: 1.5em;
 }
 
+#navi-foot {
+    font-size: .8em !important;
+}
+
 #feedback {
     font-size: .8em !important;
     color:#999 !important;
     margin: 0px !important;
-    margin-bottom:1em !important;
     padding: 0px !important;
     border-top: none;
-    border-bottom: solid thin;    
+    border-bottom: none;    
     padding-top: .25em !important;
     padding-bottom: .25em !important;
 }

@@ -7,7 +7,9 @@
 
 	header("Content-Type: text/cache-manifest");
 	header("Cache-Control: no-cache, must-revalidate");
-	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+	header("Pragma: public");
+
+	# header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 	$timestamp = $GLOBALS['cfg']['appcache_manifest_timestamp'];
 
