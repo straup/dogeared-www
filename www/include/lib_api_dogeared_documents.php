@@ -136,14 +136,15 @@
 			api_output_error(404, "Invalid document ID");
 		}
 
-		/*
+		# This is probably the wrong place to be doing this
+		# but you know let's see if it even works (20140622/straup)
+
 		if ($ts = post_int32("lastmodified")){
 
 			if ($ts == $doc['lastmodified']){
 				api_output_error(304, "Same same");
 			}
 		}
-		*/
 
 		$doc['display_title'] = dogeared_documents_display_title($doc);
 

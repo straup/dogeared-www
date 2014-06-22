@@ -309,6 +309,13 @@ function dogeared_documents_get_text(doc){
 
     var on_success = function(rsp){
 
+	// if 304
+
+	if (! rsp){
+	    dogeared_documents_fill_cache_decr();
+	    return;
+	}
+
 	var _doc = rsp['document'];
 
 	var ok = dogeared_cache_documents_store(_doc);
