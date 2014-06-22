@@ -18,6 +18,10 @@ function dogeared_documents_init(){
     });
 
     dogeared_documents_load_index();
+
+    dogeared_documents_process_to_delete();
+    dogeared_highlights_flush_pending();
+
 }
 
 function dogeared_documents_on_online(e){
@@ -27,6 +31,7 @@ function dogeared_documents_on_online(e){
 }
 
 function dogeared_documents_on_offline(e){
+
     dogeared_omgwtf("documents: offline");
 
     if (! dogeared_documents_currently_reading()){
@@ -127,6 +132,9 @@ function dogeared_documents_init_delete_controls(){
 	
 	if (! dogeared_network_is_online()){
 
+	    var wrapper = $("#dogeared-document-" + id);
+	    wrapper.remove();
+
 	    var key = "dogeared_to_delete";
 	    var cache = store.get(key);
 
@@ -137,10 +145,7 @@ function dogeared_documents_init_delete_controls(){
 	    cache[id] = true;
 	    store.set(key, cache);
 
-	    var wrapper = $("#dogeared-document-" + id);
-	    wrapper.remove();
-
-	    dogeared_feedback_modal("Okay. That document has been queued for deletion.");
+	    // dogeared_feedback_modal("Okay. That document has been queued for deletion.");
 	    return false;
 	}
 

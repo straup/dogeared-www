@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v339
+# v340
 # ts{$manifest_timestamp|escape}
 
 CACHE:
