@@ -1,10 +1,10 @@
     </div>
 
-    <div id="footer">	
-    <div class="container">
-      <p>FOOTER</p>
-      </div>
-    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" id="footer">
+
+     {include file="inc_head_feedback.txt"}
+
+    </nav>
 
   </body>
 </html>
