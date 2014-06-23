@@ -11,13 +11,18 @@ body {
 }
 
 #footer {
-    background-color: #fff;
+    background-color: #000;
     padding-top: 0.5em;
     border-top: 1px dotted #666;
+    color: #fff;
 }
 
 a {
     color: blue;
+}
+
+#footer a {
+    color: #fff !important;
 }
 
 h3 small {
@@ -77,7 +82,7 @@ h3 small {
 }
 
 #navi-foot {
-    font-size: .8em !important;
+    font-size: .75em !important;
 }
 
 #feedback {
@@ -102,7 +107,7 @@ h3 small {
 
 #feedback-general {
     font-weight: 700;
-    color: #000;
+    color: #ccc;
 }
 
 .highlight {
