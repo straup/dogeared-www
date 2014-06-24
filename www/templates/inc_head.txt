@@ -77,4 +77,4 @@
 
   {include file="inc_head_navi.txt"}
 
-  <div class="container">
+  <div class="container" id="main">

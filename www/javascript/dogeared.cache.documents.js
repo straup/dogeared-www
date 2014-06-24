@@ -12,6 +12,11 @@ function dogeared_cache_documents_store(doc){
     var rsp = store.set(key, doc);
 
     var ok = (rsp['id'] == id) ? 1 : 0;
+
+    if (! ok){
+	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title']);
+    }
+
     // dogeared_omgwtf("store " + key + ": " + ok);
 
     return ok;
