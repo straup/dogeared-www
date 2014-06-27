@@ -10,12 +10,7 @@ function dogeared_documents_init(){
 	dogeared_documents_on_online(e);
     });
 
-    $(document).keydown(function(e){
-
-	if ((e.keyCode == 70) && (e.shiftKey)){
-    	    screenfull.request();
-	}
-    });
+    dogeared_documents_init_keyboard();
 
     dogeared_documents_load_index();
 
@@ -24,9 +19,18 @@ function dogeared_documents_init(){
 
 }
 
+function dogeared_documents_init_keyboard(){
+
+    $(document).keydown(function(e){
+
+	if ((e.keyCode == 70) && (e.shiftKey)){
+    	    screenfull.request();
+	}
+    });
+}
+
 function dogeared_documents_on_online(e){
     dogeared_omgwtf("documents: online");
-
     dogeared_documents_process_to_delete();
 }
 
@@ -154,20 +158,10 @@ function dogeared_documents_init_delete_controls(){
 
 	var on_success = function(rsp){
 
-	    // var doc = $("#document-" + id);
-	    // doc.remove();
-
-	    // overkill as it's already been done but
-	    // just in case... (20140601/straup)
-
-	    var wrapper = $("#dogeared-document-" + id);
-	    wrapper.remove();
-
 	    var key = "dogeared_" + id;
 	    store.remove(key);
 
 	    dogeared_feedback("Okay, that document has been removed from your reading list");
-	    dogeared_documents_load_index();
 	};
 
 	dogeared_api_call(method, args, on_success);
@@ -201,7 +195,7 @@ function dogeared_documents_load_cache(){
     var delete_key = "dogeared_to_delete";
     var to_delete = store.get(delete_key);
 
-    var docs = dogeared_cache_documents();
+    var docs = dogeared_documents_cache();
     var count = docs.length;
 
     if (count == 0){
@@ -318,7 +312,7 @@ function dogeared_documents_get_text(doc){
 
 	var _doc = rsp['document'];
 
-	var ok = dogeared_cache_documents_store(_doc);
+	var ok = dogeared_documents_store(_doc);
 
 	dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ") " + ok);
 	dogeared_documents_fill_cache_decr();
@@ -361,7 +355,7 @@ function dogeared_documents_fill_cache(callback){
 
     var purge_cache = {};
 
-    var docs = dogeared_cache_documents();
+    var docs = dogeared_documents_cache();
     var count = docs.length;
 
     for (var i=0; i < count; i++){
@@ -500,4 +494,52 @@ function dogeared_documents_load_doc(id){
     $(".excerpt").remove();
     
     dogeared_document_init_doc(id);
+}
+
+function dogeared_documents_cache(){
+
+    var cache = new Array();
+
+    store.forEach(function(key, val){
+
+	var parts = key.split("_");
+	var ima = parts[0];
+	
+	if (ima == 'dogeared'){
+	    val['cache_key'] = key;
+	    cache.push(val);
+	}
+    });
+
+    return cache;
+}
+
+function dogeared_documents_store(doc){
+
+    if (! store.enabled){
+	console.log("localstorage is not enabled");
+	return false;
+    }
+    
+    var lastmod = doc['lastmodified'];
+    var id = doc['id'];
+			
+    var key = "dogeared_" + id;
+
+    try {
+	var rsp = store.set(key, doc);
+    }
+
+    catch(e){
+	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title'] + " because " + e);
+	return 0;
+    }
+    
+    var ok = (rsp['id'] == id) ? 1 : 0;
+
+    if (! ok){
+	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title']);
+    }
+
+    return ok;
 }
