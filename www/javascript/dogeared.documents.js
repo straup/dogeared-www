@@ -84,7 +84,7 @@ function dogeared_documents_load_index(){
 
 		var _load = function(){
 		    
-		    // dogeared_omgwtf("checking fill count: " + dogeared_fill_cache_count);
+		    dogeared_omgwtf("checking fill count: " + dogeared_fill_cache_count);
 		    
 		    if (! dogeared_fill_cache_count){
 			dogeared_documents_load_cache();
@@ -386,14 +386,14 @@ function dogeared_documents_fill_cache(callback){
 	    var id = fresh_docs[i]['document_id'];
 
 	    if (purge_cache[id]){
-		// dogeared_omgwtf("remove " + id + " from purge cache");
+		dogeared_omgwtf("remove " + id + " from purge cache");
 		delete(purge_cache[id]);
 	    }
 	}
 
 	for (id in purge_cache){
 	    var key = "dogeared_" + id;
-	    // dogeared_omgwtf("remove " + key + " from list");
+	    dogeared_omgwtf("remove " + key + " from list");
 	    store.remove(key);
 	}
 
@@ -531,7 +531,13 @@ function dogeared_documents_store(doc){
     }
 
     catch(e){
+
+	if (e.code == 22){
+	    // try to chunk the document in to (n) parts here
+	}
+
 	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title'] + " because " + e);
+	// console.log(e);
 	return 0;
     }
     

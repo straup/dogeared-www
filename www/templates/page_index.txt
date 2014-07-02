@@ -1,4 +1,4 @@
-{include file='inc_head.txt' appcache_make_me_a_sandwich=0}
+{include file='inc_head.txt' appcache_make_me_a_sandwich=1}
 
 <div class="row extruder">
 

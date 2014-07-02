@@ -139,7 +139,10 @@
 		# This is probably the wrong place to be doing this
 		# but you know let's see if it even works (20140622/straup)
 
-		if ($ts = post_int32("lastmodified")){
+		# There is a logic bug in the JS that is preventing this
+		# from working correctly (20140702/straup)
+
+		if ((0) && ($ts = post_int32("lastmodified"))){
 
 			if ($ts == $doc['lastmodified']){
 				api_output_error(304, "Same same");

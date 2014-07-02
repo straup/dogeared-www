@@ -21,6 +21,7 @@ function dogeared_feedback_ok(msg, timeout){
 }
 
 function dogeared_feedback_error(msg){
+    dogeared_omgwtf("error: " + msg);
     dogeared_feedback(msg);
 }
 

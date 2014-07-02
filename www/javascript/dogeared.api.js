@@ -26,16 +26,14 @@ function dogeared_api_call(method, data, on_success, on_error){
     
     var dothis_onsuccess = function(rsp){
 
-	dogeared_omgwtf(rsp);
-	
 	if (on_success){
 	    on_success(rsp);
 	}
     };
     
     var dothis_onerror = function(rsp){		    
-	
-	dogeared_omgwtf(rsp);
+
+	dogeared_omgwtf("[error] XHR error calling: " + method);
 	
 	var parse_rsp = function(rsp){
 	    

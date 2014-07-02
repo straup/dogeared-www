@@ -1,5 +1,7 @@
 function dogeared_cache_documents_store(doc){
 
+    dogeared_omgwtf("[warning] still calling dogeared_cache_documents_store");
+
     if (! store.enabled){
 	console.log("localstorage is not enabled");
 	return false;
