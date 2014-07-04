@@ -16,6 +16,10 @@
 	$doc = dogeared_readinglists_get_document_for_user($owner, $id);
 
 	if (! $doc){
+		# $doc = dogeared_documents_get_by_id($id);
+	}
+
+	if (! $doc){
 		error_404();
 	}
 
