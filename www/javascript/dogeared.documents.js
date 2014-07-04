@@ -15,7 +15,6 @@ function dogeared_documents_init(){
     dogeared_documents_load_index();
 
     dogeared_documents_process_to_delete();
-    dogeared_highlights_flush_pending();
 
 }
 

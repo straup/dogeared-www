@@ -1,23 +1,56 @@
+var dogeared_highlights_flush = null;
+
 function dogeared_highlights_init(){
 
     window.addEventListener("online", function(e){
 	dogeared_highlights_on_online();
     });
+
+    window.addEventListener("offline", function(e){
+	dogeared_highlights_on_offline();
+    });
+
+    dogeared_highlights_schedule_flush();
 }
 
 function dogeared_highlights_on_online(){
+    dogeared_highlights_schedule_flush();
+}
+
+function dogeared_highlights_on_offline(){
+    // pass
+}
+
+function dogeared_highlights_schedule_flush(){
+
+    dogeared_omgwtf("schedule flush");
+
+    if (dogeared_highlights_flush){
+	clearTimeout(dogeared_highlights_flush);
+    }
+
+    if (! dogeared_network_is_online()){
+	return;
+    }
+    
     dogeared_highlights_flush_pending();
+
+    if (dogeared_network_is_online()){
+
+	dogeared_highlights_flush = setTimeout(function(){
+	    dogeared_highlights_schedule_flush();
+	}, 10000);
+    }
 }
 
 function dogeared_highlights_flush_pending(){
 
-    console.log("flush pending highlights");
+    dogeared_omgwtf("flush pending highlights");
 
     var highlights = dogeared_cache_highlights();
     var count = highlights.length;
 
     for (var i=0; i < count; i++){
-
 	var pending = highlights[i];
 	dogeared_highlights_flush_pending_single(pending);
     }
@@ -26,12 +59,20 @@ function dogeared_highlights_flush_pending(){
 
 function dogeared_highlights_flush_pending_single(pending){
 
+    if (! dogeared_network_is_online()){
+	return;
+    }
+    
     var method = 'dogeared.highlights.addHighlight';
 	
     var key = pending['cache_key'];
-    console.log("flush pending highlight " + key);
+    dogeared_omgwtf("flush pending highlight " + key);
     
-    var args = { 'document_id': pending['document_id'], 'text': pending['text'], 'created': pending['created'] };
+    var args = {
+	'document_id': pending['document_id'],
+	'text': pending['text'],
+	'created': pending['created']
+    };
 
     var on_success = function(rsp){
 	store.remove(key);

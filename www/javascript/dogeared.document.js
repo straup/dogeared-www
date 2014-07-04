@@ -117,7 +117,7 @@ function dogeared_document_selected_mouseup(e){
 
 function dogeared_document_selected_selectionchange(e){
 
-    console.log("on selectionchange");
+    // console.log("on selectionchange");
 
     $(".highlight").remove();
 
@@ -163,36 +163,19 @@ function dogeared_document_add_highlight(){
     var s = window.getSelection();
     var t = (current_selection) ? current_selection : s.toString();
 
-    var method = 'dogeared.highlights.addHighlight';
-
     var args = {
 	'document_id': id,
 	'text': t
     };
 
-    if (! dogeared_network_is_online()){
+    if (dogeared_cache_highlights_store(args)){
 
-	if (dogeared_cache_highlights_store(args)){
+	if (! dogeared_network_is_online()){
 	    dogeared_feedback_modal("Your highlight has been cached.");
-	    dogeared_cache_highlights_status();
 	}
-
-	return;
+	
+	dogeared_cache_highlights_status();
     }
-    
-    var on_success = function(rsp){
 
-	if (rsp['stat'] != 'ok'){
-	    dogeared_feedback_api_error(rsp);
-	    return;
-	}
-
-	dogeared_feedback_modal('Your highlight has been added.');	
-    };
-
-    var on_error = function(){
-	dogeared_feedback();
-    };
-    
-    dogeared_api_call(method, args, on_success);
+    return;
 }
