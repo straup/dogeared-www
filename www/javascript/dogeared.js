@@ -23,7 +23,7 @@ function dogeared_init(){
     });
 
     dogeared_network_init();
-    dogeared_appcache_init();
+    //dogeared_appcache_init();
     dogeared_highlights_init();
     dogeared_cache_highlights_init();
     dogeared_whosonfirst_init();
@@ -69,7 +69,7 @@ function dogeared_now(){
 
 function dogeared_on_online(e){
 
-    doeared_omgwtf("came online at " + e.timeStamp);
+    dogeared_omgwtf("came online at " + e.timeStamp);
     dogeared_feedback("You appear to be online again.");
 
     $(".appcache_equals_no").show();

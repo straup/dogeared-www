@@ -26,6 +26,8 @@ function dogeared_api_call(method, data, on_success, on_error){
     
     var dothis_onsuccess = function(rsp){
 
+	dogeared_api_hints_ok();
+
 	if (on_success){
 	    on_success(rsp);
 	}
@@ -34,6 +36,7 @@ function dogeared_api_call(method, data, on_success, on_error){
     var dothis_onerror = function(rsp){		    
 
 	dogeared_omgwtf("[error] XHR error calling: " + method);
+	dogeared_api_hints_error();
 	
 	var parse_rsp = function(rsp){
 	    
@@ -92,6 +95,8 @@ function dogeared_api_call(method, data, on_success, on_error){
     }
     
     $.ajax(args);
+
+    dogeared_api_hints_dispatch();
 }
 
 function dogeared_api_endpoint(){
@@ -100,4 +105,21 @@ function dogeared_api_endpoint(){
 
 function dogeared_api_site_token(){
 	return document.body.getAttribute("data-api-site-token");
+}
+
+function dogeared_api_hints_ok(){
+    $('#api-dispatch').hide();
+    $('#api-ok').show();
+
+    setTimeout(function(){
+	$('#api-ok').hide();	
+    }, 10000);
+}
+
+function dogeared_api_hints_error(){
+    $('#api-error').show();
+}
+
+function dogeared_api_hints_dispatch(){
+    $('#api-dispatch').show();
 }

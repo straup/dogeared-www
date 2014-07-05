@@ -5,19 +5,47 @@
 <div class="container">
 <div class="row">
 
-<div class="pull-right"><span style="font-size:2em;" onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#127846;</span></div>
+{* http://www.fileformat.info/info/emoji/list.htm *}
+
+{* ice cream *}
+<div class="pull-right hint" id="ima-online"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#127846;</span></div>
+
+{* pile of poo *}
+<div class="pull-right hint" id="ima-offline"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#128169;</span></div>
+
+{* abcd *}
+<div class="pull-right hint" id="has-pending"><span>&#128289;</span></div>
+
+{* thumbs-up *}
+<div class="pull-right hint" id="api-ok" ><span>&#128077;</span></div>
+
+{* thumbs down *}
+<div class="pull-right"><span id="api-error" class="hint">&#128078;</span></div>
+
+{* satellite *}
+<div class="pull-right"><span id="api-dispatch" class="hint">&#128225;</span></div>
+
+{* alarm clock *}
+<div class="pull-right hint" id="warning"><span>&#9200;</span></div>
 
 <ul class="list-inline" id="navi-foot">
 <li><a href="{$cfg.abs_root_url}documents/">reading list</a></li>
-<li><a href="{$cfg.abs_root_url}highlights/">highlight</a></li>
-<li><a href="{$cfg.abs_root_url}notepad/">notepad</a></li>
 </ul>
 
-<ul class="list-inline" id="feedback" style="display:none;">
+<div id="feedback" style="display:none;"
+
+<ul class="list-inline">
 <li id="feedback-general"></li>
 <li id="feedback-network-status"></li>
 <li id="feedback-pending-highlights"></li>
 </ul>
+
+<ul class="list-inline" id="navi-foot">
+<li><a href="{$cfg.abs_root_url}highlights/">highlight</a></li>
+<li><a href="{$cfg.abs_root_url}notepad/">notepad</a></li>
+</ul>
+
+</div>
 
 </div>
 </div>

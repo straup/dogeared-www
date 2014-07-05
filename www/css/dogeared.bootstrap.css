@@ -21,6 +21,11 @@ body {
     color: #fff;
 }
 
+.hint {
+    font-size: 2em;
+    display:none;
+}
+
 a {
     color: blue;
 }

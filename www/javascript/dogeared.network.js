@@ -31,10 +31,22 @@ function dogeared_network_status(){
     var status = $("#feedback-network-status");
 
     if (dogeared_network_is_online()){
+	dogeared_network_hints_online();
 	status.html("you are awake and connected to the network");
     }
 
     else {
+	dogeared_network_hints_offline();
 	status.html("you are playing hide-and-go-seek with the sky and the sky is winning.");
     }
+}
+
+function dogeared_network_hints_online(){
+    $('#ima-online').show();
+    $('#ima-offline').hide();
+}
+
+function dogeared_network_hints_offline(){
+    $('#ima-online').hide();
+    $('#ima-offline').show();
 }

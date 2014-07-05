@@ -39,7 +39,7 @@ function dogeared_highlights_schedule_flush(){
 
 	dogeared_highlights_flush = setTimeout(function(){
 	    dogeared_highlights_schedule_flush();
-	}, 10000);
+	}, 3000);
     }
 }
 
@@ -54,6 +54,12 @@ function dogeared_highlights_flush_pending(){
 	var pending = highlights[i];
 	dogeared_highlights_flush_pending_single(pending);
     }
+
+    var highlights = dogeared_cache_highlights();
+    var count = highlights.length;
+    
+    var hint = $('#has-pending');
+    (count) ? hint.show() : hint.hide();
 
 }
 

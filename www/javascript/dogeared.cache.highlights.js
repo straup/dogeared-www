@@ -1,3 +1,5 @@
+// OMG STOP USING THIS...
+
 function dogeared_cache_highlights_init(){
     dogeared_cache_highlights_status();
 }
@@ -18,6 +20,10 @@ function dogeared_cache_highlights_store(hl){
     console.log(hl);
 
     store.set(key, hl);
+
+    var hint = $('#has-pending');
+    hint.show();
+
     return true;
 }
 
