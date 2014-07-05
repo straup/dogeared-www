@@ -113,7 +113,7 @@ function dogeared_api_hints_ok(){
 
     setTimeout(function(){
 	$('#api-ok').hide();	
-    }, 10000);
+    }, 5000);
 }
 
 function dogeared_api_hints_error(){
