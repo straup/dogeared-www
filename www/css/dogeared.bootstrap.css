@@ -26,6 +26,10 @@ body {
     display:none;
 }
 
+.hint-network {
+    margin-left:.5em;
+}
+
 a {
     color: blue;
 }
@@ -224,8 +228,8 @@ pre {
     }
 
     .document p {
-	font-size: 1.2em;
-	line-height: 1.5em;
+	font-size: 1.4em;
+	line-height: 1.6em;
 	font-weight:250 !important;
     }
     

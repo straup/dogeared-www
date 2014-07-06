@@ -8,7 +8,7 @@
 {* http://www.fileformat.info/info/emoji/list.htm *}
 
 {* ice cream *}
-<div class="pull-right hint" id="ima-online"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#127846;</span></div>
+<div class="pull-right hint hint-network" id="ima-online"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#127846;</span></div>
 
 {* pile of poo *}
 <div class="pull-right hint" id="ima-offline"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#128169;</span></div>
@@ -29,7 +29,7 @@
 <div class="pull-right hint" id="warning"><span>&#9200;</span></div>
 
 <ul class="list-inline" id="navi-foot">
-<li><a href="{$cfg.abs_root_url}documents/">reading list</a></li>
+<li><a href="{$cfg.abs_root_url}documents/" id="reading-list">reading list</a></li>
 </ul>
 
 <div id="feedback" style="display:none;"
