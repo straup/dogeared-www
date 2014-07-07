@@ -35,7 +35,7 @@
 
 <div id="feedback" style="display:none;">
 
-<ul class="list">
+<ul class="list" id="feedback-list">
 <li id="feedback-network-status"></li>
 <li id="feedback-general"></li>
 <li id="feedback-warning"></li>
