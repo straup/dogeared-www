@@ -24,6 +24,10 @@ function dogeared_feedback_error(msg){
 
     $('#warning').show();
 
+    var warning = $('#feedback-warning');
+    warning.html(msg + '<br />' + warning.html());
+    warning.show();
+
     dogeared_omgwtf("error: " + msg);
     dogeared_feedback(msg);
 }

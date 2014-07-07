@@ -23,8 +23,6 @@ function dogeared_highlights_on_offline(){
 
 function dogeared_highlights_schedule_flush(){
 
-    dogeared_omgwtf("schedule flush");
-
     if (dogeared_highlights_flush){
 	clearTimeout(dogeared_highlights_flush);
     }
@@ -45,11 +43,15 @@ function dogeared_highlights_schedule_flush(){
 
 function dogeared_highlights_flush_pending(){
 
-    dogeared_omgwtf("flush pending highlights");
-
     var highlights = dogeared_cache_highlights();
     var count = highlights.length;
 
+    if (count == 0){
+	return;
+    }
+
+    dogeared_omgwtf("flush pending highlights (" + count + ")");
+    
     for (var i=0; i < count; i++){
 	var pending = highlights[i];
 	dogeared_highlights_flush_pending_single(pending);

@@ -29,21 +29,24 @@
 <div class="pull-right hint" id="warning"><span>&#9200;</span></div>
 
 <ul class="list-inline" id="navi-foot">
+<li><a href="{$cfg.abs_root_url}/" id="add-doc">add document</a></li>
 <li><a href="{$cfg.abs_root_url}documents/" id="reading-list">reading list</a></li>
 </ul>
 
-<div id="feedback" style="display:none;"
+<div id="feedback" style="display:none;">
 
-<ul class="list-inline">
-<li id="feedback-general"></li>
+<ul class="list">
 <li id="feedback-network-status"></li>
-<li id="feedback-pending-highlights"></li>
+<li id="feedback-general"></li>
+<li id="feedback-warning"></li>
 </ul>
 
+{if 0}
 <ul class="list-inline" id="navi-foot">
-<li><a href="{$cfg.abs_root_url}highlights/">highlight</a></li>
+<li><a href="{$cfg.abs_root_url}highlights/">highlights</a></li>
 <li><a href="{$cfg.abs_root_url}notepad/">notepad</a></li>
 </ul>
+{/if}
 
 </div>
 

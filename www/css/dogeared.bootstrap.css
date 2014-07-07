@@ -100,7 +100,7 @@ h3 small {
 
 #feedback {
     font-size: .8em !important;
-    color:#999 !important;
+    color:#fff !important;
     margin: 0px !important;
     padding: 0px !important;
     border-top: none;
@@ -119,8 +119,11 @@ h3 small {
 }
 
 #feedback-general {
-    font-weight: 700;
+}
+
+#feedback-warning {
     color: #ccc;
+    display:none;
 }
 
 .highlight {

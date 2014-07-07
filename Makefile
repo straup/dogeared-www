@@ -5,7 +5,7 @@ version:
 	bin/increment-manifest.sh www/templates/page_appcache_manifest.txt
 
 js:
-	java -Xmx64m -jar lib/google-compiler/compiler-20100616.jar --js www/javascript/dogeared.js --js www/javascript/dogeared.network.js --js www/javascript/dogeared.appcache.js --js www/javascript/dogeared.feedback.js  --js www/javascript/dogeared.api.js --js www/javascript/dogeared.extruder.js --js www/javascript/dogeared.documents.js --js www/javascript/dogeared.document.js --js www/javascript/dogeared.highlights.js --js www/javascript/dogeared.notepad.js --js www/javascript/dogeared.cache.js --js www/javascript/dogeared.cache.documents.js --js www/javascript/dogeared.cache.highlights.js > www/javascript/dogeared.bundle.min.js
+	java -Xmx64m -jar lib/google-compiler/compiler-20100616.jar --js www/javascript/dogeared.js --js www/javascript/dogeared.network.js --js www/javascript/dogeared.omgwtf.js --js www/javascript/dogeared.appcache.js --js www/javascript/dogeared.feedback.js  --js www/javascript/dogeared.api.js --js www/javascript/dogeared.extruder.js --js www/javascript/dogeared.documents.js --js www/javascript/dogeared.document.js --js www/javascript/dogeared.highlights.js --js www/javascript/dogeared.notepad.js --js www/javascript/dogeared.cache.js --js www/javascript/dogeared.cache.documents.js --js www/javascript/dogeared.cache.highlights.js > www/javascript/dogeared.bundle.min.js
 
 	java -Xmx64m -jar lib/google-compiler/compiler-20100616.jar --js www/javascript/phpjs.htmlspecialchars.js --js www/javascript/phpjs.usort.js --js www/javascript/phpjs.array_values.js > www/javascript/phpjs.min.js
 

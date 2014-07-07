@@ -1,8 +1,3 @@
-function dogeared_omgwtf(bbq){
-    // var c = arguments.callee.caller.toString();
-    console.log(bbq);
-}
-
 function dogeared_init(){
 
     window.addEventListener("offline", dogeared_on_offline);
@@ -23,7 +18,8 @@ function dogeared_init(){
     });
 
     dogeared_network_init();
-    //dogeared_appcache_init();
+    dogeared_omgwtf_init();
+    dogeared_appcache_init();
     dogeared_highlights_init();
     dogeared_cache_highlights_init();
     dogeared_whosonfirst_init();

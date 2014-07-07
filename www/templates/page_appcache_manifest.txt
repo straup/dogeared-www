@@ -1,7 +1,7 @@
 CACHE MANIFEST
 {if $auth_hash}# {$auth_hash|escape}
 {/if}
-# v384
+# v392
 # ts{$manifest_timestamp|escape}
 
 CACHE:
@@ -28,6 +28,7 @@ CACHE:
 {$cfg.abs_root_url}javascript/math.uuid.min.js
 {$cfg.abs_root_url}javascript/fingerprint.min.js
 {$cfg.abs_root_url}javascript/dogeared.js
+{$cfg.abs_root_url}javascript/dogeared.omgwtf.js
 {$cfg.abs_root_url}javascript/dogeared.appcache.js
 {$cfg.abs_root_url}javascript/dogeared.network.js
 {$cfg.abs_root_url}javascript/dogeared.feedback.js
