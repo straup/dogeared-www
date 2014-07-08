@@ -117,6 +117,7 @@ function dogeared_api_hints_ok(){
 }
 
 function dogeared_api_hints_error(){
+    $('#api-dispatch').hide();
     $('#api-error').show();
 }
 

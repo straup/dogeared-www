@@ -480,11 +480,7 @@ function dogeared_documents_load_doc(id){
     txt += '<div class="row">';
     txt += ' <pre><small>' + url + '</small></pre>';
     txt += '</div>';
-    
-    txt += '<div>';
-    txt += '<a href="">reading list</a>';
-    txt += '</div>';
-    
+        
     txt += '</div>';
     
     var documents = $("#documents");

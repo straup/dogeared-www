@@ -26,6 +26,11 @@ body {
     display:none;
 }
 
+.hint-navi {
+    font-size: 2em;
+    margin-right:.5em;
+}
+
 .hint-network {
     margin-left:.5em;
 }

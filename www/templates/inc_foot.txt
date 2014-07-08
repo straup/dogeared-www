@@ -11,7 +11,7 @@
 <div class="pull-right hint hint-network" id="ima-online"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#127846;</span></div>
 
 {* pile of poo *}
-<div class="pull-right hint" id="ima-offline"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#128169;</span></div>
+<div class="pull-right hint hint-network" id="ima-offline"><span onclick="var f=$('#feedback'); (f.is(':visible')) ? f.hide() : f.show(); return false;">&#128169;</span></div>
 
 {* abcd *}
 <div class="pull-right hint" id="has-pending"><span>&#128289;</span></div>
@@ -29,8 +29,10 @@
 <div class="pull-right hint" id="warning"><span>&#9200;</span></div>
 
 <ul class="list-inline" id="navi-foot">
-<li><a href="{$cfg.abs_root_url}/" id="add-doc">add document</a></li>
-<li><a href="{$cfg.abs_root_url}documents/" id="reading-list">reading list</a></li>
+{* pencil – http://www.fileformat.info/info/unicode/char/1f4dd/index.htm *}
+<li><a href="{$cfg.abs_root_url}/" id="add-doc" class="hint-navi">&#128221;</a></li>
+{* books – http://www.fileformat.info/info/unicode/char/1f4da/index.htm *}
+<li><a href="{$cfg.abs_root_url}documents/" id="reading-list" class="hint-navi">&#128218;</a></li>
 </ul>
 
 <div id="feedback" style="display:none;">
