@@ -5,11 +5,12 @@ function dogeared_init(){
 
     $("a").click(function(){
 	
-	if (! dogeared_network_is_online()){
+	var el = $(this);
+	// console.log(el.attr('id'));
+
+	if (! dogeared_network_is_online()){	    
 	    
-	    var el = $(this);
-	    
-	    if (el.html() == 'reading list'){
+	    if (el.attr('id') == 'reading list'){
 		dogeared_documents_load_cache();
 	    }
 	    
