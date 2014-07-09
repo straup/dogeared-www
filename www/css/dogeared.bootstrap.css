@@ -35,6 +35,11 @@ body {
     margin-left:.5em;
 }
 
+#hint-highlight {
+    margin-left:1.5em;
+    display:none;
+}
+
 a {
     color: blue;
 }

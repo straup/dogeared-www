@@ -137,3 +137,11 @@ function dogeared_highlights_init_single(){
 	dogeared_api_call(method, args, on_success);
     });
 }
+
+function dogeared_highlights_hints_show(){
+    $("#hint-highlight").show();
+}
+
+function dogeared_highlights_hints_hide(){
+    $("#hint-highlight").hide();
+}

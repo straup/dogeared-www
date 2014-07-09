@@ -83,6 +83,7 @@ function dogeared_document_selected_mouseup(e){
 	return;
     }
 
+    dogeared_highlights_hints_hide();
     $(".highlight").remove();
 
     var sel = window.getSelection();
@@ -113,12 +114,14 @@ function dogeared_document_selected_mouseup(e){
         sel.addRange(expandedSelRange);
     }
 
+    dogeared_highlights_hints_show();
 }
 
 function dogeared_document_selected_selectionchange(e){
 
     // console.log("on selectionchange");
 
+    dogeared_highlights_hints_hide();
     $(".highlight").remove();
 
     var sel = window.getSelection();
@@ -146,6 +149,7 @@ function dogeared_document_selected_selectionchange(e){
     range.insertNode(frag);
 
     $("#highlight").click(dogeared_document_add_highlight);
+    dogeared_highlights_hints_show();
 }
 
 // move this in to dogeared.highlights.js ? 
