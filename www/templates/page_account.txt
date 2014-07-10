@@ -3,6 +3,8 @@
 
 <div class="row">
 
+     {if 0}{$cfg.user.email|escape}{/if}
+
 	{if $smarty.get.password}<p class="message">Your password has been updated.</p>{/if}
 
 	<ul>

@@ -49,6 +49,7 @@ function dogeared_document_bind_highlight_controls(){
 	$(document).bind('mouseup', dogeared_document_selected_mouseup);
     }	
 
+    $("#hint-highlight").bind('click', dogeared_document_add_highlight);
 }
 
 function dogeared_document_unbind_highlight_controls(){
@@ -63,12 +64,14 @@ function dogeared_document_unbind_highlight_controls(){
 	$(document).unbind('mouseup', dogeared_document_selected_mouseup);
     }	
 
+    $("#hint-highlight").unbind('click', dogeared_document_add_highlight);
 }
 
 function dogeared_document_selected_mouseup(e){
-    console.log("document: on mouseup");
 
     var target = e.target;
+
+    console.log("document: on mouseup on " + target.nodeName);
 
     if (target.nodeName == 'BUTTON'){
 
@@ -83,7 +86,7 @@ function dogeared_document_selected_mouseup(e){
 	return;
     }
 
-    dogeared_highlights_hints_hide();
+    dogeared_document_hide_highlights_hint();
     $(".highlight").remove();
 
     var sel = window.getSelection();
@@ -92,6 +95,9 @@ function dogeared_document_selected_mouseup(e){
     if (txt == ""){
 	return;
     }
+
+    dogeared_document_show_highlights_hint();
+    return;
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
@@ -114,14 +120,13 @@ function dogeared_document_selected_mouseup(e){
         sel.addRange(expandedSelRange);
     }
 
-    dogeared_highlights_hints_show();
 }
 
 function dogeared_document_selected_selectionchange(e){
 
     // console.log("on selectionchange");
 
-    dogeared_highlights_hints_hide();
+    dogeared_document_hide_highlights_hint();
     $(".highlight").remove();
 
     var sel = window.getSelection();
@@ -131,7 +136,10 @@ function dogeared_document_selected_selectionchange(e){
 	return;
     }
 
+    dogeared_document_show_highlights_hint();
     current_selection = txt;
+
+    return;
 
     range = window.getSelection().getRangeAt(0);
     expandedSelRange = range.cloneRange();
@@ -149,7 +157,6 @@ function dogeared_document_selected_selectionchange(e){
     range.insertNode(frag);
 
     $("#highlight").click(dogeared_document_add_highlight);
-    dogeared_highlights_hints_show();
 }
 
 // move this in to dogeared.highlights.js ? 
@@ -179,7 +186,16 @@ function dogeared_document_add_highlight(){
 	}
 	
 	dogeared_cache_highlights_status();
+	dogeared_document_hide_highlights_hint();
     }
 
     return;
+}
+
+function dogeared_document_show_highlights_hint(){
+    $("#hint-highlight").show();
+}
+
+function dogeared_document_hide_highlights_hint(){
+    $("#hint-highlight").hide();
 }

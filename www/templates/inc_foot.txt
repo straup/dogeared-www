@@ -37,7 +37,7 @@
 <li><a href="{$cfg.abs_root_url}documents/" id="reading-list" class="hint-navi">&#128218;</a></li>
 
 {* pencil – http://www.fileformat.info/info/unicode/char/1f4dd/index.htm *}
-<li><span class="hint-navi" id="hint-highlight">&#128221;</span></li>
+<li><button class="hint-button hint-navi" id="hint-highlight">&#128221;</button></li>
 
 </ul>
 

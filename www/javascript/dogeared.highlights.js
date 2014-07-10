@@ -70,12 +70,17 @@ function dogeared_highlights_flush_pending_single(pending){
     if (! dogeared_network_is_online()){
 	return;
     }
-    
+ 
     var method = 'dogeared.highlights.addHighlight';
 	
     var key = pending['cache_key'];
     dogeared_omgwtf("flush pending highlight " + key);
-    
+ 
+    if (! pending['text']){
+	store.remove(key);
+	return;
+    }
+   
     var args = {
 	'document_id': pending['document_id'],
 	'text': pending['text'],
@@ -136,12 +141,4 @@ function dogeared_highlights_init_single(){
 	
 	dogeared_api_call(method, args, on_success);
     });
-}
-
-function dogeared_highlights_hints_show(){
-    $("#hint-highlight").show();
-}
-
-function dogeared_highlights_hints_hide(){
-    $("#hint-highlight").hide();
 }

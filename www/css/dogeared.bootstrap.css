@@ -26,6 +26,11 @@ body {
     display:none;
 }
 
+.hint-button {
+    background-color: transparent;
+    border: none;
+}
+
 .hint-navi {
     font-size: 2em;
     margin-right:.5em;
@@ -36,7 +41,7 @@ body {
 }
 
 #hint-highlight {
-    margin-left:1.5em;
+    margin-left:1em;
     display:none;
 }
 
