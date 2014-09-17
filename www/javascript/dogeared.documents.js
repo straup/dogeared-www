@@ -44,31 +44,7 @@ function dogeared_documents_on_offline(e){
 
 function dogeared_documents_process_to_delete(){
 
-    var key = "dogeared_to_delete";
-    var to_delete = store.get(key);
-
-    for (id in to_delete){
-	dogeared_omgwtf("process pending delete for document " + id);
-
-	if (! id){
-	    delete(to_delete[id]);
-	    store.set(key, to_delete);
-	    continue;
-	}
-
-	var method = "dogeared.documents.deleteDocument";
-	var args = { 'document_id': id };
-
-	var on_success = function(rsp){
-
-	    var _key = "dogeared_to_delete";
-	    var _cache = store.get(_key);
-	    delete(_cache[id]);
-	    store.set(_key, _cache);
-	};
-
-	dogeared_api_call(method, args, on_success);	
-    }
+    dogeared_cache_process_pending_delete();
 }
 
 function dogeared_documents_load_index(){
@@ -103,7 +79,6 @@ function dogeared_documents_load_index(){
 
 	catch(e){
 	    dogeared_feedback_error("Oh no! There was a problem loading your documents: " + e);
-	    console.log(e);
 	}
     }
     
@@ -138,17 +113,7 @@ function dogeared_documents_init_delete_controls(){
 	    var wrapper = $("#dogeared-document-" + id);
 	    wrapper.remove();
 
-	    var key = "dogeared_to_delete";
-	    var cache = store.get(key);
-
-	    if (! cache){
-		cache = {};
-	    }
-
-	    cache[id] = true;
-	    store.set(key, cache);
-
-	    // dogeared_feedback_modal("Okay. That document has been queued for deletion.");
+	    dogeared_cache_schedule_pending_delete(id);
 	    return false;
 	}
 
@@ -157,10 +122,7 @@ function dogeared_documents_init_delete_controls(){
 
 	var on_success = function(rsp){
 
-	    var key = "dogeared_" + id;
-	    store.remove(key);
-
-	    dogeared_feedback("Okay, that document has been removed from your reading list");
+	    dogeared_cache_remove_document(id);
 	};
 
 	dogeared_api_call(method, args, on_success);

@@ -124,8 +124,6 @@ function dogeared_document_selected_mouseup(e){
 
 function dogeared_document_selected_selectionchange(e){
 
-    // console.log("on selectionchange");
-
     dogeared_document_hide_highlights_hint();
     $(".highlight").remove();
 
@@ -159,8 +157,6 @@ function dogeared_document_selected_selectionchange(e){
     $("#highlight").click(dogeared_document_add_highlight);
 }
 
-// move this in to dogeared.highlights.js ? 
-
 function dogeared_document_add_highlight(){
 
     var doc = $("#document");
@@ -174,21 +170,12 @@ function dogeared_document_add_highlight(){
     var s = window.getSelection();
     var t = (current_selection) ? current_selection : s.toString();
 
-    var args = {
+    var hl = {
 	'document_id': id,
 	'text': t
     };
 
-    if (dogeared_cache_highlights_store(args)){
-
-	if (! dogeared_network_is_online()){
-	    dogeared_feedback_modal("Your highlight has been cached.");
-	}
-	
-	dogeared_cache_highlights_status();
-	dogeared_document_hide_highlights_hint();
-    }
-
+    dogeared_cache_store_highlight(hl);
     return;
 }
 
