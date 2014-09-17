@@ -86,6 +86,19 @@ function dogeared_cache_store_document(doc, cb){
     dogeared_cache_set(key, doc, cb);
 }
 
+function dogeared_cache_load_documents(onload){
+
+    var re = /dogeared_(\d+)/;
+
+    var cb = function(key, match){
+
+	var document_id = match[1];
+	dogeared_cache_load_documents(document_id, cb);
+    };
+
+    dogeared_cache_keys(re, cb);
+}
+
 function dogeared_cache_load_document(document_id, cb){
 
     var key = "dogeared_" + document_id;
@@ -122,6 +135,17 @@ function dogeared_cache_store_highlight(hl, cb){
     }
 
     dogeared_cache_set(key, hl, cb);
+}
+
+function dogeared_cache_is_scheduled_pending_delete(document_id, yes, no){
+
+    var key = "dogeared_delete_" + document_id;
+
+    var cb = function(rsp){
+	(rsp) ? yes() : no();
+    };
+
+    dogeared_cache_get(key, cb);
 }
 
 function dogeared_cache_schedule_pending_delete(document_id){
@@ -162,6 +186,8 @@ function dogeared_cache_list_pending_delete(){
 
 function dogeared_cache_process_pending_delete(){
 
+    var re = /dogeared_delete_(\d+)/;
+
     var cb = function(key, match){
 
 	var document_id = match[1];
@@ -169,5 +195,5 @@ function dogeared_cache_process_pending_delete(){
 	dogeared_cache_remove_pending_delete(document_id);
     };
 
-    dogeared_cache_keys(cb);
+    dogeared_cache_keys(re, cb);
 }

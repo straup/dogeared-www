@@ -152,75 +152,70 @@ function dogeared_documents_load_cache(){
     dogeared_feedback_reset();
 
     window.scrollTo(0,0);
-    
-    var delete_key = "dogeared_to_delete";
-    var to_delete = store.get(delete_key);
-
-    var docs = dogeared_documents_cache();
-    var count = docs.length;
-
-    if (count == 0){
-	return false;
-    }
-    
-    docs = dogeared_documents_sort(docs);
 
     $(".excerpt").remove();
     $(".document").remove();
     
     var documents = $("#documents");
+
+    var on_load = function(doc){
+
+	var document_id = doc['id'];
+
+	var yes = function(){
+	    return;
+	};
+
+	var no = function(){
+	    dogeared_documents_draw_doc(doc);
+	};
+	
+	dogeared_cache_is_scheduled_pending_delete(document_id, yes, no);
+    };
     
-    var root = dogeared_abs_root_url();
+    dogeared_cache_load_documents(on_load);
+        
+    dogeared_documents_init_delete_controls();
+    dogeared_document_init();
+};
 
-    for (var i = 0; i < count; i++){
-	
-	var doc = docs[i];
-	var id = doc['id'];
+function dogeared_documents_draw_doc(doc){
 
-	if (! id){
-	    continue;
-	}
+    var title = doc['display_title'];
 
-	if ((to_delete) && (to_delete[id])){
-	    dogeared_omgwtf("skipping document " + id + " because it is set to be deleted");
-	    continue;
-	}
-	
-	var title = doc['display_title'];
-
-	if (title == undefined){
-	    title = "Unknown title #" + id;
-	}
-
-	dogeared_omgwtf("load " + title + " (" + id + ") " + doc['created']);
-
-	var document_url = dogeared_abs_root_url();
-	document_url += 'documents/' + id + '/';
-
-	var row = '<div class="row excerpt"';
-	row += ' id="dogeared-document-' + id + '"';
-	row += '>';
-	row += '<h3><a href="';
-	row += document_url;
-	row += '" class="load-doc" data-document-id="';
-	row += htmlspecialchars(id);
-	row += '">';
-	row += htmlspecialchars(title);
-	row += '</a>';
-	row += ' <pre><small>' + htmlspecialchars(doc['url']) + '</small></pre>';
-	row += '</h3>';
-
-	row += '<div>';
-	row += '<button class="btn btn-sm delete-document pull-right" data-document-id="';
-	row += id;
-	row += '" data-button-action="delete">Delete</button>';
-	row += '</div>';
-
-	row += '</div>';
-	
-	documents.append(row);			
+    if (title == undefined){
+	title = "Unknown title #" + id;
     }
     
+    dogeared_omgwtf("load " + title + " (" + id + ") " + doc['created']);
+    
+    var document_url = dogeared_abs_root_url();
+    document_url += 'documents/' + id + '/';
+
+    var row = '<div class="row excerpt"';
+    row += ' id="dogeared-document-' + id + '"';
+    row += '>';
+    row += '<h3><a href="';
+    row += document_url;
+    row += '" class="load-doc" data-document-id="';
+    row += htmlspecialchars(id);
+    row += '">';
+    row += htmlspecialchars(title);
+    row += '</a>';
+    row += ' <pre><small>' + htmlspecialchars(doc['url']) + '</small></pre>';
+    row += '</h3>';
+    
+    row += '<div>';
+    row += '<button class="btn btn-sm delete-document pull-right" data-document-id="';
+    row += id;
+    row += '" data-button-action="delete">Delete</button>';
+    row += '</div>';
+    
+    row += '</div>';
+    
+    var documents = $("#documents");
+    documents.append(row);	
+
     $(".load-doc").click(function(){
 
 	try {
@@ -241,10 +236,8 @@ function dogeared_documents_load_cache(){
 
 	return false;
     });
-    
-    dogeared_documents_init_delete_controls();
-    dogeared_document_init();
-};
+
+}
 
 function dogeared_documents_get_text(doc){
 
