@@ -273,10 +273,12 @@ function dogeared_documents_get_text(doc){
 
 	var _doc = rsp['document'];
 
-	var ok = dogeared_documents_store(_doc);
+	var cb = function(){
+	    dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ") " + ok);
+	    dogeared_documents_fill_cache_decr();
+	};
 
-	dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ") " + ok);
-	dogeared_documents_fill_cache_decr();
+	dogeared_cache_store_document(_doc, cb);
     };
     
     var on_error = function(rsp){
@@ -469,40 +471,4 @@ function dogeared_documents_cache(){
     });
 
     return cache;
-}
-
-function dogeared_documents_store(doc){
-
-    if (! store.enabled){
-	console.log("localstorage is not enabled");
-	return false;
-    }
-    
-    var lastmod = doc['lastmodified'];
-    var id = doc['id'];
-			
-    var key = "dogeared_" + id;
-
-    try {
-	var rsp = store.set(key, doc);
-    }
-
-    catch(e){
-
-	if (e.code == 22){
-	    // try to chunk the document in to (n) parts here
-	}
-
-	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title'] + " because " + e);
-	// console.log(e);
-	return 0;
-    }
-    
-    var ok = (rsp['id'] == id) ? 1 : 0;
-
-    if (! ok){
-	dogeared_feedback_error("Failed to cache " + key + ", " + doc['title']);
-    }
-
-    return ok;
 }

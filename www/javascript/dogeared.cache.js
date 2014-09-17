@@ -72,12 +72,34 @@ function dogeared_cache_keys(re, on_match){
     localforage.keys(cb);
 }
 
-function dogeared_cache_remove_document(id, cb){
+function dogeared_cache_store_document(doc, cb){
 
-    var key = "dogeared_" + id;
+    var key = "dogeared_" + doc['id'];
 
     if (! cb){
-	dogeared_feedback("Okay, that document (" + htmlspecialchars(id) + ") has been removed from your reading list");
+
+	cb = function(rsp){
+	    console.log(rsp);
+	};
+    }
+
+    dogeared_cache_set(key, doc, cb);
+}
+
+function dogeared_cache_load_document(document_id, cb){
+
+    var key = "dogeared_" + document_id;
+    dogeared_cache_get(key, cb);
+}
+
+function dogeared_cache_remove_document(document_id, cb){
+
+    var key = "dogeared_" + document_id;
+
+    if (! cb){
+	cb = function(rsp){
+	    dogeared_feedback("Okay, that document (" + htmlspecialchars(document_id) + ") has been removed from your reading list");
+	};
     }
 
     dogeared_cache_unset(key, cb);
@@ -91,10 +113,12 @@ function dogeared_cache_store_highlight(hl, cb){
     var key = "highlight_" + hash;
 
     if (! cb){
-	dogeared_omgwtf("stored " + key);
 
-	var hint = $('#has-pending');
-	hint.show();
+	cb = function(rsp){
+	    dogeared_omgwtf("stored " + key);
+	    var hint = $('#has-pending');
+	    hint.show();
+	};
     }
 
     dogeared_cache_set(key, hl, cb);
@@ -119,6 +143,21 @@ function dogeared_cache_remove_pending_delete(document_id){
     };
 
     dogeared_api_call(method, args, on_success);
+}
+
+// ugh... fucking javascript
+
+function dogeared_cache_list_pending_delete(){
+
+    var cache = {};
+
+    var cb = function(key, match){
+
+	var document_id = match[1];
+	cache[document_id] = true;
+    };
+
+    dogeared_cache_keys(cb);
 }
 
 function dogeared_cache_process_pending_delete(){
