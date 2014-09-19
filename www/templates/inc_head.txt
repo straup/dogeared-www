@@ -29,7 +29,7 @@
     <script src="{$cfg.abs_root_url}javascript/jquery.touchwipe.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/bootstrap.min.js"></script>
     {* new new *}
-    <script src="{$cfg.abs_root_url}javascript/localforage.min.js"></script>
+    <script src="{$cfg.abs_root_url}javascript/localforage.js"></script>
     {* deprecated *}
     <script src="{$cfg.abs_root_url}javascript/store.min.js"></script>
     <script src="{$cfg.abs_root_url}javascript/phpjs.min.js"></script>
@@ -52,7 +52,9 @@
 
     <script src="{$cfg.abs_root_url}javascript/dogeared.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.omgwtf.js"></script>
+    {if 0 and "appcache"|@features_is_enabled}
     <script src="{$cfg.abs_root_url}javascript/dogeared.appcache.js"></script>
+    {/if}
     <script src="{$cfg.abs_root_url}javascript/dogeared.network.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.feedback.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.api.js"></script>
@@ -62,9 +64,10 @@
     <script src="{$cfg.abs_root_url}javascript/dogeared.notepad.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.highlights.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.js"></script>
+    {if 0}
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.documents.js"></script>
     <script src="{$cfg.abs_root_url}javascript/dogeared.cache.highlights.js"></script>
-
+    {/if}
     {/if}
 
     <script type="text/javascript">

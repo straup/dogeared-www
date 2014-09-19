@@ -239,49 +239,6 @@ function dogeared_documents_draw_doc(doc){
 
 }
 
-function dogeared_documents_get_text(doc){
-
-    var id = doc['document_id'];
-
-    // This shouldn't ever happen but you know... computers
-    // (20140527/straup)
-
-    if (id=='0'){
-	return false;
-    }
-    
-    var lastmod = doc['lastmodified'];
-
-    var method = 'dogeared.documents.getInfo';
-    var args = { 'document_id': id, 'lastmodified': lastmod };
-
-    var on_success = function(rsp){
-
-	// if 304
-
-	if (! rsp){
-	    dogeared_documents_fill_cache_decr();
-	    return;
-	}
-
-	var _doc = rsp['document'];
-
-	var cb = function(){
-	    dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ") " + ok);
-	    dogeared_documents_fill_cache_decr();
-	};
-
-	dogeared_cache_store_document(_doc, cb);
-    };
-    
-    var on_error = function(rsp){
-	dogeared_documents_fill_cache_decr();
-    };
-   
-    dogeared_api_call(method, args, on_success, on_error);
-    dogeared_documents_fill_cache_incr();
-}
-
 function dogeared_documents_store_docs(docs){
 
     dogeared_documents_fill_cache_reset();
@@ -309,63 +266,74 @@ function dogeared_documents_fill_cache_decr(){
 
 function dogeared_documents_fill_cache(callback){
 
-    var purge_cache = {};
+    var on_index = function(){
 
-    var docs = dogeared_documents_cache();
-    var count = docs.length;
-
-    for (var i=0; i < count; i++){
-	var id = docs[i]['id'];
-	var lastmod = docs[i]['lastmodified'];
-	purge_cache[id] = lastmod;
-    }
-
-    var method = 'dogeared.documents.getList';
-    var args = {};
+	var method = 'dogeared.documents.getList';
+	var args = {};
     
-    var on_success = function(rsp){
+	var on_success = function(rsp){
 	
-	dogeared_feedback("Storing documents");
+	    dogeared_feedback("Storing documents");
 
-	var fresh_docs = rsp['documents']['document'];
-	var count_fresh = fresh_docs.length;
+	    console.log(rsp);
+	    var fresh_docs = rsp['documents']['document'];
+	    var count_docs = fresh_docs.length;
 
-	dogeared_documents_store_docs(fresh_docs);
-
-	dogeared_feedback("Cleaning up document cache");
-
-	for (var i=0; i < count_fresh; i++){
-
-	    // See the way that's 'document_id' and not 'id'
-	    // Yeah, that's not great... (20140516/straup)
-
-	    var id = fresh_docs[i]['document_id'];
-
-	    if (purge_cache[id]){
-		dogeared_omgwtf("remove " + id + " from purge cache");
-		delete(purge_cache[id]);
+	    for (var i=0; i < count_docs; i++){
+		
+		var doc = fresh_docs[i];
+		dogeared_documents_get_text(doc);
 	    }
+	    
+	    dogeared_documents_store_docs(fresh_docs);
+
+	    if (callback){
+		callback();
+	    }
+	};
+    
+	dogeared_feedback("Fetching documents");
+	dogeared_api_call(method, args, on_success);
+    };
+
+    dogeared_cache_ensure_key("dogeared_document_index", {}, on_index);
+}
+
+function dogeared_documents_get_text(doc){
+
+    var id = doc['document_id'];
+    var lastmod = doc['lastmodified'];
+
+    var method = 'dogeared.documents.getInfo';
+    var args = { 'document_id': id, 'lastmodified': lastmod };
+
+    var on_success = function(rsp){
+
+	// if 304
+
+	if (! rsp){
+	    dogeared_documents_fill_cache_decr();
+	    return;
 	}
 
-	for (id in purge_cache){
-	    var key = "dogeared_" + id;
-	    dogeared_omgwtf("remove " + key + " from list");
-	    store.remove(key);
-	}
+	var _doc = rsp['document'];
 
-	dogeared_feedback_reset();
+	var cb = function(){
+	    dogeared_omgwtf("store " + _doc['display_title'] + " (" + _doc['id'] + ")");
+	    dogeared_documents_fill_cache_decr();
+	};
 
-	if (callback){
-	    callback();
-	}
+	var key = "dogeared_document_" + id;
+	dogeared_cache_set(key, _doc, cb);
     };
     
     var on_error = function(rsp){
-
+	dogeared_documents_fill_cache_decr();
     };
-
-    dogeared_feedback("Fetching documents");
+   
     dogeared_api_call(method, args, on_success, on_error);
+    dogeared_documents_fill_cache_incr();
+
 }
 
 // This is not working correctly because... computers?

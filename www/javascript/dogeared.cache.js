@@ -1,39 +1,16 @@
-function dogeared_cache_count_for_type(type){
+function dogeared_cache_ensure_key(key, value, cb){
 
-    var count = 0;
+    var on_get = function(rsp){
 
-    store.forEach(function(key, val){
-
-	var parts = key.split("_");
-	var ima = parts[0];
-	
-	if (ima == type){
-	    count += 1;
+	if (rsp){
+	    cb(rsp);
+	    return;
 	}
-    });
 
-    return count;
-}
+	dogeared_cache_set(key, value, cb);
+    };
 
-function dogeared_cache_get_for_type(type){
-
-    var stuff = new Array();
-
-    store.forEach(function(key, val){
-
-	// store.remove(key);
-	// continue;
-
-	var parts = key.split("_");
-	var ima = parts[0];
-	
-	if (ima == type){
-	    val['cache_key'] = key;
-	    stuff.push(val);
-	}
-    });
-
-    return stuff;
+    dogeared_cache_get(key, on_get);
 }
 
 function dogeared_cache_get(key, cb){

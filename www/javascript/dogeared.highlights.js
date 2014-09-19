@@ -23,6 +23,8 @@ function dogeared_highlights_on_offline(){
 
 function dogeared_highlights_schedule_flush(){
 
+    return;
+
     if (dogeared_highlights_flush){
 	clearTimeout(dogeared_highlights_flush);
     }

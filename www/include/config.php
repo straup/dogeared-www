@@ -13,7 +13,7 @@
 	$GLOBALS['cfg']['display_message'] = 0;
 	$GLOBALS['cfg']['display_message_text'] = '';
 
-	$GLOBALS['cfg']['enable_feature_appcache'] = 1;
+	$GLOBALS['cfg']['enable_feature_appcache'] = 0;
 	$GLOBALS['cfg']['appcache_manifest_timestamp'] = null;
 
 	$GLOBALS['cfg']['dogeared_extruder_endpoint'] = 'http://localhost:8080/';

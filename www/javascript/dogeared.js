@@ -6,7 +6,6 @@ function dogeared_init(){
     $("a").click(function(){
 	
 	var el = $(this);
-	// console.log(el.attr('id'));
 
 	if (! dogeared_network_is_online()){	    
 	    
@@ -20,12 +19,14 @@ function dogeared_init(){
 
     dogeared_network_init();
     dogeared_omgwtf_init();
-    dogeared_appcache_init();
+    // dogeared_appcache_init();
     dogeared_highlights_init();
-    dogeared_cache_highlights_init();
-    dogeared_whosonfirst_init();
+    // dogeared_cache_highlights_init();
+    // dogeared_whosonfirst_init();
 
     dogeared_init_touch_controls();
+
+    dogeared_documents_fill_cache();
 }
 
 function dogeared_init_touch_controls(){
