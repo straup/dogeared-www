@@ -26,7 +26,7 @@ function dogeared_init(){
 
     dogeared_init_touch_controls();
 
-    dogeared_documents_fill_cache();
+    //dogeared_documents_fill_cache();
 }
 
 function dogeared_init_touch_controls(){

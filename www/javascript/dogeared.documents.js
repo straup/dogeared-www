@@ -1,4 +1,5 @@
-var dogeared_fill_cache_count = 0;
+var DOGEARED_fill_cache_count = 0;
+var DOGEARED_to_delete = {};
 
 function dogeared_documents_init(){
 
@@ -26,6 +27,30 @@ function dogeared_documents_init_keyboard(){
     	    screenfull.request();
 	}
     });
+}
+
+function dogeared_documents_init_to_delete(on_complete){
+
+    var re = /dogeared_document_delete(\d+)/;
+
+    var cb = function(rsp){
+
+	var count = rsp.length;
+
+	for (var i=0; i < count; i++){
+
+	    var m = rsp[i];
+	    var id = m[1];
+
+	    DOGEARED_to_delete[id] = true;
+	}
+
+	if (on_complete){
+	    on_complete(DOGEARED_to_delete);
+	}
+    };
+
+    dogeared_cache_keys(re, cb);
 }
 
 function dogeared_documents_on_online(e){
@@ -59,14 +84,14 @@ function dogeared_documents_load_index(){
 
 		var _load = function(){
 		    
-		    dogeared_omgwtf("checking fill count: " + dogeared_fill_cache_count);
+		    dogeared_omgwtf("checking fill count: " + DOGEARED_fill_cache_count);
 		    
-		    if (! dogeared_fill_cache_count){
+		    if (! DOGEARED_fill_cache_count){
 			dogeared_documents_load_cache();
 			return;
 		    }
 		    
-		    dogeared_feedback("Loading documents, " + dogeared_fill_cache_count + " left");
+		    dogeared_feedback("Loading documents, " + DOGEARED_fill_cache_count + " left");
 		    setTimeout(_load, 500);
 		};
 		
@@ -249,17 +274,17 @@ function dogeared_documents_store_docs(docs){
 }
 
 function dogeared_documents_fill_cache_reset(){
-    dogeared_fill_cache_count = 0;
+    DOGEARED_fill_cache_count = 0;
 }
 
 function dogeared_documents_fill_cache_incr(){
-    dogeared_fill_cache_count += 1;
+    DOGEARED_fill_cache_count += 1;
 }
 
 function dogeared_documents_fill_cache_decr(){
 
-    if (dogeared_fill_cache_count){
-	dogeared_fill_cache_count -= 1;
+    if (DOGEARED_fill_cache_count){
+	DOGEARED_fill_cache_count -= 1;
     }
 
 }
@@ -282,11 +307,13 @@ function dogeared_documents_fill_cache(callback){
 	    for (var i=0; i < count_docs; i++){
 		
 		var doc = fresh_docs[i];
-		dogeared_documents_get_text(doc);
+		var id = doc['id'];
+
+		if (! DOGEARED_to_delete[id]){
+		    dogeared_documents_get_text(doc);
+		}
 	    }
 	    
-	    dogeared_documents_store_docs(fresh_docs);
-
 	    if (callback){
 		callback();
 	    }
@@ -333,7 +360,6 @@ function dogeared_documents_get_text(doc){
    
     dogeared_api_call(method, args, on_success, on_error);
     dogeared_documents_fill_cache_incr();
-
 }
 
 // This is not working correctly because... computers?
@@ -367,69 +393,55 @@ function dogeared_documents_currently_reading(){
 
 function dogeared_documents_load_doc(id){
 
-    var key = "dogeared_" + id;
-    var doc = store.get(key);
-    
-    var title = doc['display_title'];
+    var key = "dogeared_document_" + id;
 
-    if (title == undefined){
-	title = "Unknown title #" + id;
-    }
+    var draw(doc){
     
-    var body = JSON.parse(doc['body']);
-    
-    var url = htmlspecialchars(doc['url']);
-    
-    var txt = '<div class="document" id="document"';
-    txt += ' data-document-id="';
-    txt += htmlspecialchars(id);
-    txt += '">';
-    
-    txt += '<div class="row">';
-    txt += '<h3>';
-    txt += htmlspecialchars(title);
-    txt += '</h3>';
-    txt += ' <pre><small>' + url + '</small></pre>';
-    txt += '</div>';
-    
-    txt += '<div class="row">';
-    
-    for (var i in body){
-	txt += '<p>';
-	txt += htmlspecialchars(body[i]);
-	txt += '</p>';
-    }
-    
-    txt += '</div>';
-    
-    txt += '<div class="row">';
-    txt += ' <pre><small>' + url + '</small></pre>';
-    txt += '</div>';
-        
-    txt += '</div>';
-    
-    var documents = $("#documents");
-    documents.append(txt);
-    
-    $(".excerpt").remove();
-    
-    dogeared_document_init_doc(id);
-}
+	var title = doc['display_title'];
 
-function dogeared_documents_cache(){
-
-    var cache = new Array();
-
-    store.forEach(function(key, val){
-
-	var parts = key.split("_");
-	var ima = parts[0];
-	
-	if (ima == 'dogeared'){
-	    val['cache_key'] = key;
-	    cache.push(val);
+	if (title == undefined){
+	    title = "Unknown title #" + id;
 	}
-    });
+	
+	var body = JSON.parse(doc['body']);
+	
+	var url = htmlspecialchars(doc['url']);
+	
+	var txt = '<div class="document" id="document"';
+	txt += ' data-document-id="';
+	txt += htmlspecialchars(id);
+	txt += '">';
+	
+	txt += '<div class="row">';
+	txt += '<h3>';
+	txt += htmlspecialchars(title);
+	txt += '</h3>';
+	txt += ' <pre><small>' + url + '</small></pre>';
+	txt += '</div>';
+	
+	txt += '<div class="row">';
+	
+	for (var i in body){
+	    txt += '<p>';
+	    txt += htmlspecialchars(body[i]);
+	    txt += '</p>';
+	}
+	
+	txt += '</div>';
+	
+	txt += '<div class="row">';
+	txt += ' <pre><small>' + url + '</small></pre>';
+	txt += '</div>';
+        
+	txt += '</div>';
+	
+	var documents = $("#documents");
+	documents.append(txt);
+	
+	$(".excerpt").remove();
+	
+	dogeared_document_init_doc(id);
+    };
 
-    return cache;
+    dogeared_cache_get(key, draw);
 }

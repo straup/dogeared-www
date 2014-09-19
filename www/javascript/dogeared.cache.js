@@ -33,6 +33,7 @@ function dogeared_cache_keys(re, on_match){
     var cb = function(keys){
 
 	var count = keys.length;
+	var rsp = new Array();
 
 	for (var i = 0; i < count; i++){
 
@@ -41,9 +42,11 @@ function dogeared_cache_keys(re, on_match){
 	    var m = key.match(re);
 
 	    if (m){
-		on_match(key, m);
+		rsp.push(m);
 	    }
 	}
+
+	on_match(rsp);
     };
 
     localforage.keys(cb);
