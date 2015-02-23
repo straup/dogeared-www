@@ -105,7 +105,7 @@ function dogeared_notepad_save_note(){
     note = dogeared_notepad_get_current_note();
 
     if (! note){
-	return;
+	return false;
     }
 
     var key = dogeared_notepad_key(note);
@@ -134,7 +134,6 @@ function dogeared_notepad_save_note(){
     var now = dogeared_now();
     note['lastmodified' ] = now;
 
-    console.log("update " + key);
     store.set(key, note);
 
     dogeared_notepad_sync_note(note);
